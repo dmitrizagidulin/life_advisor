@@ -3,4 +3,8 @@ class ActionItem
   
   property :name, String
   timestamps!
+  
+  def self.all
+    ActionItem.list
+  end
 end
