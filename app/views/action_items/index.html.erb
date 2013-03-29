@@ -1,21 +1,25 @@
-<h1>Listing action_items</h1>
+<h1>Action Items</h1>
 
-<table>
+<table class="table table-striped">
+  <thead>
   <tr>
-    <th></th>
+    <th>Task</th>
     <th></th>
     <th></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @action_items.each do |action_item| %>
   <tr>
-    <td><%= action_item.name %><%= link_to 'Show', action_item %></td>
-    <td><%= link_to 'Edit', edit_action_item_path(action_item) %></td>
-    <td><%= link_to 'Destroy', action_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to action_item.name, action_item %></td>
+    <td><%= link_to 'Edit', edit_action_item_path(action_item), :class => 'btn btn-mini' %></td>
+    <td><%= link_to 'Destroy', action_item, method: :delete, :class => 'btn btn-mini btn-danger',
+      data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+  </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Action item', new_action_item_path %>
+<%= link_to 'New Action item', new_action_item_path, :class => 'btn' %>
