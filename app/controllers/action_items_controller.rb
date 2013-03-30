@@ -2,8 +2,10 @@ class ActionItemsController < ApplicationController
   # GET /action_items
   # GET /action_items.json
   def index
-    @action_items = ActionItem.all
-
+    @action_items = ActionItem.all_todo
+    @completed_items = ActionItem.all_completed
+    @all_items = ActionItem.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @action_items }
