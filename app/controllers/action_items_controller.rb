@@ -44,7 +44,7 @@ class ActionItemsController < ApplicationController
 
     respond_to do |format|
       if @action_item.save
-        format.html { redirect_to @action_item, notice: 'Action item was successfully created.' }
+        format.html { redirect_to action_items_url, notice: 'Action item created.' }
         format.json { render json: @action_item, status: :created, location: @action_item }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class ActionItemsController < ApplicationController
 
     respond_to do |format|
       if @action_item.update_attributes(params[:action_item])
-        format.html { redirect_to @action_item, notice: 'Action item was successfully updated.' }
+        format.html { redirect_to action_items_url, notice: 'Action item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
