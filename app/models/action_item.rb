@@ -1,7 +1,7 @@
 class ActionItem
   include Ripple::Document
   
-  property :name, String
+  property :name, String, :presence => true
   property :done, Boolean, :default => false
   
   timestamps!
