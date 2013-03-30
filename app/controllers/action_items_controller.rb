@@ -12,6 +12,16 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  def completed
+    @completed_items = ActionItem.all_completed
+    
+    respond_to do |format|
+      format.html # completed.html.erb
+      format.json { render json: @completed_items }
+    end
+  end
+
+  
   # GET /action_items/1
   # GET /action_items/1.json
   def show

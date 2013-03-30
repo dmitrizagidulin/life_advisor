@@ -1,7 +1,12 @@
 LifeAdvisor::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  controller :action_items do
+    get 'action_items/completed' => :completed
+  end
   resources :action_items
+  
+
   
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
