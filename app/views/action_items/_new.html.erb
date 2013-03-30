@@ -1,0 +1,6 @@
+<%= form_for(@new_item) do |f| %>
+  <p>
+    <%= f.text_field :name, :class=> "action_item" %>
+    <%= f.submit 'Create', :class=> "action_item btn" %>
+  </p>
+<% end %>

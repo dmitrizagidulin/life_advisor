@@ -1,6 +1,4 @@
-<%= link_to 'New Action item', new_action_item_path, :class => 'btn' %>
-
-<br />
+<%= render 'new' %>
 
 <h2>Action Items</h2>
 
@@ -25,4 +23,7 @@
 <% end %>
   </tbody>
 </table>
+
+<br />
+<%= link_to 'New Action item', new_action_item_path, :class => 'btn' %>
 

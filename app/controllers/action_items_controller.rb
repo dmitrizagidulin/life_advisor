@@ -3,6 +3,7 @@ class ActionItemsController < ApplicationController
   # GET /action_items.json
   def index
     @action_items = ActionItem.all_todo
+    @new_item = ActionItem.new
     
     respond_to do |format|
       format.html # index.html.erb
