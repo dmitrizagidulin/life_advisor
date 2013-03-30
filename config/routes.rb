@@ -3,6 +3,7 @@ LifeAdvisor::Application.routes.draw do
   # first created -> highest priority.
   controller :action_items do
     get 'action_items/completed' => :completed
+    get 'action_items/all' => :all
   end
   resources :action_items
   

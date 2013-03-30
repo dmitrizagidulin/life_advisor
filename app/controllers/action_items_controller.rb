@@ -3,8 +3,6 @@ class ActionItemsController < ApplicationController
   # GET /action_items.json
   def index
     @action_items = ActionItem.all_todo
-    @completed_items = ActionItem.all_completed
-    @all_items = ActionItem.all
     
     respond_to do |format|
       format.html # index.html.erb
@@ -12,6 +10,15 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  def all
+    @all_items = ActionItem.all # list keys
+    
+    respond_to do |format|
+      format.html # all.html.erb
+      format.json { render json: @all_items }
+    end
+  end
+  
   def completed
     @completed_items = ActionItem.all_completed
     
