@@ -6,6 +6,11 @@ class ActionItem
   
   timestamps!
   
+  def toggle_done!
+    self.done = !self.done
+    self.save
+  end
+  
   def self.all
     ActionItem.list
   end

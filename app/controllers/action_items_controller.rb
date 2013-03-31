@@ -6,6 +6,7 @@ class ActionItemsController < ApplicationController
     @new_item = ActionItem.new
     
     respond_to do |format|
+      format.js
       format.html # index.html.erb
       format.json { render json: @action_items }
     end
@@ -73,6 +74,12 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  def toggle_done
+    @action_item = ActionItem.find(params[:id])
+    @action_item.toggle_done!
+    render :nothing => true
+  end
+  
   # PUT /action_items/1
   # PUT /action_items/1.json
   def update

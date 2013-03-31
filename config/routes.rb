@@ -4,6 +4,7 @@ LifeAdvisor::Application.routes.draw do
   controller :action_items do
     get 'action_items/completed' => :completed
     get 'action_items/all' => :all
+    post 'action_items/toggle_done/:id' => :toggle_done
   end
   resources :action_items
   
