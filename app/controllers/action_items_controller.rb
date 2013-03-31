@@ -5,7 +5,7 @@ class ActionItemsController < ApplicationController
     @critical_items = ActionItem.all_todo('critical')
     @opportunity_items = ActionItem.all_todo('opportunity')
     @horizon_items = ActionItem.all_todo('horizon')
-    @someday_items = ActionItem.all_todo
+    @someday_items = ActionItem.all_todo('someday')
     @new_item = ActionItem.new
     
     respond_to do |format|
@@ -21,6 +21,16 @@ class ActionItemsController < ApplicationController
     respond_to do |format|
       format.html # all.html.erb
       format.json { render json: @all_items }
+    end
+  end
+  
+  def category_update
+    @action_item = ActionItem.find(params[:id])
+    @action_item.mywn_category = params[:category]
+    respond_to do |format|
+      if @action_item.save
+        format.html { redirect_to action_items_url }
+      end
     end
   end
   

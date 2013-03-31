@@ -3,7 +3,7 @@ class ActionItem
   
   property :name, String, :presence => true
   property :done, Boolean, :default => false
-  property :mywn_category, String
+  property :mywn_category, String, :default => :someday
   
   timestamps!
   

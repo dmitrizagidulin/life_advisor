@@ -1,6 +1,9 @@
   <tr>
     <td><%= check_box_tag action_item.key, '1', action_item.done, :class => 'action_item_checkbox' %></td>
     <td><span id="task-<%= action_item.key %>"><%= link_to action_item.name, edit_action_item_path(action_item) %></td>
+    <td>
+      <%= link_to 'Critical', 'action_items/'+action_item.key+'/category/critical', method: :post, :class => 'btn btn-mini' %>
+    </td>
     <td><%= link_to 'Destroy', 'action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',
       data: { confirm: 'Are you sure?' } %></td>
   </tr>
