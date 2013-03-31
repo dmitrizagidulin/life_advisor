@@ -1,7 +1,7 @@
-<%= render 'new' %>
+
 
 <h3>Today - Critical</h3>
-
+<%= render partial: 'new', locals: { mywn_category: :critical } %>
 <table class="table table-striped">
   <tbody>
 <% @critical_items.each do |action_item| %>
@@ -12,6 +12,7 @@
 <br />
 
 <h3>Today - Opportunity</h3>
+<%= render partial: 'new', locals: { mywn_category: :opportunity } %>
 
 <table class="table table-striped">
   <tbody>
@@ -24,6 +25,7 @@
 <br />
 
 <h3>Horizon</h3>
+<%= render partial: 'new', locals: { mywn_category: :horizon } %>
 
 <table class="table table-striped">
   <tbody>
@@ -35,6 +37,7 @@
 <br />
 
 <h3>Someday/Maybe</h3>
+<%= render partial: 'new', locals: { mywn_category: :someday } %>
 
 <table class="table table-striped">
   <tbody>
