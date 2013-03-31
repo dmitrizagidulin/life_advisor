@@ -3,6 +3,7 @@ class ActionItem
   
   property :name, String, :presence => true
   property :done, Boolean, :default => false
+  property :mywn_category, String
   
   timestamps!
   
@@ -15,8 +16,14 @@ class ActionItem
     ActionItem.list
   end
   
-  def self.all_todo
-    results = self.search_results_for("done:false")
+  def self.all_todo(mywn_category=nil)
+    if mywn_category
+      search_string = "done:false AND mywn_category:"+mywn_category
+    else
+      search_string = "done:false"
+      
+    end
+    results = self.search_results_for(search_string)
     results.collect { |doc| ActionItem.from_search_result(doc) }
   end
   
