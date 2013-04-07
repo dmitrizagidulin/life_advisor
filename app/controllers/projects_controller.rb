@@ -10,6 +10,15 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def all
+    @all_items = Project.all # list keys
+    
+    respond_to do |format|
+      format.html # all.html.erb
+      format.json { render json: @all_items }
+    end
+  end
+  
   # GET /projects/1
   # GET /projects/1.json
   def show
