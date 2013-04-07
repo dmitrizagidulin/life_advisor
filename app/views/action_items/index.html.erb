@@ -13,7 +13,6 @@
 <table class="table table-striped">
   <tbody>
 <% @opportunity_items.each do |action_item| %>
-  <tr>
     <%= render(partial: 'action_item', object: action_item) %>
 <% end %>
   </tbody>
