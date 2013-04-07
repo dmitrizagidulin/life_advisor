@@ -6,6 +6,8 @@ class Project
   
   property :name, String, :presence => true
   property :description, String
+  property :status, String, :default => :idea  # One of [:idea, :active, :someday, :cancelled, :completed]
+  
   timestamps!
   
   
