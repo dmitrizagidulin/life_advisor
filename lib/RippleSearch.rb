@@ -1,6 +1,6 @@
 module RippleSearch
   def all
-    ActionItem.list
+    self.list
   end
   
   def from_search_result(document)
