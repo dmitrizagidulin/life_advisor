@@ -1,5 +1,8 @@
   <tr>
-    <td class="span6"><%= link_to project.name, project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-mini' %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+    <td class="span6"><%= link_to project.name, edit_project_path(project) %></td>
+    <td>
+      <%= link_to 'Active', 'projects/'+project.key+'/status/active', method: :post, :class => 'btn btn-mini' %>
+      <%= link_to 'Idea', 'projects/'+project.key+'/status/idea', method: :post, :class => 'btn btn-mini' %>
+    </td>
+    <td><%= link_to 'Destroy', 'projects/'+project.key, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
   </tr>

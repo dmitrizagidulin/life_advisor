@@ -13,6 +13,11 @@ class Project
   def self.all_for_status(status)
     search_string = "status:"+status.to_s
     results = self.search_results_for(search_string)
-    results.collect { |doc| self.from_search_result(doc) }
+    results.collect { |doc| Project.from_search_result(doc) }
+  end
+
+  def from_search_result(document)
+    project = super.from_search_result(document)
+    project
   end
 end
