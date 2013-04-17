@@ -11,6 +11,17 @@
 
 <br />
 
+<h3>Someday/Maybe</h3>
+<table class="table table-striped table-hover">
+<tbody>
+<% @someday_projects.each do |project| %>
+  <%= render(partial: 'project', object: project) %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
 <h3>Ideas/Hopper</h3>
 <table class="table table-striped table-hover">
 <tbody>

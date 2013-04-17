@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
 #    @projects = Project.all
     @idea_projects = Project.all_for_status(:idea)
     @active_projects = Project.all_for_status(:active)
+    @someday_projects = Project.all_for_status(:someday)
 
     respond_to do |format|
       format.html # index.html.erb
