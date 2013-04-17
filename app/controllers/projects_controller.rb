@@ -2,7 +2,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+#    @projects = Project.all
+    @idea_projects = Project.all_for_status(:idea)
+    @active_projects = Project.all_for_status(:active)
 
     respond_to do |format|
       format.html # index.html.erb
