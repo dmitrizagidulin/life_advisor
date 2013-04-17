@@ -9,6 +9,9 @@ LifeAdvisor::Application.routes.draw do
   end
   resources :action_items
   
+  controller :projects do
+    post 'projects/:id/status/:status' => :status_update
+  end
   resources :projects
   
   # Sample of regular route:

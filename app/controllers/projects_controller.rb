@@ -64,6 +64,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def status_update
+    @project = Project.find(params[:id])
+    @project.status = params[:status]
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to projects_url }
+      end
+    end
+  end
+  
   # PUT /projects/1
   # PUT /projects/1.json
   def update
