@@ -7,6 +7,7 @@
       <%= link_to 'Horizon', 'action_items/'+action_item.key+'/category/horizon', method: :post, :class => 'btn btn-mini' %>
       <%= link_to 'Someday', 'action_items/'+action_item.key+'/category/someday', method: :post, :class => 'btn btn-mini' %>
     </td>
+    <td><small><%= action_item.created_at.localtime.strftime("%b %d, %y")  %></small></td>
     <td><%= link_to 'Destroy', 'action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',
       data: { confirm: 'Are you sure?' } %></td>
   </tr>
