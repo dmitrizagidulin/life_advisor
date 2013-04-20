@@ -11,8 +11,8 @@ module RippleSearch
     action_item
   end
   
-  def search_results_for(search_string)
-    search_results = Ripple.client.search self.bucket.name, search_string
+  def search_results_for(search_string, rows=10000)
+    search_results = Ripple.client.search self.bucket.name, search_string, rows: rows
     search_results['response']['docs']
   end
 end
