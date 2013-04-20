@@ -1,5 +1,5 @@
 <%= form_for(@new_item, :html => { :class => "form-inline inline"}) do |f| %>
-    <strong><%= mywn_category.capitalize %></strong>&nbsp;&nbsp;&nbsp;
+    <strong><%= mywn_category.capitalize %> (<%= item_count %>)</strong>&nbsp;&nbsp;&nbsp;
     <%= f.text_field :name, :class=> "action_item" %>
     <%= f.hidden_field :mywn_category, value: mywn_category %>
     <%= f.submit 'Add', :class=> "action_item btn" %>
