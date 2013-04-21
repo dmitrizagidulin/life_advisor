@@ -9,6 +9,8 @@ gem 'sqlite3'
 
 gem 'ripple', '1.0.0.beta2'
 
+gem 'better_errors'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
