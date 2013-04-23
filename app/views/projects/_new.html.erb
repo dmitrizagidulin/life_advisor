@@ -1,0 +1,4 @@
+<%= form_for(@new_item, :html => { :class => "form-inline inline"}) do |f| %>
+    <%= f.text_field :name, :class=> "project" %>
+    <%= f.submit 'Add', :class=> "project btn" %>
+<% end %>
