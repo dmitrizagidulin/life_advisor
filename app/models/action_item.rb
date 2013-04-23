@@ -6,7 +6,7 @@ class ActionItem
 
   property :name, String, :presence => true
   property :done, Boolean, :default => false
-  property :mywn_category, String, :default => :someday
+  property :mywn_category, String, :default => :someday # One of [:critical, :opportunity, :horizon, :someday, :tomorrow]
   
   timestamps!
   
@@ -17,7 +17,7 @@ class ActionItem
   
   def self.all_todo(mywn_category=nil)
     if mywn_category
-      search_string = "done:false AND mywn_category:"+mywn_category
+      search_string = "done:false AND mywn_category:"+mywn_category.to_s
     else
       search_string = "done:false"
       
