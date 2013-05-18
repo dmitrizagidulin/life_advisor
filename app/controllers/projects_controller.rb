@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @projects }
+#      format.json { render json: @projects }
     end
   end
 
@@ -20,6 +20,13 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html # all.html.erb
       format.json { render json: @all_items }
+    end
+  end
+  
+  def completed
+    @completed_projects = Project.all_for_status(:completed)
+    respond_to do |format|
+      format.html # completed.html.erb
     end
   end
   
