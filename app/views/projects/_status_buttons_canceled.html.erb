@@ -2,5 +2,5 @@
       <%= link_to 'Back to Maybe', '/projects/'+project.key+'/status/someday', method: :post, :class => 'btn btn-mini' %>
       <%= link_to 'Back to Idea', '/projects/'+project.key+'/status/idea', method: :post, :class => 'btn btn-mini' %>
     </td>
-    <td><small><%= project.created_at.localtime.strftime("%b %d, %y")  %></small></td>
+    <td><small><%= project.canceled_at.localtime.strftime("%b %d, %y") if project.canceled_at %></small></td>
       

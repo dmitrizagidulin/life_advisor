@@ -83,9 +83,18 @@ class ProjectsController < ApplicationController
   def status_update
     @project = Project.find(params[:id])
     @project.change_status! params[:status]
+    
+    if @project.status.to_sym == :completed
+      new_url = '/projects/completed'
+    elsif @project.status.to_sym == :canceled
+      new_url = '/projects/canceled'
+    else
+      new_url = projects_url
+    end
+      
     respond_to do |format|
       if @project.save
-        format.html { redirect_to projects_url }
+        format.html { redirect_to new_url }
       end
     end
   end

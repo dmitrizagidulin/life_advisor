@@ -8,6 +8,7 @@ class Project
   property :description, String
   property :status, String, :default => :idea  # One of [:idea, :active, :someday, :canceled, :completed]
   property :completed_at, Time
+  property :canceled_at, Time
   
   timestamps!
   
@@ -21,8 +22,13 @@ class Project
     self.status = new_status
     if new_status.to_sym == :completed
       self.completed_at = Time.now
+      self.canceled_at = nil
+    elsif new_status.to_sym == :canceled
+      self.canceled_at = Time.now
+      self.completed_at = nil
     else
       self.completed_at = nil
+      self.canceled_at = nil
     end
   end
   
