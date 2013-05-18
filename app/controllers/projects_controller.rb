@@ -22,7 +22,14 @@ class ProjectsController < ApplicationController
       format.json { render json: @all_items }
     end
   end
-  
+
+  def canceled
+    @canceled_projects = Project.all_for_status(:canceled)
+    respond_to do |format|
+      format.html # canceled.html.erb
+    end
+  end
+    
   def completed
     @completed_projects = Project.all_for_status(:completed)
     respond_to do |format|

@@ -11,6 +11,7 @@ LifeAdvisor::Application.routes.draw do
   
   controller :projects do
     get 'projects/completed'
+    get 'projects/canceled'
     post 'projects/:id/status/:status' => :status_update
   end
   resources :projects
