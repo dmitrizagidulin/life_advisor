@@ -82,7 +82,7 @@ class ProjectsController < ApplicationController
 
   def status_update
     @project = Project.find(params[:id])
-    @project.status = params[:status]
+    @project.change_status! params[:status]
     respond_to do |format|
       if @project.save
         format.html { redirect_to projects_url }

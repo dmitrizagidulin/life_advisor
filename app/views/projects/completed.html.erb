@@ -1,6 +1,14 @@
 <h1>Completed Projects</h1>
 
 <table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th>Project</th>
+    <th></th>
+    <th>Completed</th>
+    <th></th>
+  </tr>
+</thead>
 <tbody>
 <% @completed_projects.each do |project| %>
   <%= render(partial: 'project', object: project, locals: { project_status: :completed }) %>

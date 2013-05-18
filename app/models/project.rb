@@ -7,6 +7,7 @@ class Project
   property :name, String, :presence => true
   property :description, String
   property :status, String, :default => :idea  # One of [:idea, :active, :someday, :canceled, :completed]
+  property :completed_at, Time
   
   timestamps!
   
@@ -16,6 +17,15 @@ class Project
     results.collect { |doc| Project.from_search_result(doc) }
   end
 
+  def change_status!(new_status)
+    self.status = new_status
+    if new_status.to_sym == :completed
+      self.completed_at = Time.now
+    else
+      self.completed_at = nil
+    end
+  end
+  
   def from_search_result(document)
     project = super.from_search_result(document)
     project

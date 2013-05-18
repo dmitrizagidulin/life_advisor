@@ -1,2 +1,6 @@
+    <td>
       <%= link_to 'Focus', '/projects/'+project.key+'/status/active', method: :post, :class => 'btn btn-mini' %>
       <%= link_to 'Cancel', '/projects/'+project.key+'/status/canceled', method: :post, :class => 'btn btn-mini' %>
+    </td>
+    <td><small><%= project.created_at.localtime.strftime("%b %d, %y")  %></small></td>
+      
