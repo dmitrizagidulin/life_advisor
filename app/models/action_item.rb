@@ -7,11 +7,17 @@ class ActionItem
   property :name, String, :presence => true
   property :done, Boolean, :default => false
   property :mywn_category, String, :default => :someday # One of [:critical, :opportunity, :horizon, :someday, :tomorrow]
+  property :completed_at, Time
   
   timestamps!
   
   def toggle_done!
     self.done = !self.done
+    if self.done
+      self.completed_at = Time.zone.now
+    else
+      self.completed_at = nil
+    end
     self.save
   end
   
