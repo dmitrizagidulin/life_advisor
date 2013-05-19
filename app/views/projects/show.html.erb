@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to '< Projects', projects_path, :class => 'btn btn-mini '  %> &nbsp;
 <%= link_to 'Edit', edit_project_path(@project), :class => 'btn btn-mini '  %>
 <h4><%= @project.name %></h4>
 
@@ -14,8 +15,6 @@
   <dd><%= @project.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
 </dl>
 
-<h5>Action Items</h5>
-
 <%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
     <%= f.text_field :name, :class => "action_item", :tabindex => 1 %>
     <%= f.hidden_field :mywn_category, value: :someday %>
@@ -24,9 +23,18 @@
 <% end %>
 
 <table class="table table-striped table-hover">
-  <tbody>
+<thead>
+  <tr>
+    <th></th>
+    <th>Action Item</th>
+    <th></th>
+    <th>Created</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
 <% @action_items.each do |action_item| %>
 	<%= render(partial: 'action_item', object: action_item) %>
 <% end %>
-  </tbody>
+</tbody>
 </table>
