@@ -1,5 +1,8 @@
   <tr>
-    <td class="span6"><%= link_to project.name, edit_project_path(project) %></td>
+    <td class="span6"><%= link_to project.name, project_path(project) %></td>
     <%= render(partial: 'status_buttons_'+project_status.to_s, locals: { project: project } ) %>
-    <td><%= link_to 'Destroy', '/projects/'+project.key, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-mini '  %>
+      <%= link_to 'Destroy', '/projects/'+project.key, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
+    </td>
   </tr>

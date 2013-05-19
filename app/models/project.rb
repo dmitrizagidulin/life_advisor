@@ -18,6 +18,10 @@ class Project
     results.collect { |doc| Project.from_search_result(doc) }
   end
 
+  def action_items
+    ActionItem.for_project(self.key)
+  end
+  
   def change_status!(new_status)
     self.status = new_status
     if new_status.to_sym == :completed

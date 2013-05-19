@@ -8,6 +8,7 @@ class ActionItem
   property :done, Boolean, :default => false
   property :mywn_category, String, :default => :someday # One of [:critical, :opportunity, :horizon, :someday, :tomorrow]
   property :completed_at, Time
+  property :project_key, String  # (Optional) An action item can belong to a Project
   
   timestamps!
   
@@ -34,6 +35,12 @@ class ActionItem
   
   def self.all_completed
     results = self.search_results_for("done:true")
+    results.collect { |doc| ActionItem.from_search_result(doc) }
+  end
+  
+  def self.for_project(project_key)
+    search_string = "project_key:#{project_key}"
+    results = self.search_results_for(search_string)
     results.collect { |doc| ActionItem.from_search_result(doc) }
   end
   
