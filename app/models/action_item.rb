@@ -44,6 +44,10 @@ class ActionItem
     results.collect { |doc| ActionItem.from_search_result(doc) }
   end
   
+  def self.mywn_categories
+    ['critical', 'tomorrow', 'opportunity', 'horizon', 'someday']
+  end
+  
   def from_search_result(document)
     action_item = super.from_search_result(document)
     action_item.done = action_item.done == 'true'
