@@ -19,7 +19,11 @@ class Project
   end
 
   def action_items
-    ActionItem.for_project(self.key)
+    @action_items = ActionItem.for_project(self.key)
+  end
+  
+  def action_items_completed
+    self.action_items.select { |item| item.done }
   end
   
   def change_status!(new_status)

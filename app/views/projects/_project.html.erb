@@ -2,7 +2,7 @@
   <tr>
     <td class="span6"><%= link_to project.name, project_path(project) %> 
     <% if item_count > 0 %>
-      [ <%= item_count %> items ]
+      [ <%= project.action_items_completed.count %> / <%= item_count %> completed ]
     <% end %>  
     </td>
     <%= render(partial: 'status_buttons_'+project_status.to_s, locals: { project: project } ) %>
