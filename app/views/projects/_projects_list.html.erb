@@ -1,0 +1,16 @@
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>Completed</th>
+    <th></th>
+    <th></th>
+    <th>Created</th>
+    </th></th>
+  </tr>
+</thead>
+<tbody>
+<% projects.each do |project| %>
+  <%= render(partial: 'project', object: project, locals: { project_status: project_status }) %>
+<% end %>
+</tbody>
+</table>

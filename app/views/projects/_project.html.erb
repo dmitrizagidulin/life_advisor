@@ -1,10 +1,11 @@
-<% item_count = project.action_items.count %>
+  <% item_count = project.action_items.count %>
   <tr>
-    <td class="span6"><%= link_to project.name, project_path(project) %> 
+    <td class="span1">
     <% if item_count > 0 %>
-      [ <%= project.action_items_completed.count %> / <%= item_count %> completed ]
+      [ <%= project.action_items_completed.count %> / <%= item_count %> ]
     <% end %>  
     </td>
+    <td class="span6"><%= link_to project.name, project_path(project) %></td>
     <%= render(partial: 'status_buttons_'+project_status.to_s, locals: { project: project } ) %>
     <td>
       <%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-mini '  %>

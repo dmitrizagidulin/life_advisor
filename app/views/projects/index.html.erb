@@ -3,35 +3,17 @@
 <%= render partial: 'new', locals: { } %>
 
 <h3>Active</h3>
-<table class="table table-hover">
-<tbody>
-<% @active_projects.each do |project| %>
-  <%= render(partial: 'project', object: project, locals: { project_status: :active }) %>
-<% end %>
-</tbody>
-</table>
+<%= render(partial: 'projects_list', locals: { projects: @active_projects, project_status: :active }) %>
 
 <br />
 
 <h3>Someday/Maybe</h3>
-<table class="table table-hover">
-<tbody>
-<% @someday_projects.each do |project| %>
-  <%= render(partial: 'project', object: project, locals: { project_status: :someday }) %>
-<% end %>
-</tbody>
-</table>
+<%= render(partial: 'projects_list', locals: { projects: @someday_projects, project_status: :someday }) %>
 
 <br />
 
 <h3>Ideas/Hopper</h3>
-<table class="table table-hover">
-<tbody>
-<% @idea_projects.each do |project| %>
-  <%= render(partial: 'project', object: project, locals: { project_status: :idea }) %>
-<% end %>
-</tbody>
-</table>
+<%= render(partial: 'projects_list', locals: { projects: @idea_projects, project_status: :idea }) %>
 
 <br />
 
