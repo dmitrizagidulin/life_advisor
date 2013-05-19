@@ -11,3 +11,6 @@
  *= require_self
  *= require_tree .
  */
+.task_done {
+	text-decoration: line-through;
+}
