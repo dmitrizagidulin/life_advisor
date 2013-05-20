@@ -22,7 +22,7 @@ class ActionItem
     self.save
   end
   
-  def self.all_todo(mywn_category=nil)
+  def self.all_todo(mywn_category=nil, include_projects=true)
     if mywn_category
       search_string = "done:false AND mywn_category:"+mywn_category.to_s
     else
@@ -30,7 +30,11 @@ class ActionItem
       
     end
     results = self.search_results_for(search_string)
-    results.collect { |doc| ActionItem.from_search_result(doc) }
+    results = results.collect { |doc| ActionItem.from_search_result(doc) }
+    unless include_projects
+      results = results.select { | item | item.project_key.nil? or item.project_key.empty? }
+    end
+    results
   end
   
   def self.all_completed

@@ -5,7 +5,7 @@ class ActionItemsController < ApplicationController
     @critical_items = ActionItem.all_todo(:critical)
     @opportunity_items = ActionItem.all_todo(:opportunity)
     @horizon_items = ActionItem.all_todo(:horizon)
-    @someday_items = ActionItem.all_todo(:someday)
+    @someday_items = ActionItem.all_todo(:someday, include_projects=false)
     @tomorrow_items = ActionItem.all_todo(:tomorrow)
     @new_item = ActionItem.new
     
