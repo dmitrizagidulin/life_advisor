@@ -41,10 +41,16 @@ class WebLinksController < ApplicationController
   # POST /web_links.json
   def create
     @web_link = WebLink.new(params[:web_link])
-
+    if @web_link.project_key
+      project = Project.find(@web_link.project_key)
+      redirect_url = project_path(project)
+    else
+      redirect_url = web_links_url
+    end
+    
     respond_to do |format|
       if @web_link.save
-        format.html { redirect_to @web_link, notice: 'Web link was successfully created.' }
+        format.html { redirect_to redirect_url, notice: 'Link was successfully created.' }
         format.json { render json: @web_link, status: :created, location: @web_link }
       else
         format.html { render action: "new" }
@@ -73,10 +79,15 @@ class WebLinksController < ApplicationController
   # DELETE /web_links/1.json
   def destroy
     @web_link = WebLink.find(params[:id])
+    if @web_link.project_key
+      project = Project.find(@web_link.project_key)
+      redirect_url = project_path(project)
+    else
+      redirect_url = web_links_url
+    end
     @web_link.destroy
-
     respond_to do |format|
-      format.html { redirect_to web_links_url }
+      format.html { redirect_to redirect_url }
       format.json { head :no_content }
     end
   end

@@ -105,10 +105,15 @@ class ActionItemsController < ApplicationController
   # PUT /action_items/1.json
   def update
     @action_item = ActionItem.find(params[:id])
-
+    if @action_item.project_key
+      project = Project.find(@action_item.project_key)
+      redirect_url = project_path(project)
+    else
+      redirect_url = action_items_url
+    end
     respond_to do |format|
       if @action_item.update_attributes(params[:action_item])
-        format.html { redirect_to action_items_url, notice: 'Action item was successfully updated.' }
+        format.html { redirect_to redirect_url, notice: 'Action item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -121,10 +126,16 @@ class ActionItemsController < ApplicationController
   # DELETE /action_items/1.json
   def destroy
     @action_item = ActionItem.find(params[:id])
+    if @action_item.project_key
+      project = Project.find(@action_item.project_key)
+      redirect_url = project_path(project)
+    else
+      redirect_url = action_items_url
+    end
     @action_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to action_items_url }
+      format.html { redirect_to redirect_url }
       format.json { head :no_content }
     end
   end
