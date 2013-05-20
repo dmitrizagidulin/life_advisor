@@ -16,6 +16,8 @@ LifeAdvisor::Application.routes.draw do
   end
   resources :projects
   
+  resources :web_links
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -48,9 +48,9 @@ class ActionItem
     ['critical', 'tomorrow', 'opportunity', 'horizon', 'someday']
   end
   
-  def from_search_result(document)
-    action_item = super.from_search_result(document)
-    action_item.done = action_item.done == 'true'
-    action_item
-  end
+#  def from_search_result(document)
+#    action_item = super.from_search_result(document)
+#    action_item.done = action_item.done == 'true'
+#    action_item
+#  end
 end

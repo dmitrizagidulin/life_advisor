@@ -1,0 +1,17 @@
+<%= form_for(@web_link) do |f| %>
+  <% if @web_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@web_link.errors.count, "error") %> prohibited this web_link from being saved:</h2>
+
+      <ul>
+      <% @web_link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

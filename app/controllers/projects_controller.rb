@@ -42,6 +42,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @action_items = @project.action_items
+    @links = @project.links
     
     respond_to do |format|
       format.html # show.html.erb

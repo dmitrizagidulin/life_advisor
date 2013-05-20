@@ -1,0 +1,21 @@
+<h1>Listing web_links</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @web_links.each do |web_link| %>
+  <tr>
+    <td><%= link_to 'Show', web_link %></td>
+    <td><%= link_to 'Edit', edit_web_link_path(web_link) %></td>
+    <td><%= link_to 'Destroy', web_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Web link', new_web_link_path %>

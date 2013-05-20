@@ -38,3 +38,26 @@
 <% end %>
 </tbody>
 </table>
+
+<%= form_for(WebLink.new, :html => { :class => "form-inline inline"}) do |f| %>
+    url <%= f.text_field :url, :class => "link", :tabindex => 2 %>
+    name <%= f.text_field :name, :class => "link", :tabindex => 3 %>
+    <%= f.hidden_field :project_key, value: @project.key %>
+    <%= f.submit 'Add Link', :class=> "link btn" %>
+<% end %>
+
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th>Link</th>
+    <th></th>
+    <th>Added</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @links.each do | link | %>
+	<%= render(partial: 'link', object: link) %>
+<% end %>
+</tbody>
+</table>
