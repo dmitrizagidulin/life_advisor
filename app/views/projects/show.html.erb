@@ -15,7 +15,7 @@
 </dl>
 
 <%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
-    <%= f.text_field :name, :class => "action_item", :tabindex => 1 %>
+    <%= f.text_field :name, :class => "action_item", :tabindex => 1, :autofocus => true %>
     <%= f.hidden_field :mywn_category, value: :someday %>
     <%= f.hidden_field :project_key, value: @project.key %>
     <%= f.submit 'Add Item', :class=> "action_item btn" %>
