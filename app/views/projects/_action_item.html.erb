@@ -5,7 +5,7 @@
     <% if action_item.done %>
       <span>Completed <%= action_item.completed_at.localtime.strftime("%b %d, %Y, %l:%M %P") if action_item.completed_at %></span>
     <% else %>
-      <%= render(partial: 'action_item_category_buttons', locals: {action_item: action_item} ) %>
+      <%= render(partial: 'action_items/action_item_category_buttons', locals: {action_item: action_item} ) %>
     <% end %>
     </td>
     <td><small><%= action_item.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
