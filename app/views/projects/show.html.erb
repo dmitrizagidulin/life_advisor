@@ -8,8 +8,12 @@
   <dt>Description:</dt>
   <dd><%= raw(@project.description) %></dd>
 <% end %>
+  <dt>Complete:</dt>
+  <dd><%= @project.action_items_completed.count %> / <%= @action_items.count %> action items</dd>
   <dt>Status:</dt>
   <dd><%= @project.status.capitalize %></dd>
+  <dt>Links:</dt>
+  <dd><a href="#links_table"><%= @links.count %></a></dd>
   <dt>Created:</dt>
   <dd><%= @project.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
 </dl>
@@ -47,7 +51,7 @@
     <%= f.submit 'Add Link', :class=> "link btn" %>
 <% end %>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" id="links_table">
 <thead>
   <tr>
     <th>Link</th>
