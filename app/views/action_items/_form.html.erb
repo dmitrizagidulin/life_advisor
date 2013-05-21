@@ -24,7 +24,14 @@
     <%= f.check_box :done, :class=> "action_item" %>
   </div>
 </div>
-    
+   
+<div class="control-group">
+    <%= f.label :description, class: "control-label" %>
+  <div class="controls">
+    <%= f.text_area :description, :class=> "action_item", :rows => 5 %><br />
+  </div>
+</div>
+   
 <div class="control-group">
   <div class="actions controls">
     <%= f.submit %>
