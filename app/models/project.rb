@@ -9,6 +9,7 @@ class Project
   property :status, String, :default => :idea  # One of [:idea, :active, :someday, :canceled, :completed]
   property :completed_at, Time
   property :canceled_at, Time
+  property :area, String, :default => :soul # Realms/Areas of concern. One of [:soul, :dayjob, :admin, :assistant ]
   
   timestamps!
   

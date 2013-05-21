@@ -1,4 +1,4 @@
-<%= form_for(@project) do |f| %>
+<%= form_for(@project, :html => { :class => "form-horizontal"}) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -11,15 +11,43 @@
     </div>
   <% end %>
 
-    <%= f.label :name %>
+<div class="control-group">
+    <%= f.label :name, class: "control-label" %>
+    <div class="controls">
     <%= f.text_field :name, :class=> "project" %><br />
+    </div>
+</div>
+<div class="control-group">
+<div class="controls">
+  <label class="radio">
+    <%= f.radio_button :area, 'soul' %>
+    Soul
+  </label>
+  <label class="radio">
+    <%= f.radio_button :area, 'dayjob' %>
+    Dayjob
+  </label>
+  <label class="radio">
+    <%= f.radio_button :area, 'admin' %>
+    Admin
+  </label>
+  <label class="radio">
+    <%= f.radio_button :area, 'assistant' %>
+    Assistant
+  </label>
+</div>
+</div>
 
-    <%= f.label :description %>
-    <%= f.text_area :description, :class=> "project" %><br />
+<div class="control-group">
+    <%= f.label :description, class: "control-label" %>
+  <div class="controls">
+    <%= f.text_area :description, :class=> "project", :rows => 5 %><br />
+  </div>
+</div>
 
-    <div class="clear"><br /></div>
-
-  <div class="actions">
+<div class="control-group">
+  <div class="actions controls">
     <%= f.submit %>
   </div>
+</div>
 <% end %>
