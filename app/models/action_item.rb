@@ -8,7 +8,8 @@ class ActionItem
   property :done, Boolean, :default => false
   property :mywn_category, String, :default => :someday # One of [:critical, :opportunity, :horizon, :someday, :tomorrow]
   property :completed_at, Time
-  property :project_key, String  # (Optional) An action item can belong to a Project
+  property :parent_type, String  # One of [:project]
+  property :parent_key, String  # (Optional) An action item can belong to a Project, or another action item, etc
   
   timestamps!
   
@@ -32,7 +33,7 @@ class ActionItem
     results = self.search_results_for(search_string)
     results = results.collect { |doc| ActionItem.from_search_result(doc) }
     unless include_projects
-      results = results.select { | item | item.project_key.nil? or item.project_key.empty? }
+      results = results.select { | item | item.parent_key.nil? or item.parent_key.empty? }
     end
     results
   end
@@ -42,8 +43,8 @@ class ActionItem
     results.collect { |doc| ActionItem.from_search_result(doc) }
   end
   
-  def self.for_project(project_key)
-    search_string = "project_key:#{project_key}"
+  def self.for_parent(parent_type, parent_key)
+    search_string = "parent_type:#{parent_type} AND parent_key:#{parent_key}"
     results = self.search_results_for(search_string)
     results.collect { |doc| ActionItem.from_search_result(doc) }
   end

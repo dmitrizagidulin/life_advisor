@@ -41,8 +41,8 @@ class WebLinksController < ApplicationController
   # POST /web_links.json
   def create
     @web_link = WebLink.new(params[:web_link])
-    if @web_link.project_key
-      project = Project.find(@web_link.project_key)
+    if @web_link.parent_type == 'project'
+      project = Project.find(@web_link.parent_key)
       redirect_url = project_path(project)
     else
       redirect_url = web_links_url
@@ -63,10 +63,16 @@ class WebLinksController < ApplicationController
   # PUT /web_links/1.json
   def update
     @web_link = WebLink.find(params[:id])
-
+    if @web_link.parent_type == 'project'
+      project = Project.find(@web_link.parent_key)
+      redirect_url = project_path(project)
+    else
+      redirect_url = web_links_url
+    end
+    
     respond_to do |format|
       if @web_link.update_attributes(params[:web_link])
-        format.html { redirect_to @web_link, notice: 'Web link was successfully updated.' }
+        format.html { redirect_to redirect_url, notice: 'Web link was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,8 +85,8 @@ class WebLinksController < ApplicationController
   # DELETE /web_links/1.json
   def destroy
     @web_link = WebLink.find(params[:id])
-    if @web_link.project_key
-      project = Project.find(@web_link.project_key)
+    if @web_link.parent_type == 'project'
+      project = Project.find(@web_link.parent_key)
       redirect_url = project_path(project)
     else
       redirect_url = web_links_url

@@ -17,7 +17,8 @@
 <%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
     <%= f.text_field :name, :class => "action_item", :tabindex => 1, :autofocus => true %>
     <%= f.hidden_field :mywn_category, value: :someday %>
-    <%= f.hidden_field :project_key, value: @project.key %>
+    <%= f.hidden_field :parent_type, value: :project %>
+    <%= f.hidden_field :parent_key, value: @project.key %>
     <%= f.submit 'Add Item', :class=> "action_item btn" %>
 <% end %>
 
@@ -41,7 +42,8 @@
 <%= form_for(WebLink.new, :html => { :class => "form-inline inline"}) do |f| %>
     url <%= f.text_field :url, :class => "link", :tabindex => 2 %>
     name <%= f.text_field :name, :class => "link", :tabindex => 3 %>
-    <%= f.hidden_field :project_key, value: @project.key %>
+    <%= f.hidden_field :parent_type, value: :project %>
+    <%= f.hidden_field :parent_key, value: @project.key %>
     <%= f.submit 'Add Link', :class=> "link btn" %>
 <% end %>
 

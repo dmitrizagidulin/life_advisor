@@ -6,6 +6,8 @@ module RippleSearch
   def from_search_result(document)
     fields = document['fields']
     fields.delete('_type') # Remove the _type key, gives an error when instantiating
+    deprecated_fields = ['project_key', 'action_item_key']
+    deprecated_fields.each { |field_name| fields.delete(field_name) }
     action_item = self.new(fields)
     action_item.key = document['id']
     action_item

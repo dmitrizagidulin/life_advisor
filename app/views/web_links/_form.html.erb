@@ -11,6 +11,14 @@
     </div>
   <% end %>
 
+    <%= f.label :url %>
+    <%= f.text_field :url, :class=> "web_link" %><br />
+
+    <%= f.label :name %>
+    <%= f.text_field :name, :class=> "web_link" %><br />
+
+    <div class="clear"><br /></div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

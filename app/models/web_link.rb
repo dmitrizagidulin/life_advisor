@@ -7,13 +7,14 @@ class WebLink
   property :name, String
   property :url, String, :presence => true
 
-  property :action_item_key, String  # (Optional) A link can belong to an ActionItem
-  property :project_key, String  # (Optional) A link can belong to a Project
+  property :parent_type, String  # One of [:project]
+  property :parent_key, String  # (Optional) An action item can belong to a Project, or another action item, etc
+
   
   timestamps!
   
-  def self.for_project(project_key)
-    search_string = "project_key:#{project_key}"
+  def self.for_parent(parent_type, parent_key)
+    search_string = "parent_type:#{parent_type} AND parent_key:#{parent_key}"
     results = self.search_results_for(search_string)
     results.collect { |doc| WebLink.from_search_result(doc) }
   end

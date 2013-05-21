@@ -77,8 +77,8 @@ class ActionItemsController < ApplicationController
   def create
     @action_item = ActionItem.new(params[:action_item])
 
-    if @action_item.project_key
-      project = Project.find(@action_item.project_key)
+    if @action_item.parent_type == 'project'
+      project = Project.find(@action_item.parent_key)
       redirect_url = project_path(project)
     else
       redirect_url = action_items_url
@@ -105,8 +105,8 @@ class ActionItemsController < ApplicationController
   # PUT /action_items/1.json
   def update
     @action_item = ActionItem.find(params[:id])
-    if @action_item.project_key
-      project = Project.find(@action_item.project_key)
+    if @action_item.parent_type == 'project'
+      project = Project.find(@action_item.parent_key)
       redirect_url = project_path(project)
     else
       redirect_url = action_items_url
@@ -126,8 +126,8 @@ class ActionItemsController < ApplicationController
   # DELETE /action_items/1.json
   def destroy
     @action_item = ActionItem.find(params[:id])
-    if @action_item.project_key
-      project = Project.find(@action_item.project_key)
+    if @action_item.parent_type == 'project'
+      project = Project.find(@action_item.parent_key)
       redirect_url = project_path(project)
     else
       redirect_url = action_items_url

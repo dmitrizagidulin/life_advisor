@@ -19,7 +19,7 @@ class Project
   end
 
   def action_items
-    ActionItem.for_project(self.key)
+    ActionItem.for_parent(:project, self.key)
   end
   
   def action_items_completed
@@ -27,7 +27,7 @@ class Project
   end
   
   def links
-    WebLink.for_project(self.key)
+    WebLink.for_parent(:project, self.key)
   end
   
   def change_status!(new_status)
