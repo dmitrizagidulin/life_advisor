@@ -9,6 +9,7 @@ class ActionItem
   property :mywn_category, String, :default => :someday # One of [:critical, :opportunity, :horizon, :someday, :tomorrow]
   property :completed_at, Time
   property :description, String
+  property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
   property :parent_type, String  # One of [:project]
   property :parent_key, String  # (Optional) An action item can belong to a Project, or another action item, etc
   

@@ -24,7 +24,9 @@
     <%= f.check_box :done, :class=> "action_item" %>
   </div>
 </div>
-   
+
+<%= render partial: 'action_items/area_select', locals: { form: f } %>
+
 <div class="control-group">
     <%= f.label :description, class: "control-label" %>
   <div class="controls">

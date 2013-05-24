@@ -17,26 +17,8 @@
     <%= f.text_field :name, :class=> "project" %><br />
     </div>
 </div>
-<div class="control-group">
-<div class="controls">
-  <label class="radio">
-    <%= f.radio_button :area, 'soul' %>
-    Soul
-  </label>
-  <label class="radio">
-    <%= f.radio_button :area, 'work' %>
-    Work
-  </label>
-  <label class="radio">
-    <%= f.radio_button :area, 'admin' %>
-    Admin
-  </label>
-  <label class="radio">
-    <%= f.radio_button :area, 'assistant' %>
-    Assistant
-  </label>
-</div>
-</div>
+
+<%= render partial: 'action_items/area_select', locals: { form: f } %>
 
 <div class="control-group">
     <%= f.label :description, class: "control-label" %>
