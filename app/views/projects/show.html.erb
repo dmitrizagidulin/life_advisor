@@ -12,6 +12,8 @@
   <dd><%= @project.action_items_completed.count %> / <%= @action_items.count %> action items</dd>
   <dt>Status:</dt>
   <dd><%= @project.status.capitalize %></dd>
+  <dt>Area:</dt>
+  <dd><%= @project.area.capitalize %></dd>
   <dt>Links:</dt>
   <dd><a href="#links_table"><%= @links.count %></a></dd>
   <dt>Created:</dt>
@@ -23,6 +25,7 @@
     <%= f.hidden_field :mywn_category, value: :someday %>
     <%= f.hidden_field :parent_type, value: :project %>
     <%= f.hidden_field :parent_key, value: @project.key %>
+    <%= f.hidden_field :area, value: @project.area %>
     <%= f.submit 'Add Item', :class=> "action_item btn" %>
 <% end %>
 
