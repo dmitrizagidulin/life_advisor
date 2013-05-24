@@ -32,7 +32,9 @@ class ActionItem
       search_string = "done:false"
     end
     
-    unless focus_area.nil?
+    if not focus_area.nil? and focus_area.to_sym == :admin
+      search_string += " AND (area:admin OR area:assistant)"
+    elsif not focus_area.nil?
       search_string += " AND area:#{focus_area}"
     end
     
