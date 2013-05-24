@@ -14,3 +14,16 @@
 .task_done {
 	text-decoration: line-through;
 }
+.area-soul {
+	font-weight: bold;
+	color: green;
+}
+.area-soul a {
+	color: green;
+}
+.area-admin {
+	color: #555;
+}
+.area-admin a {
+	color: #555;
+}

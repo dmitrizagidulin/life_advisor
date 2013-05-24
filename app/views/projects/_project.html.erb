@@ -7,7 +7,7 @@
     <% end %>
     </td>
     <td class="span6">
-      <%= link_to project.name, project_path(project) %> (<%= project.area %>)
+      <span class="area-<%= project.area %>"><%= link_to project.name, project_path(project) %></span>
       <% if link_count > 0 %>
         <br />
         <span class="muted small"><%= link_count %> links</span>
