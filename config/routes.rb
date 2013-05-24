@@ -19,7 +19,7 @@ LifeAdvisor::Application.routes.draw do
   resources :web_links
   
   controller :focus do
-    get 'focus/work' => :work
+    get 'focus/:area' => :focus_area
   end
   
   # Sample of regular route:

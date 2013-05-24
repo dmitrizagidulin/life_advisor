@@ -1,4 +1,4 @@
-<h1 class="page">Focus!</h1>
+<h1 class="page area-<%= @focus_area %>">Focus! (<%= @focus_area.capitalize %>)</h1>
 
 <%= render partial: 'action_items/category_list', locals: { mywn_category: :critical, items: @critical_items, focus_area: :work, tab_index: 1 } %>
 
