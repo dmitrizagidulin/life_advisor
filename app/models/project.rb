@@ -9,7 +9,7 @@ class Project
   property :status, String, :default => :idea  # One of [:idea, :active, :someday, :canceled, :completed]
   property :completed_at, Time
   property :canceled_at, Time
-  property :area, String, :default => :soul # Realms/Areas of concern. One of [:soul, :dayjob, :admin, :assistant ]
+  property :area, String, :default => :soul # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
   
   timestamps!
   
@@ -19,6 +19,12 @@ class Project
     results.collect { |doc| Project.from_search_result(doc) }
   end
 
+  def self.focus_on_area(area)
+    search_string = "status:active AND area:#{area}"
+    results = self.search_results_for(search_string)
+    results.collect { |doc| Project.from_search_result(doc) }
+  end
+  
   def action_items
     ActionItem.for_parent(:project, self.key)
   end

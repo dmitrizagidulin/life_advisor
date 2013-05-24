@@ -1,6 +1,6 @@
 <h1>Projects</h1>
 
-<%= render partial: 'new', locals: { } %>
+<%= render partial: 'new', locals: { area: :soul } %>
 
 <h3>Active</h3>
 <%= render(partial: 'projects_list', locals: { projects: @active_projects, project_status: :active }) %>

@@ -10,7 +10,7 @@
 </thead>
 <tbody>
 <% projects.each do |project| %>
-  <%= render(partial: 'project', object: project, locals: { project_status: project_status }) %>
+  <%= render(partial: 'projects/project', object: project, locals: { project_status: project_status }) %>
 <% end %>
 </tbody>
 </table>
