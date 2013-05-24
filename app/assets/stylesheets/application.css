@@ -11,6 +11,11 @@
  *= require_self
  *= require_tree .
  */
+h1.page {
+	text-align: center;
+	font-size: 16pt;
+}
+ 
 .task_done {
 	text-decoration: line-through;
 }
@@ -26,4 +31,10 @@
 }
 .area-admin a {
 	color: #555;
+}
+.area-assistant {
+	color: #CCC;
+}
+.area-assistant a {
+	color: #CCC;
 }

@@ -1,8 +1,8 @@
-<%= render partial: 'new', locals: { mywn_category: mywn_category, item_count: items.count, tab_index: tab_index } %>
+<%= render partial: 'action_items/new', locals: { mywn_category: mywn_category, item_count: items.count, focus_area: focus_area, tab_index: tab_index } %>
 <table class="table table-hover">
   <tbody>
 <% items.each do |action_item| %>
-	<%= render(partial: 'action_item', object: action_item) %>
+	<%= render(partial: 'action_items/action_item', object: action_item) %>
 <% end %>
   </tbody>
 </table>

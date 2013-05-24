@@ -25,13 +25,17 @@ class ActionItem
     self.save
   end
   
-  def self.all_todo(mywn_category=nil, include_projects=true)
+  def self.all_todo(mywn_category=nil, focus_area=nil, include_projects=true)
     if mywn_category
       search_string = "done:false AND mywn_category:"+mywn_category.to_s
     else
       search_string = "done:false"
-      
     end
+    
+    unless focus_area.nil?
+      search_string += " AND area:#{focus_area}"
+    end
+    
     results = self.search_results_for(search_string)
     results = results.collect { |doc| ActionItem.from_search_result(doc) }
     unless include_projects

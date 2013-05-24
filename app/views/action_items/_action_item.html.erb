@@ -13,7 +13,7 @@
       <% end %>
     </td>
     <td>
-    <%= render partial: 'action_item_category_buttons', locals: { action_item: action_item } %>
+    <%= render partial: 'action_items/action_item_category_buttons', locals: { action_item: action_item } %>
     </td>
     <td><small><%= action_item.created_at.localtime.strftime("%b %d, %y")  %></small></td>
     <td><%= link_to 'Destroy', '/action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',

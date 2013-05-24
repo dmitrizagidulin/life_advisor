@@ -60,8 +60,13 @@
         <div class="span2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
+              <li><%= link_to_unless_current "Focus!", "/focus/"  %></li>
+              <li><%= link_to_unless_current "Soul", "/focus/soul"  %></li>
+              <li><%= link_to_unless_current "Work", "/focus/work"  %></li>
+              <li><%= link_to_unless_current "Admin", "/focus/admin"  %></li>
+              <li><%= link_to_unless_current "Assistant", "/focus/assistant"  %></li>
               <li class="nav-header">Action Items</li>
-              <li><%= link_to_unless_current "To Do", "/action_items"  %></li>
+              <li><%= link_to_unless_current "Review All", "/action_items"  %></li>
               <li><%= link_to_unless_current "Completed", "/action_items/completed"  %></li>
               <li><%= link_to_unless_current "All Items", "/action_items/all"  %></li>
               <li class="nav-header">Projects</li>

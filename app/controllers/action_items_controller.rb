@@ -5,9 +5,8 @@ class ActionItemsController < ApplicationController
     @critical_items = ActionItem.all_todo(:critical)
     @opportunity_items = ActionItem.all_todo(:opportunity)
     @horizon_items = ActionItem.all_todo(:horizon)
-    @someday_items = ActionItem.all_todo(:someday, include_projects=false)
+    @someday_items = ActionItem.all_todo(:someday, focus_area=nil, include_projects=false)
     @tomorrow_items = ActionItem.all_todo(:tomorrow)
-    @new_item = ActionItem.new
     
     respond_to do |format|
       format.js
@@ -28,9 +27,10 @@ class ActionItemsController < ApplicationController
   def category_update
     @action_item = ActionItem.find(params[:id])
     @action_item.mywn_category = params[:category]
+    session[:return_to] = request.referer || action_items_url # redirect to referring page
     respond_to do |format|
       if @action_item.save
-        format.html { redirect_to action_items_url }
+        format.html { redirect_to session[:return_to] }
       end
     end
   end
@@ -77,16 +77,11 @@ class ActionItemsController < ApplicationController
   def create
     @action_item = ActionItem.new(params[:action_item])
 
-    if @action_item.parent_type == 'project'
-      project = Project.find(@action_item.parent_key)
-      redirect_url = project_path(project)
-    else
-      redirect_url = action_items_url
-    end
+    session[:return_to] = request.referer || action_items_url # redirect to referring page
       
     respond_to do |format|
       if @action_item.save
-        format.html { redirect_to redirect_url, notice: 'Action item created.' }
+        format.html { redirect_to session[:return_to], notice: 'Action item created.' }
         format.json { render json: @action_item, status: :created, location: @action_item }
       else
         format.html { render action: "new" }
@@ -105,15 +100,11 @@ class ActionItemsController < ApplicationController
   # PUT /action_items/1.json
   def update
     @action_item = ActionItem.find(params[:id])
-    if @action_item.parent_type == 'project'
-      project = Project.find(@action_item.parent_key)
-      redirect_url = project_path(project)
-    else
-      redirect_url = action_items_url
-    end
+    session[:return_to] = request.referer || action_items_url # redirect to referring page
+
     respond_to do |format|
       if @action_item.update_attributes(params[:action_item])
-        format.html { redirect_to redirect_url, notice: 'Action item was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Action item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -126,16 +117,11 @@ class ActionItemsController < ApplicationController
   # DELETE /action_items/1.json
   def destroy
     @action_item = ActionItem.find(params[:id])
-    if @action_item.parent_type == 'project'
-      project = Project.find(@action_item.parent_key)
-      redirect_url = project_path(project)
-    else
-      redirect_url = action_items_url
-    end
+    session[:return_to] = request.referer || action_items_url # redirect to referring page
     @action_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to redirect_url }
+      format.html { redirect_to session[:return_to] }
       format.json { head :no_content }
     end
   end

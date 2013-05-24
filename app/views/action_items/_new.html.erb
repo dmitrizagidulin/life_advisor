@@ -1,6 +1,7 @@
-<%= form_for(@new_item, :html => { :class => "form-inline inline"}) do |f| %>
+<%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
     <strong><%= mywn_category.capitalize %> (<%= item_count %>)</strong>&nbsp;&nbsp;&nbsp;
     <%= f.text_field :name, :class => "action_item", :tabindex => tab_index, :autofocus => mywn_category.to_sym == :critical %>
     <%= f.hidden_field :mywn_category, value: mywn_category %>
+    <%= f.hidden_field :area, value: focus_area %>
     <%= f.submit 'Add', :class=> "action_item btn" %>
 <% end %>
