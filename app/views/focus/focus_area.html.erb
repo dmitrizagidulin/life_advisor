@@ -1,10 +1,10 @@
 <h1 class="page area-<%= @focus_area %>">Focus! (<%= @focus_area.capitalize %>)</h1>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :critical, items: @critical_items, focus_area: :work, tab_index: 1 } %>
+<%= render partial: 'action_items/category_list', locals: { mywn_category: :critical, items: @critical_items, focus_area: @focus_area, tab_index: 1 } %>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :opportunity, items: @opportunity_items, focus_area: :work, tab_index: 2 } %>
+<%= render partial: 'action_items/category_list', locals: { mywn_category: :opportunity, items: @opportunity_items, focus_area: @focus_area, tab_index: 2 } %>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :horizon, items: @horizon_items, focus_area: :work, tab_index: 3 } %>
+<%= render partial: 'action_items/category_list', locals: { mywn_category: :horizon, items: @horizon_items, focus_area: @focus_area, tab_index: 3 } %>
 
 
 <%= render(partial: 'projects/projects_list', locals: { projects: @projects, project_status: :active }) %>
