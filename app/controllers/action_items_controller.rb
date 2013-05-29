@@ -34,7 +34,19 @@ class ActionItemsController < ApplicationController
       end
     end
   end
-  
+
+  def category_update_all
+    @from_category = params[:from_mywn_category]
+    @to_category = params[:to_mywn_category]
+    session[:return_to] = request.referer || action_items_url # redirect to referring page
+
+    count_moved = ActionItem.mywn_category_move(@from_category, @to_category)
+    respond_to do |format|
+      format.html { redirect_to session[:return_to], notice: "#{count_moved} items moved from Tomorrow to Critical." }
+    end
+  end
+
+    
   def completed
     @completed_items = ActionItem.all_completed
     

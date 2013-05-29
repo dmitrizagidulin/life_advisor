@@ -61,6 +61,27 @@ class ActionItem
     ['critical', 'tomorrow', 'opportunity', 'horizon', 'someday']
   end
   
+  # TODO: Unit test
+  def self.is_valid_category?(category)
+    ActionItem.mywn_categories.include? category.to_s
+  end
+  
+  # TODO: Unit test
+  def self.mywn_category_move(category_from, category_to)
+    unless ActionItem.is_valid_category? category_from
+      raise ArgumentError, "Invalid MYWN Category"
+    end
+    unless ActionItem.is_valid_category? category_to
+      raise ArgumentError, "Invalid MYWN Category"
+    end
+    category_items = ActionItem.all_todo(category_from)
+    category_items.each do | item |
+      item.mywn_category = category_to
+      item.save!
+    end
+    category_items.count  # Return the number of items moved
+  end
+  
 #  def from_search_result(document)
 #    action_item = super.from_search_result(document)
 #    action_item.done = action_item.done == 'true'

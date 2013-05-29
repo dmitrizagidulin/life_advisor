@@ -6,6 +6,7 @@ LifeAdvisor::Application.routes.draw do
     get 'action_items/all' => :all
     post 'action_items/toggle_done/:id' => :toggle_done
     post 'action_items/:id/category/:category' => :category_update
+    post 'action_items/category_update_all' => :category_update_all
   end
   resources :action_items
   
