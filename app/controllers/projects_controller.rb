@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @action_items = @project.action_items
+    @action_items = @project.action_items.sort
     @links = @project.links
     
     respond_to do |format|

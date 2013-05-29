@@ -2,6 +2,7 @@ require 'RippleSearch'
 
 class ActionItem
   include Ripple::Document
+  include Comparable
   extend RippleSearch
 
   property :name, String, :presence => true
@@ -14,6 +15,37 @@ class ActionItem
   property :parent_key, String  # (Optional) An action item can belong to a Project, or another action item, etc
   
   timestamps!
+  
+  # TODO: Unit test
+  def <=>(anOther)
+    # First, sort on Done status
+    return -1 if self.done and not anOther.done
+    return 1 if not self.done and anOther.done
+    
+    # In case both are done, sort on Completed At time
+    if self.done and anOther.done
+      return self.completed_at <=> anOther.completed_at unless self.completed_at.nil? or anOther.completed_at.nil?
+    end
+    
+    # Next, sort on MYWN Category
+    unless self.mywn_category.nil? or anOther.mywn_category.nil?
+      category_cmp = self.mywn_category_order <=> anOther.mywn_category_order
+      return category_cmp unless category_cmp == 0
+    end
+
+    # Next, sort on Focus Area
+    unless self.area.nil? or anOther.area.nil?
+      area_cmp = self.area_order <=> anOther.area_order
+      return area_cmp unless area_cmp == 0
+    end
+    
+    # Lastly, sort on Created At time
+    self.created_at <=> anOther.created_at
+  end
+  
+  def area_order
+    ActionItem.areas.find_index self.area.to_s
+  end
   
   def has_parent?
     not self.parent_type.nil? and not self.parent_type.empty?
@@ -30,6 +62,10 @@ class ActionItem
     if self.parent_type.to_sym == :project
       return "/projects/#{self.parent_key}"
     end
+  end
+  
+  def mywn_category_order
+    ActionItem.mywn_categories.find_index self.mywn_category
   end
   
   def toggle_done!
@@ -76,6 +112,10 @@ class ActionItem
   
   def self.mywn_categories
     ['critical', 'tomorrow', 'opportunity', 'horizon', 'someday']
+  end
+  
+  def self.areas
+    ['soul', 'work', 'admin', 'assistant']
   end
   
   # TODO: Unit test

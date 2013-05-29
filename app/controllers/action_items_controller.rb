@@ -2,11 +2,11 @@ class ActionItemsController < ApplicationController
   # GET /action_items
   # GET /action_items.json
   def index
-    @critical_items = ActionItem.all_todo(:critical)
-    @opportunity_items = ActionItem.all_todo(:opportunity)
-    @horizon_items = ActionItem.all_todo(:horizon)
-    @someday_items = ActionItem.all_todo(:someday, focus_area=nil, include_projects=false)
-    @tomorrow_items = ActionItem.all_todo(:tomorrow)
+    @critical_items = ActionItem.all_todo(:critical).sort
+    @opportunity_items = ActionItem.all_todo(:opportunity).sort
+    @horizon_items = ActionItem.all_todo(:horizon).sort
+    @someday_items = ActionItem.all_todo(:someday, focus_area=nil, include_projects=false).sort
+    @tomorrow_items = ActionItem.all_todo(:tomorrow).sort
     
     respond_to do |format|
       format.js
