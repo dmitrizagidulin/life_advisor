@@ -82,6 +82,7 @@ class ActionItemsController < ApplicationController
   # GET /action_items/1/edit
   def edit
     @action_item = ActionItem.find(params[:id])
+    @parent = @action_item.parent
   end
 
   # POST /action_items
@@ -112,7 +113,11 @@ class ActionItemsController < ApplicationController
   # PUT /action_items/1.json
   def update
     @action_item = ActionItem.find(params[:id])
-    session[:return_to] = request.referer || action_items_url # redirect to referring page
+    if @action_item.has_parent?
+      session[:return_to] = @action_item.parent_url
+    else
+      session[:return_to] = request.referer || action_items_url # redirect to referring page
+    end
 
     respond_to do |format|
       if @action_item.update_attributes(params[:action_item])

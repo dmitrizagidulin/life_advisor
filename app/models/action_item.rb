@@ -15,6 +15,23 @@ class ActionItem
   
   timestamps!
   
+  def has_parent?
+    not self.parent_type.nil? and not self.parent_type.empty?
+  end
+  
+  def parent
+    if self.parent_type.to_sym == :project
+      parent = Project.find(self.parent_key)
+    end
+    parent
+  end
+  
+  def parent_url
+    if self.parent_type.to_sym == :project
+      return "/projects/#{self.parent_key}"
+    end
+  end
+  
   def toggle_done!
     self.done = !self.done
     if self.done
