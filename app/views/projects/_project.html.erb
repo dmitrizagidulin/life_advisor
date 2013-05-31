@@ -6,7 +6,7 @@
       [ <%= project.action_items_completed.count %> / <%= item_count %> ]
     <% end %>
     </td>
-    <td class="span6">
+    <td class="span6" id="project-<%= project.key %>">
       <%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-mini '  %>
       <span class="area-<%= project.area %>"><%= link_to project.name, project_path(project) %></span>
       <% if link_count > 0 %>

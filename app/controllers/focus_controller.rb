@@ -1,7 +1,8 @@
 class FocusController < ApplicationController
   def focus_area
     @focus_area = params[:area]
-    @projects = Project.focus_on_area(@focus_area)
+    @active_projects = Project.focus_on_area(@focus_area, :active)
+    @someday_projects = Project.focus_on_area(@focus_area, :someday)
     @critical_items = ActionItem.all_todo(:critical)
     @opportunity_items = ActionItem.all_todo(:opportunity, @focus_area)
     @horizon_items = ActionItem.all_todo(:horizon, @focus_area)

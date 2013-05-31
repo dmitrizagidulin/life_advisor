@@ -19,8 +19,8 @@ class Project
     results.collect { |doc| Project.from_search_result(doc) }
   end
 
-  def self.focus_on_area(area)
-    search_string = "status:active AND area:#{area}"
+  def self.focus_on_area(area, status=:active)
+    search_string = "status:#{status} AND area:#{area}"
     results = self.search_results_for(search_string)
     results.collect { |doc| Project.from_search_result(doc) }
   end

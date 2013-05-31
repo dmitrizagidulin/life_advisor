@@ -52,7 +52,7 @@ class ActionItem
   end
   
   def parent
-    if self.parent_type.to_sym == :project
+    if self.parent_type and self.parent_type.to_sym == :project
       parent = Project.find(self.parent_key)
     end
     parent
