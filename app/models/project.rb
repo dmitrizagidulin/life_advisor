@@ -32,6 +32,10 @@ class Project
   def action_items_completed
     self.action_items.select { |item| item.done }
   end
+
+  def action_items_todo
+    self.action_items.select { |item| not item.done }
+  end
   
   def links
     WebLink.for_parent(:project, self.key)

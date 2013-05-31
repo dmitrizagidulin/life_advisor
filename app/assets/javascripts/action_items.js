@@ -7,4 +7,9 @@ $(document).ready(function() {
 				$(task_name).toggleClass('task_done');
 			});
 	})
+	
+	$('#reveal_completed').click(function() {
+		$('#action_items_hidden').removeClass('hidden');
+		$('#action_items_hidden').show();
+	})
 });

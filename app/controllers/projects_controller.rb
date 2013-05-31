@@ -40,7 +40,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @action_items = @project.action_items.sort
+    @action_items = @project.action_items_todo.sort
+    @completed_items = @project.action_items_completed.sort
     @links = @project.links
     
     respond_to do |format|
@@ -108,7 +109,8 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to projects_url, notice: 'Project was successfully updated.' }
+        redirect_url = projects_url  + "#project-" + @project.key
+        format.html { redirect_to redirect_url, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
