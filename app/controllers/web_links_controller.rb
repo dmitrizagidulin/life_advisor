@@ -43,7 +43,7 @@ class WebLinksController < ApplicationController
     @web_link = WebLink.new(params[:web_link])
     if @web_link.parent_type == 'project'
       project = Project.find(@web_link.parent_key)
-      redirect_url = project_path(project)
+      redirect_url = project_path(project) + '#links_table'
     else
       redirect_url = web_links_url
     end
@@ -65,7 +65,7 @@ class WebLinksController < ApplicationController
     @web_link = WebLink.find(params[:id])
     if @web_link.parent_type == 'project'
       project = Project.find(@web_link.parent_key)
-      redirect_url = project_path(project)
+      redirect_url = project_path(project) + '#links_table'
     else
       redirect_url = web_links_url
     end
@@ -87,7 +87,7 @@ class WebLinksController < ApplicationController
     @web_link = WebLink.find(params[:id])
     if @web_link.parent_type == 'project'
       project = Project.find(@web_link.parent_key)
-      redirect_url = project_path(project)
+      redirect_url = project_path(project) + '#links_table'
     else
       redirect_url = web_links_url
     end

@@ -15,7 +15,7 @@ class WebLink
   
   def self.for_parent(parent_type, parent_key)
     search_string = "parent_type:#{parent_type} AND parent_key:#{parent_key}"
-    results = self.search_results_for(search_string)
+    results = self.search_results_for(search_string, sort_field='created_at desc')
     results.collect { |doc| WebLink.from_search_result(doc) }
   end
 
