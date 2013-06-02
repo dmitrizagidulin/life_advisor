@@ -1,0 +1,25 @@
+<div>
+<% @end_date.to_date.downto(@start_date.to_date) do |day| %>
+  <% day_activity = false %>
+  <h4><%= day.strftime('%a, %b %d') %></h4>
+  <% if @created_items.include? day %>
+    <% day_activity = true %>
+    <% day_items = @created_items[day] %>
+   <div class="red"><%= day_items.count %> items created.</div>
+  <% end %>
+  <% if @completed_items.include? day %>
+    <% day_activity = true %>
+    <% day_items = @completed_items[day].sort %>
+    <div class="green"><%= day_items.count %> items completed:</div>
+    <ul>
+    <% day_items.each do | item | %>
+      <li><%= item.name %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  
+  <% unless day_activity %>
+    <div class="muted">Nothing happened? Seems unlikely.</div>
+  <% end %>
+<% end %>
+</div>

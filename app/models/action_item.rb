@@ -118,6 +118,28 @@ class ActionItem
     ['soul', 'work', 'admin', 'assistant']
   end
   
+  def self.hash_by_date(items)
+    created_items = {}
+    completed_items = {}
+    items.each do | item |
+      if item.completed_at
+        completed_key = item.completed_at.to_date
+        if completed_items.include? completed_key
+          completed_items[completed_key].append(item)
+        else
+          completed_items[completed_key] = [item]
+        end
+      end
+      created_key = item.created_at.to_date
+      if created_items.include? created_key
+        created_items[created_key].append(item)
+      else
+        created_items[created_key] = [item]
+      end
+    end
+    return created_items, completed_items
+  end
+  
   # TODO: Unit test
   def self.is_valid_category?(category)
     ActionItem.mywn_categories.include? category.to_s

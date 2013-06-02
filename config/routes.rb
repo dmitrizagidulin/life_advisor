@@ -16,7 +16,7 @@ LifeAdvisor::Application.routes.draw do
     post 'projects/:id/status/:status' => :status_update
   end
   resources :projects
-  
+  resources :history
   resources :web_links
   
   controller :focus do
