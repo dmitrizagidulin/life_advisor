@@ -90,11 +90,12 @@ class ActionItemsController < ApplicationController
   def create
     @action_item = ActionItem.new(params[:action_item])
 
-    session[:return_to] = request.referer || action_items_url # redirect to referring page
-      
     respond_to do |format|
       if @action_item.save
-        format.html { redirect_to session[:return_to], notice: 'Action item created.' }
+        redirect_url = request.referer || action_items_url # redirect to referring page
+        redirect_url += "##{@action_item.key}"
+
+        format.html { redirect_to redirect_url, notice: 'Action item created.' }
         format.json { render json: @action_item, status: :created, location: @action_item }
       else
         format.html { render action: "new" }
@@ -114,14 +115,15 @@ class ActionItemsController < ApplicationController
   def update
     @action_item = ActionItem.find(params[:id])
     if @action_item.has_parent?
-      session[:return_to] = @action_item.parent_url
+      redirect_url = @action_item.parent_url
     else
-      session[:return_to] = request.referer || action_items_url # redirect to referring page
+      redirect_url = request.referer || action_items_url # redirect to referring page
     end
-
+    redirect_url += "##{@action_item.key}"
+    
     respond_to do |format|
       if @action_item.update_attributes(params[:action_item])
-        format.html { redirect_to session[:return_to], notice: 'Action item was successfully updated.' }
+        format.html { redirect_to redirect_url, notice: 'Action item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
