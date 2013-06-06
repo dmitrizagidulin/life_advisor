@@ -123,14 +123,14 @@ class ActionItem
     completed_items = {}
     items.each do | item |
       if item.completed_at
-        completed_key = item.completed_at.to_date
+        completed_key = item.completed_at.localtime.to_date
         if completed_items.include? completed_key
           completed_items[completed_key].append(item)
         else
           completed_items[completed_key] = [item]
         end
       end
-      created_key = item.created_at.to_date
+      created_key = item.created_at.localtime.to_date
       if created_items.include? created_key
         created_items[created_key].append(item)
       else
