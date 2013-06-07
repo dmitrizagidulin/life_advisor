@@ -1,0 +1,21 @@
+<h1>Thoughts</h1>
+
+<table class="table table-hover">
+  <tbody>
+<% @thoughts.each do |thought| %>
+  <%= render(partial: 'thoughts/thought', object: thought) %>
+<% end %>
+  </tbody>
+</table>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<br />
+
+<%= link_to 'New Thought', new_thought_path, :class => 'btn'  %>

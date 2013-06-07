@@ -18,6 +18,7 @@ LifeAdvisor::Application.routes.draw do
   resources :projects
   resources :history
   resources :web_links
+  resources :thoughts
   
   controller :focus do
     get 'focus/:area' => :focus_area
