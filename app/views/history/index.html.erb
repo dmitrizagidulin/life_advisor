@@ -10,13 +10,25 @@
   <% if @completed_items.include? day %>
     <% day_activity = true %>
     <% day_items = @completed_items[day].sort %>
-    <div class="green"><%= day_items.count %> items completed:</div>
+    <div class="green"><%= day_items.count %> items completed.</div>
     <ul>
     <% day_items.each do | item | %>
       <li><%= item.name %></li>
     <% end %>
     </ul>
   <% end %>
+
+  <% if @completed_items.include? day %>
+    <% day_activity = true %>
+    <% day_items = @completed_items[day].sort %>
+    <div class="green"><%= day_items.count %> items completed.</div>
+    <ul>
+    <% day_items.each do | item | %>
+      <li><%= item.name %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
   
   <% unless day_activity %>
     <div class="muted">Nothing happened? Seems unlikely.</div>
