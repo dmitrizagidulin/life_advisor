@@ -1,9 +1,11 @@
 require 'RippleSearch'
+require 'Parentable'
 
 class ActionItem
   include Ripple::Document
   include Comparable
   extend RippleSearch
+  include Parentable
 
   property :name, String, :presence => true
   property :done, Boolean, :default => false
@@ -11,9 +13,7 @@ class ActionItem
   property :completed_at, Time
   property :description, String
   property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
-  property :parent_type, String  # One of [:project]
-  property :parent_key, String  # (Optional) An action item can belong to a Project, or another action item, etc
-  
+
   timestamps!
   
   # TODO: Unit test
@@ -45,23 +45,6 @@ class ActionItem
   
   def area_order
     ActionItem.areas.find_index self.area.to_s
-  end
-  
-  def has_parent?
-    not self.parent_type.nil? and not self.parent_type.empty?
-  end
-  
-  def parent
-    if self.parent_type and self.parent_type.to_sym == :project
-      parent = Project.find(self.parent_key)
-    end
-    parent
-  end
-  
-  def parent_url
-    if self.parent_type.to_sym == :project
-      return "/projects/#{self.parent_key}"
-    end
   end
   
   def mywn_category_order
@@ -101,12 +84,6 @@ class ActionItem
   
   def self.all_completed
     results = self.search_results_for("done:true")
-    results.collect { |doc| ActionItem.from_search_result(doc) }
-  end
-  
-  def self.for_parent(parent_type, parent_key)
-    search_string = "parent_type:#{parent_type} AND parent_key:#{parent_key}"
-    results = self.search_results_for(search_string)
     results.collect { |doc| ActionItem.from_search_result(doc) }
   end
   

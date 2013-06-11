@@ -114,7 +114,7 @@ class ActionItemsController < ApplicationController
   # PUT /action_items/1.json
   def update
     @action_item = ActionItem.find(params[:id])
-    if @action_item.has_parent?
+    if @action_item.belongs_to? :project
       redirect_url = @action_item.parent_url
     else
       redirect_url = request.referer || action_items_url # redirect to referring page

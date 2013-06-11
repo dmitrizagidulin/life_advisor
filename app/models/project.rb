@@ -54,9 +54,4 @@ class Project
       self.canceled_at = nil
     end
   end
-  
-  def from_search_result(document)
-    project = super.from_search_result(document)
-    project
-  end
 end
