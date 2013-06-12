@@ -7,11 +7,10 @@ module Parentable
   included do
     property :parent_type, String  # One of [:project, :day]
     property :parent_key, String  # (Optional) An action item can belong to a Project, or a day
-    before_create :action_before_create
   end
   
   module InstanceMethods
-    def action_before_create
+    def enforce_default_day_parent
       if not self.parent_type or (self.parent_type == 'day' and self.parent_key == 'today')
         self.parent_type = 'day'
         self.parent_key = Time.now.localtime.strftime('%Y-%m-%d')
