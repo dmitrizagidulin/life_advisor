@@ -2,7 +2,7 @@ class ThoughtsController < ApplicationController
   # GET /thoughts
   # GET /thoughts.json
   def index
-    @thoughts = Thought.all
+    @thoughts = Thought.all.sort! { |a,b| b.created_at <=> a.created_at } 
 
     respond_to do |format|
       format.html # index.html.erb
