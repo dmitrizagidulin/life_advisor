@@ -18,7 +18,7 @@ module Parentable
     end
     
     def belongs_to?(parent_type)
-      self.parent_type == parent_type.to_str and self.parent_key.present?
+      self.parent_type == parent_type.to_s and self.parent_key.present?
     end
     
     def parent
