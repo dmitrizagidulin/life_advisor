@@ -42,6 +42,8 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @action_items = @project.action_items_todo.sort
     @completed_items = @project.action_items_completed.sort
+    @num_action_items_total = @action_items.count + @completed_items.count
+    
     @links = @project.links
     
     respond_to do |format|

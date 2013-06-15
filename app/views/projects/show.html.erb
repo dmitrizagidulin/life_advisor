@@ -9,7 +9,7 @@
   <dd><%= raw(@project.description) %></dd>
 <% end %>
   <dt>Complete:</dt>
-  <dd><%= @completed_items.count %> / <%= @action_items.count %> action items</dd>
+  <dd><%= @completed_items.count %> / <%= @num_action_items_total %> action items</dd>
   <dt>Status:</dt>
   <dd><%= @project.status.capitalize %></dd>
   <dt>Area:</dt>
