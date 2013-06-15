@@ -44,3 +44,6 @@ h1.page {
 .red {
 	color: red;
 }
+.bold {
+	font-weight: bold;
+}

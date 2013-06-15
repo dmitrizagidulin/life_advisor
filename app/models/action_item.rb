@@ -47,6 +47,21 @@ class ActionItem
     ActionItem.areas.find_index self.area.to_s
   end
   
+  def completed_same_day?
+    unless self.completed_at
+      return false
+    end
+    self.created_at.to_date === self.completed_at.to_date
+  end
+  
+  def day_sort_key
+    if self.done and self.completed_at.present?
+      return self.completed_at
+    else
+      return self.created_at
+    end
+  end
+  
   def mywn_category_order
     ActionItem.mywn_categories.find_index self.mywn_category
   end
