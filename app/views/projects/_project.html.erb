@@ -14,7 +14,10 @@
         <span class="muted small"><%= link_count %> links</span>
       <% end %>
     </td>
-    <%= render(partial: 'projects/status_buttons_'+project_status.to_s, locals: { project: project } ) %>
+    <td>
+      <%= render(partial: 'projects/status_buttons_'+project_status.to_s, locals: { project: project } ) %>
+    </td>
+    <td><small><%= project.created_at.localtime.strftime("%b %d, %y")  %></small></td>
     <td>
       <%= link_to 'Destroy', '/projects/'+project.key, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
     </td>

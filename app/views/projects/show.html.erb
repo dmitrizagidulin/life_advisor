@@ -11,7 +11,9 @@
   <dt>Complete:</dt>
   <dd><%= @completed_items.count %> / <%= @num_action_items_total %> action items</dd>
   <dt>Status:</dt>
-  <dd><%= @project.status.capitalize %></dd>
+  <dd><%= @project.status.capitalize %>
+  <%= render(partial: 'projects/status_buttons_'+@project.status.to_s, locals: { project: @project } ) %>
+  </dd>
   <dt>Area:</dt>
   <dd><%= @project.area.capitalize %></dd>
   <dt>Links:</dt>
