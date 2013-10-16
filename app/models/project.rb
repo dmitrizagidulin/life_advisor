@@ -41,6 +41,14 @@ class Project
     WebLink.for_parent(:project, self.key)
   end
   
+  def next_action
+    project_items_todo = self.action_items_todo.sort
+    if project_items_todo
+      next_action = project_items_todo.first
+    end
+    next_action
+  end
+  
   def change_status!(new_status)
     self.status = new_status
     if new_status.to_sym == :completed

@@ -1,5 +1,6 @@
   <% item_count = project.action_items.count %>
   <% link_count = project.links.count %>
+  <% next_action = project.next_action %>
   <tr>
     <td class="span1">
     <% if item_count > 0 %>
@@ -13,6 +14,10 @@
     <td class="span6" id="project-<%= project.key %>">
       <%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-mini '  %>
       <span class="area-<%= project.area %>"><%= link_to project.name, project_path(project) %></span>
+      <% if next_action %>
+        <br />
+        <%= link_to 'Next Action:', action_item_path(next_action) %> <%= next_action.name %>
+      <% end %>
     </td>
     <td>
       <%= render(partial: 'projects/status_buttons_'+project_status.to_s, locals: { project: project } ) %>
