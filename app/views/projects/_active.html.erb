@@ -1,0 +1,14 @@
+<h4 class="text-center">Active Projects</h4>
+<div style="text-align: center;">
+<% projects.each do | project | %>
+  <% next_action = project.next_action %>
+  <div style="display: inline-block; padding: 1em; border: 1px solid #DDD;">
+    <span class="area-<%= project.area %>"><%= link_to project.name, project_path(project) %></span>
+    <% if next_action %>
+      <br />
+      <span class="small"><%= link_to 'Next:', action_item_path(next_action) %> <%= next_action.name %></span>
+    <% end %>
+  </div>
+<% end %>
+</div>
+  <div style="clear: both;"><br /></div>

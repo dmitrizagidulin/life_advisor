@@ -13,6 +13,10 @@ class Project
   
   timestamps!
   
+  def self.active_projects
+    self.all_for_status(:active)
+  end
+  
   def self.all_for_status(status)
     search_string = "status:"+status.to_s
     results = self.search_results_for(search_string)
