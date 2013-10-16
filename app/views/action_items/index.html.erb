@@ -1,3 +1,5 @@
+<% content_for :title, "LF: Action Items" %>
+
 <%= render partial: 'thoughts/new', locals: { tab_index: 1 } %>
 
 <%= render partial: 'action_items/category_list', locals: { mywn_category: :critical, items: @critical_items, focus_area: :admin, tab_index: 3 } %>
