@@ -1,8 +1,20 @@
 <%= render partial: 'action_items/new', locals: { mywn_category: mywn_category, item_count: items.count, focus_area: focus_area, tab_index: tab_index } %>
 <table class="table table-hover">
   <tbody>
-<% items.each do |action_item| %>
-	<%= render(partial: 'action_items/action_item', object: action_item) %>
+<% if not items.empty? %>
+    <% items.each do |action_item| %>
+      <%= render(partial: 'action_items/action_item', object: action_item) %>
+    <% end %>
+<% else %>
+    <tr>
+      <td style="border: 0px;">
+      <% if mywn_category == :critical %>
+        <span>You have triumphed Against The Day.</span>
+      <% else %>
+        <span class="muted">No items for this category.</span>
+      <% end %>
+      </td>
+    </tr>
 <% end %>
   </tbody>
 </table>
