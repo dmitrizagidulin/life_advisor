@@ -66,4 +66,8 @@ class Project
       self.canceled_at = nil
     end
   end
+  
+  def questions
+    Question.for_parent(:project, self.key)
+  end
 end

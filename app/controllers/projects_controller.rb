@@ -45,6 +45,8 @@ class ProjectsController < ApplicationController
     @num_action_items_total = @action_items.count + @completed_items.count
     
     @links = @project.links
+    @questions = @project.questions
+    
     
     respond_to do |format|
       format.html # show.html.erb

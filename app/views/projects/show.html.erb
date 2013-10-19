@@ -23,8 +23,37 @@
   <dd><%= @project.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
 </dl>
 
+<span style="margin-right: 2em; font-weight: bold;">Questions</span> 
+<a href="javascript:void(0)" id="reveal_questions">
+    <i class="icon-plus-sign"></i>
+    <%= @questions.count %> questions.
+</a>
+
+<div class="hidden" id="questions_hidden">
+<%= form_for(Question.new, :html => { :class => "form-inline inline"}) do |f| %>
+    <%= f.text_field :name, :class => "question", :tabindex => 1 %>
+    <%= f.hidden_field :parent_type, value: :project %>
+    <%= f.hidden_field :parent_key, value: @project.key %>
+    <%= f.submit 'Add Question', :class=> "question btn" %>
+<% end %>
+
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th>Questions</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+
 <%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
-    <%= f.text_field :name, :class => "action_item", :tabindex => 1, :autofocus => true %>
+    <%= f.text_field :name, :class => "action_item", :tabindex => 2, :autofocus => true %>
     <%= f.hidden_field :mywn_category, value: :someday %>
     <%= f.hidden_field :parent_type, value: :project %>
     <%= f.hidden_field :parent_key, value: @project.key %>

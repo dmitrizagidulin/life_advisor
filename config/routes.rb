@@ -9,6 +9,7 @@ LifeAdvisor::Application.routes.draw do
     post 'action_items/category_update_all' => :category_update_all
   end
   resources :action_items
+  resources :questions
   
   controller :projects do
     get 'projects/completed'

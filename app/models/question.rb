@@ -1,4 +1,5 @@
 require 'RippleSearch'
+require 'Parentable'
 
 class Question
   include Ripple::Document
