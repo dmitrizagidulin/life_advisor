@@ -47,7 +47,6 @@ class ProjectsController < ApplicationController
     @links = @project.links
     @questions = @project.questions
     
-    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }

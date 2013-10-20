@@ -15,7 +15,11 @@ h1.page {
 	text-align: center;
 	font-size: 16pt;
 }
- 
+
+.form-nomargin {
+    margin: 0px;
+}
+
 .task_done {
 	text-decoration: line-through;
 }
