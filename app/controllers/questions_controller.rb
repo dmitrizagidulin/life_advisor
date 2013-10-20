@@ -41,7 +41,6 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
-
     if @question.parent_type == 'project'
       project = Project.find(@question.parent_key)
       redirect_url = project_path(project) + '#questions_table'
@@ -64,10 +63,16 @@ class QuestionsController < ApplicationController
   # PUT /questions/1.json
   def update
     @question = Question.find(params[:id])
+    if @question.parent_type == 'project'
+      project = Project.find(@question.parent_key)
+      redirect_url = project_path(project) + '#questions_table'
+    else
+      redirect_url = questions_url
+    end
 
     respond_to do |format|
       if @question.update_attributes(params[:question])
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to redirect_url, notice: 'Question was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -89,7 +94,7 @@ class QuestionsController < ApplicationController
 
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url }
+      format.html { redirect_to redirect_url }
       format.json { head :no_content }
     end
   end
