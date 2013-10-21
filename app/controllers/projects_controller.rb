@@ -95,7 +95,7 @@ class ProjectsController < ApplicationController
     elsif @project.status.to_sym == :canceled
       new_url = '/projects/canceled'
     else
-      new_url = projects_url
+      new_url = @project
     end
       
     respond_to do |format|
@@ -112,8 +112,8 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        redirect_url = projects_url  + "#project-" + @project.key
-        format.html { redirect_to redirect_url, notice: 'Project was successfully updated.' }
+#        redirect_url = projects_url  + "#project-" + @project.key
+        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
