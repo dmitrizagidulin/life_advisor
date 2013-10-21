@@ -64,6 +64,8 @@
     <%= @completed_items.count %> completed items.
   </a>
 </div>
+<% else %>
+<br />
 <% end %>
 
 <%= form_for(ActionItem.new, :html => { :class => "form-inline form-nomargin"}) do |f| %>
