@@ -12,10 +12,10 @@ require 'ripple/test_server'
 class ActiveSupport::TestCase
 
 
-  setup { Ripple::TestServer.setup }
+#  setup { Ripple::TestServer.setup }
 
 
-  teardown { Ripple::TestServer.clear }
+#  teardown { Ripple::TestServer.clear }
 
   # Add more helper methods to be used by all tests here...
 end
