@@ -11,10 +11,15 @@
     </td>
     <td>
     <% if action_item.done %>
-      <span>Completed <%= action_item.completed_at.localtime.strftime("%b %d, %Y, %l:%M %P") if action_item.completed_at %></span>
+      <span><%= action_item.completed_at.localtime.strftime("%b %d, %Y, %l:%M %P") if action_item.completed_at %></span>
     <% else %>
       <%= render(partial: 'action_items/action_item_category_buttons', locals: {action_item: action_item} ) %>
     <% end %>
+    </td>
+    <td>
+      <% if action_item.time_elapsed > 0 %>
+        <%= action_item.time_elapsed %> h
+      <% end %>
     </td>
     <td><small><%= action_item.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
     <td><%= link_to 'Destroy', '/action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',
