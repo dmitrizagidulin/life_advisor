@@ -1,0 +1,15 @@
+<%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
+    <strong><%= mywn_category.capitalize %> (<%= item_count %>)</strong>&nbsp;&nbsp;&nbsp;
+    <%= f.text_field :name, :class => "action_item", :tabindex => tab_index, :autofocus => mywn_category.to_sym == :critical %>
+    <%= f.hidden_field :mywn_category, value: mywn_category %>
+    <%= f.hidden_field :area, value: focus_area %>
+    <%= f.submit 'Add', :class=> "action_item btn" %>
+<% end %>
+
+<% if mywn_category.to_sym == :tomorrow and item_count > 0 %>
+  <%= form_tag('/action_items/category_update_all', :class => "form-inline inline") do %>
+      <%= hidden_field_tag :from_mywn_category, mywn_category %>
+      <%= hidden_field_tag :to_mywn_category, :critical %>
+      <%= submit_tag 'Move All to Today', :class=> "action_item btn" %>
+  <% end %>
+<% end %>

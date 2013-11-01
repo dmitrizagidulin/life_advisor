@@ -1,9 +1,40 @@
 LifeAdvisor::Application.routes.draw do
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
+  get "user_home/index"
+	get 'home' => "user_home#index"
+  get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+	root :to => 'action_items#index'
+
+  controller :action_items do
+    get 'action_items/completed' => :completed
+    get 'action_items/all' => :all
+    post 'action_items/toggle_done/:id' => :toggle_done
+    post 'action_items/:id/category/:category' => :category_update
+    post 'action_items/category_update_all' => :category_update_all
+  end
+  resources :action_items
+  resources :questions
+  
+  controller :projects do
+    get 'projects/completed'
+    get 'projects/canceled'
+    post 'projects/:id/status/:status' => :status_update
+  end
+  resources :projects
+  resources :history
+  resources :web_links
+  resources :thoughts
+  
+  controller :focus do
+    get 'focus/:area' => :focus_area
+  end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

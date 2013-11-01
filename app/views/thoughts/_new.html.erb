@@ -1,0 +1,7 @@
+<%= form_for(Thought.new, :html => { :class => "form-inline inline text-center"}) do |f| %>
+    <%= label_tag :name, 'Pensieve', class: "control-label" %>
+    <%= f.text_area :name, :class=> "thought span4", :rows => 2, :tabindex => tab_index, :autofocus => true %>
+    <%= f.hidden_field :parent_type, value: 'day' %>
+    <%= f.hidden_field :parent_key, value: 'today' %>
+    <%= f.submit 'Save', :class=> "thought btn", :tabindex => tab_index+1 %>
+<% end %>

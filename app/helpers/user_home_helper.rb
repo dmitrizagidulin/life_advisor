@@ -1,0 +1,2 @@
+module UserHomeHelper
+end

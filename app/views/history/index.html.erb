@@ -1,0 +1,33 @@
+<div>
+<% @end_date.to_date.downto(@start_date.to_date) do |day| %>
+  <h4><%= day.strftime('%a, %b %d') %></h4>
+  <% day_history = @history_by_day[day] %>
+
+  <% if day_history.has_activity? %>
+    <% if day_history.num_created_items > 0 %>
+      <div class="red">
+        <%= day_history.num_created_items %> action items created.
+        <% if day_history.num_completed_same_day > 0 %>
+          Of those, <%= day_history.num_completed_same_day %> were completed the same day.
+        <% end %>
+      </div>
+    <% end %>
+    <div class="green bold"><%= day_history.num_completed_items %> action items completed.</div>
+    <ul>
+    <% day_history.items.each do | item | %>
+      <li>
+        <%= item.history_timestamp.localtime.strftime("%I:%M") %> -
+        <% if item.done %>
+          <span class="green">Complete:</span>
+        <% else %>
+          <span>Added:</span>
+        <% end %>
+        <%= item.name %>
+      </li>
+    <% end %>
+    </ul>
+  <% else %>
+    <div class="muted">Nothing happened? Seems unlikely.</div>
+  <% end %>
+<% end %>
+</div>

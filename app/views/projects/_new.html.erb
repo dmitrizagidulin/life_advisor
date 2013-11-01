@@ -1,0 +1,5 @@
+<%= form_for(Project.new, :html => { :class => "form-inline inline"}) do |f| %>
+    <%= f.text_field :name, :class=> "project", :tabindex => 1, :autofocus => true %>
+    <%= f.hidden_field :area, value: area %>
+    <%= f.submit 'Add Project', :class=> "project btn" %>
+<% end %>

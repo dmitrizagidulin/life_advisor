@@ -1,0 +1,138 @@
+<% content_for :title, "LF: #{@project.name}" %>
+
+<%= link_to '< Projects', projects_path, :class => 'btn btn-mini '  %> &nbsp;
+<%= link_to 'Edit', edit_project_path(@project), :class => 'btn btn-mini '  %>
+<h4><%= @project.name %></h4>
+
+<dl class="dl-horizontal">
+<% if !@project.description.nil? and !@project.description.empty? %>
+  <dt>Description:</dt>
+  <dd><%= raw(@project.description) %></dd>
+<% end %>
+  <dt>Complete:</dt>
+  <dd><%= @completed_items.count %> / <%= @num_action_items_total %> action items</dd>
+  <dt>Status:</dt>
+  <dd><%= @project.status.capitalize %>
+  <%= render(partial: 'projects/status_buttons_'+@project.status.to_s, locals: { project: @project } ) %>
+  </dd>
+  <dt>Area:</dt>
+  <dd><%= @project.area.capitalize %></dd>
+  <dt>Links:</dt>
+  <dd><a href="#links_table"><%= @links.count %></a></dd>
+  <dt>Created:</dt>
+  <dd><%= @project.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
+</dl>
+
+<%= form_for(Question.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
+  <%= f.text_field :name, :class => "question", :tabindex => 1 %>
+  <%= f.hidden_field :parent_type, value: :project %>
+  <%= f.hidden_field :parent_key, value: @project.key %>
+  <%= f.submit 'Add Question', :class=> "question btn" %>
+<% end %>
+
+<% if @questions.count > 0 %>
+  <table class="table table-striped table-hover" id="questions_table">
+  <thead>
+    <tr>
+      <th colspan="3">Questions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @questions.each do | question | %>
+    <tr>
+      <td><%= link_to question.name, edit_question_path(question) %>
+      <% if question.description %>
+        <br />
+        <div class="muted">
+          <%= question.description %>
+        </div>
+      <% end %>
+      </td>
+      <td><small><%= question.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
+      <td><%= link_to 'Destroy', '/questions/'+question.key, method: :delete, :class => 'btn btn-mini btn-danger',
+        data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>
+
+<% if @completed_items.count > 0 %> 
+<div style="margin: 1em 0px;">
+  <a href="javascript:void(0)" id="reveal_completed">
+    <i class="icon-plus-sign"></i>
+    <%= @completed_items.count %> completed items.
+  </a>
+</div>
+<% else %>
+<br />
+<% end %>
+
+<%= form_for(ActionItem.new, :html => { :class => "form-inline form-nomargin"}) do |f| %>
+  <%= f.text_field :name, :class => "action_item", :tabindex => 2, :autofocus => true %>
+  <%= f.hidden_field :mywn_category, value: :someday %>
+  <%= f.hidden_field :parent_type, value: :project %>
+  <%= f.hidden_field :parent_key, value: @project.key %>
+  <%= f.hidden_field :area, value: @project.area %>
+  <%= f.submit 'Add Item', :class=> "action_item btn" %>
+<% end %>
+
+<div class="hidden" id="action_items_hidden">
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th></th>
+    <th>Completed Item</th>
+    <th></th>
+    <th>Created</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @completed_items.each do |action_item| %>
+  <%= render(partial: 'action_item', object: action_item) %>
+<% end %>
+</tbody>
+</table>
+</div>
+
+<table class="table table-striped table-hover">
+<thead>
+  <tr>
+    <th></th>
+    <th>Action Item</th>
+    <th></th>
+    <th>Created</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @action_items.each do |action_item| %>
+	<%= render(partial: 'action_item', object: action_item) %>
+<% end %>
+</tbody>
+</table>
+<br />
+<%= form_for(WebLink.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
+    url <%= f.text_field :url, :class => "link", :tabindex => 2 %>
+    name <%= f.text_field :name, :class => "link", :tabindex => 3 %>
+    <%= f.hidden_field :parent_type, value: :project %>
+    <%= f.hidden_field :parent_key, value: @project.key %>
+    <%= f.submit 'Add Link', :class=> "link btn" %>
+<% end %>
+
+<table class="table table-striped table-hover" id="links_table">
+<thead>
+  <tr>
+    <th>Link</th>
+    <th></th>
+    <th>Added</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<% @links.each do | link | %>
+	<%= render(partial: 'link', object: link) %>
+<% end %>
+</tbody>
+</table>

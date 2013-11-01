@@ -1,0 +1,16 @@
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>Complete</th>
+    <th><%= project_status.capitalize %> Project</th>
+    <th></th>
+    <th>Created</th>
+    </th></th>
+  </tr>
+</thead>
+<tbody>
+<% projects.each do |project| %>
+  <%= render(partial: 'projects/project', object: project, locals: { project_status: project_status }) %>
+<% end %>
+</tbody>
+</table>

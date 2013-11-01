@@ -1,0 +1,22 @@
+<% content_for :title, "LF: Projects" %>
+
+<h1>Projects</h1>
+
+<%= render partial: 'new', locals: { area: :soul } %>
+
+<h3>Active</h3>
+<%= render(partial: 'projects_list', locals: { projects: @active_projects, project_status: :active }) %>
+
+<br />
+
+<h3>Someday/Maybe</h3>
+<%= render(partial: 'projects_list', locals: { projects: @someday_projects, project_status: :someday }) %>
+
+<br />
+
+<h3>Ideas/Hopper</h3>
+<%= render(partial: 'projects_list', locals: { projects: @idea_projects, project_status: :idea }) %>
+
+<br />
+
+<%= link_to 'New Project', new_project_path, :class => 'btn' %>

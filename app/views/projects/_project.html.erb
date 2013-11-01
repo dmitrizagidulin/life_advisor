@@ -1,0 +1,29 @@
+  <% item_count = project.action_items.count %>
+  <% link_count = project.links.count %>
+  <% next_action = project.next_action %>
+  <tr>
+    <td class="span1">
+    <% if item_count > 0 %>
+      [ <%= project.action_items_completed.count %> / <%= item_count %> ]
+      <% if link_count > 0 %>
+        <br />
+        <span class="muted small"><%= link_count %> links</span>
+      <% end %>
+    <% end %>
+    </td>
+    <td class="span6" id="project-<%= project.key %>">
+      <%= link_to 'Edit', edit_project_path(project), :class => 'btn btn-mini '  %>
+      <span class="area-<%= project.area %>"><%= link_to project.name, project_path(project) %></span>
+      <% if next_action %>
+        <br />
+        <%= link_to 'Next Action:', action_item_path(next_action) %> <%= next_action.name %>
+      <% end %>
+    </td>
+    <td>
+      <%= render(partial: 'projects/status_buttons_'+project_status.to_s, locals: { project: project } ) %>
+    </td>
+    <td><small><%= project.created_at.localtime.strftime("%b %d, %y")  %></small></td>
+    <td>
+      <%= link_to 'Destroy', '/projects/'+project.key, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>

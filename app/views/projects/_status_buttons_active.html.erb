@@ -1,0 +1,5 @@
+      <%= link_to 'Done!', '/projects/'+project.key+'/status/completed', method: :post, :class => 'btn btn-mini' %>
+      <%= link_to 'Later', '/projects/'+project.key+'/status/someday', method: :post, :class => 'btn btn-mini' %>
+      <%= link_to 'Cancel', '/projects/'+project.key+'/status/canceled', method: :post, :class => 'btn btn-mini' %>
+
+    

@@ -1,0 +1,25 @@
+<%= form_for(@web_link) do |f| %>
+  <% if @web_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@web_link.errors.count, "error") %> prohibited this web_link from being saved:</h2>
+
+      <ul>
+      <% @web_link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.label :url %>
+    <%= f.text_field :url, :class=> "web_link" %><br />
+
+    <%= f.label :name %>
+    <%= f.text_field :name, :class=> "web_link" %><br />
+
+    <div class="clear"><br /></div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

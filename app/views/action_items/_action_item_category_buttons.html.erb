@@ -1,0 +1,7 @@
+<% ActionItem.mywn_categories.each do | category | %>
+  <% if action_item.mywn_category == category %>
+    <%= link_to category.capitalize, '', method: :post, :class => 'btn btn-mini', :disabled => true %>
+  <% else %>
+    <%= link_to category.capitalize, '/action_items/'+action_item.key+'/category/'+category, method: :post, :class => 'btn btn-mini' %>
+  <% end %>
+<% end %>
