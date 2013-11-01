@@ -89,7 +89,7 @@ class ActionItemsController < ApplicationController
   # POST /action_items
   # POST /action_items.json
   def create
-    @action_item = ActionItem.new(params[:action_item].permit(:name, :mywn_category, :area, :parent_type, :parent_key))
+    @action_item = ActionItem.new(params[:action_item].permit(:name, :mywn_category, :area, :parent_type, :parent_key, :time_elapsed))
 
     respond_to do |format|
       if @action_item.save
@@ -123,7 +123,7 @@ class ActionItemsController < ApplicationController
     redirect_url += "##{@action_item.key}"
     
     respond_to do |format|
-      if @action_item.update_attributes(params[:action_item].permit(:name, :mywn_category, :done, :completed_at, :description, :area, :parent_type, :parent_key))
+      if @action_item.update_attributes(params[:action_item].permit(:name, :mywn_category, :done, :completed_at, :time_elapsed, :description, :area, :parent_type, :parent_key))
         format.html { redirect_to redirect_url, notice: 'Action item was successfully updated.' }
         format.json { head :no_content }
       else

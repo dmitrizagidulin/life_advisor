@@ -13,6 +13,8 @@ class ActionItem
   property :completed_at, Time
   property :description, String
   property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
+  property :time_elapsed, Float, :default => 0  # Elapsed time, in hours. E.g.: 1.5
+  
   timestamps!
   
   before_update :enforce_completed_at

@@ -30,6 +30,11 @@
   <div class="controls">
     <%= f.text_field :completed_at, :class=> "action_item" %>
   </div>
+  
+  <%= f.label :time_elapsed, class: "control-label" %>
+  <div class="controls">
+    <%= f.text_field :time_elapsed, :class=> "action_item" %> hrs
+  </div>
 </div>
 
 <% unless @parent.nil? %>
