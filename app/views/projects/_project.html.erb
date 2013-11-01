@@ -1,6 +1,8 @@
-  <% item_count = project.action_items.count %>
+  <% action_items = project.action_items %>
+  <% item_count = action_items.count %>
   <% link_count = project.links.count %>
   <% next_action = project.next_action %>
+  <% time_elapsed = project.time_elapsed(action_items) %>
   <tr>
     <td class="span1">
     <% if item_count > 0 %>
@@ -21,6 +23,11 @@
     </td>
     <td>
       <%= render(partial: 'projects/status_buttons_'+project_status.to_s, locals: { project: project } ) %>
+    </td>
+    <td>
+      <% if time_elapsed > 0 %>
+        <%= time_elapsed %> h
+      <% end %>
     </td>
     <td><small><%= project.created_at.localtime.strftime("%b %d, %y")  %></small></td>
     <td>
