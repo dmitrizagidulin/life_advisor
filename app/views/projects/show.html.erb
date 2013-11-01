@@ -21,6 +21,9 @@
   <dd><a href="#links_table"><%= @links.count %></a></dd>
   <dt>Created:</dt>
   <dd><%= @project.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
+  <br />
+  <dt>Elapsed Time:</dt>
+  <dd><%= @elapsed_time_total %> hrs</dd>
 </dl>
 
 <%= form_for(Question.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
@@ -62,6 +65,9 @@
   <a href="javascript:void(0)" id="reveal_completed">
     <i class="icon-plus-sign"></i>
     <%= @completed_items.count %> completed items.
+    <% if @elapsed_time_completed > 0 %>
+    Elapsed Time: <%= @elapsed_time_completed %> hrs.
+    <% end %>
   </a>
 </div>
 <% else %>

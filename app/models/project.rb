@@ -70,4 +70,8 @@ class Project
   def questions
     Question.for_parent(:project, self.key)
   end
+  
+  def time_elapsed(action_items)
+    action_items.map(&:time_elapsed).sum
+  end
 end

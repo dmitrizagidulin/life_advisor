@@ -43,6 +43,9 @@ class ProjectsController < ApplicationController
     @action_items = @project.action_items_todo.sort
     @completed_items = @project.action_items_completed.sort
     @num_action_items_total = @action_items.count + @completed_items.count
+    @elapsed_time_completed = @project.time_elapsed(@completed_items)
+    @elapsed_time_todo = @project.time_elapsed(@action_items)
+    @elapsed_time_total = @elapsed_time_completed + @elapsed_time_todo
     
     @links = @project.links
     @questions = @project.questions
