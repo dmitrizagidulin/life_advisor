@@ -13,8 +13,9 @@ class ActionItem
   property :completed_at, Time
   property :description, String
   property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
-
   timestamps!
+  
+  before_update :enforce_completed_at
   
   # TODO: Unit test
   def <=>(anOther)
@@ -59,6 +60,12 @@ class ActionItem
       return self.completed_at
     else
       return self.created_at
+    end
+  end
+  
+  def enforce_completed_at
+    if self.done and self.completed_at.nil?
+      self.completed_at = Time.zone.now
     end
   end
   
