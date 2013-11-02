@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @action_items = @project.action_items_todo.sort
-    @completed_items = @project.action_items_completed.sort
+    @completed_items = @project.action_items_completed.sort {|x,y| y <=> x}
     @num_action_items_total = @action_items.count + @completed_items.count
     @elapsed_time_completed = @project.time_elapsed(@completed_items)
     @elapsed_time_todo = @project.time_elapsed(@action_items)
