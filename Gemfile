@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 gem "ripple", :git => "git@github.com:basho-labs/ripple.git", :branch => "rails-4.0"
+# gem "ripple", :path => "/Users/koldun/b/ripple"
 
 gem "zip-zip"
 

@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:basho-labs/ripple.git
-  revision: ccf7bb779e6aec0efb32ee2916e0cd13e8f514b9
+  revision: d0cf2c4263f5c0fcc4644636e65bbc03a1687618
   branch: rails-4.0
   specs:
     ripple (1.0.0.beta2)
