@@ -30,6 +30,9 @@ class Project
   end
   
   def action_items
+    if self.new?
+      return []
+    end
     ActionItem.for_parent(:project, self.key)
   end
   
@@ -39,6 +42,24 @@ class Project
 
   def action_items_todo
     self.action_items.select { |item| not item.done }
+  end
+  
+  def add_goal(goal_key)
+    project_goal = ProjectGoal.new project_key: self.key, goal_key: goal_key
+    project_goal.save
+  end
+  
+  def goal_ids
+    search_string = "project_key:#{self.key}"
+    goal_docs = ProjectGoal.search_results_for(search_string)
+    goal_ids = goal_docs.collect {|g| g['goal_key'] }
+  end
+  
+  def goals_served
+    if self.new?
+      return []
+    end
+    Goal.find(self.goal_ids)
   end
   
   def links

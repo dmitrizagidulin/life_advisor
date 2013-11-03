@@ -25,6 +25,8 @@ LifeAdvisor::Application.routes.draw do
     get 'projects/completed'
     get 'projects/canceled'
     post 'projects/:id/status/:status' => :status_update
+#    resources :goals, only: [:set_goals
+    get 'projects/:id/set_goals' => :set_goals
   end
   resources :projects
   resources :history

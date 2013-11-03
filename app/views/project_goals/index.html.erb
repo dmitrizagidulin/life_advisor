@@ -1,0 +1,25 @@
+<h1>Listing project_goals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_goals.each do |project_goal| %>
+      <tr>
+        <td><%= link_to 'Show', project_goal %></td>
+        <td><%= link_to 'Edit', edit_project_goal_path(project_goal) %></td>
+        <td><%= link_to 'Destroy', project_goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project goal', new_project_goal_path %>

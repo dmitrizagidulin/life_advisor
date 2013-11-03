@@ -1,0 +1,23 @@
+<div style="margin:1em; border:1px solid black; padding: 1em;">
+<h5>Life Goals Served</h5>
+
+<% if goals_served.empty? %>
+
+<% else %>
+
+<table class="table">
+
+<tbody>
+  <% goals_served.each do | goal | %>
+    <tr>
+      <td><%= link_to goal.name, goal %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+<% end %>
+
+  <div style="margin-top: 1em;">
+   <%= link_to 'Set Goals', {:controller => 'projects', :action => 'set_goals', :id => project.key}, class: 'btn-mini btn' %>
+  </div>
+</div>

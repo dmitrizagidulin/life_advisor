@@ -49,6 +49,7 @@ class ProjectsController < ApplicationController
     
     @links = @project.links
     @questions = @project.questions
+    @goals_served = @project.goals_served
     
     respond_to do |format|
       format.html # show.html.erb
@@ -56,6 +57,15 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def set_goals
+    @project = Project.find(params[:id])
+    @goal_ids = @project.goal_ids
+    
+    respond_to do |format|
+      format.html # set_goals.html.erb
+    end
+  end
+  
   # GET /projects/new
   # GET /projects/new.json
   def new

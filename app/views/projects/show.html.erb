@@ -26,6 +26,8 @@
   <dd><%= @elapsed_time_total %> hrs</dd>
 </dl>
 
+<%= render(partial: 'projects/goals_served', locals: { project: @project, goals_served: @goals_served } ) %>
+
 <%= form_for(Question.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
   <%= f.text_field :name, :class => "question", :tabindex => 1 %>
   <%= f.hidden_field :parent_type, value: :project %>

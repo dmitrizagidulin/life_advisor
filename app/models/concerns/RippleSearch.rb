@@ -16,9 +16,8 @@ module RippleSearch
   end
   
   def search_results_for(search_string, sort_field=:created_at, rows=10000)
-    puts "Searching #{self.bucket.name}:#{search_string}"
+#    puts "Searching #{self.bucket.name}:#{search_string}"
     search_results = Ripple.client.search self.bucket.name, search_string, sort: sort_field, rows: rows
-    puts search_results
 #    search_results['response']['docs']
     search_results['docs']
   end
