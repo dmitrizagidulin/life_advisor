@@ -10,6 +10,14 @@
         <%= action_item.description %>
       </div>
       <% end %>
+      
+      <% if not links.empty? %>
+        <ul>
+        <% links.each do | link | %>
+          <li><%= link_to link.name_display, link.url %></li>
+        <% end %>
+        </ul>
+      <% end %>
     </td>
     <td>
     <% if action_item.done %>

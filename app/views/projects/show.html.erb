@@ -118,7 +118,8 @@
 </thead>
 <tbody>
 <% @action_items.each do |action_item| %>
-	<%= render(partial: 'action_item', object: action_item) %>
+  <% links = action_item.links %>
+  <%= render(partial: 'action_item', locals: {action_item: action_item, links: links}) %>
 <% end %>
 </tbody>
 </table>

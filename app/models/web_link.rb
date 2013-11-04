@@ -13,4 +13,11 @@ class WebLink
   before_create :enforce_default_day_parent
   before_update :enforce_default_day_parent
 
+  def name_display
+    if self.name.empty? and not self.url.empty?
+      return self.url.truncate(50)
+    end
+    self.name
+  end
+  
 end
