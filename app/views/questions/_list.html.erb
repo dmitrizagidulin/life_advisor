@@ -1,0 +1,39 @@
+<% if questions.count > 0 %>
+  <table class="table table-striped table-hover" id="questions_table">
+  <thead>
+    <tr>
+      <th>Questions</th>
+      <th>Added</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% questions.each do | question | %>
+    <% answers = question ? question.answers : [] %>
+    <tr>
+      <td><%= link_to question.name, '/questions/'+question.key %>
+      <% if question.description %>
+        <br />
+        <div class="muted">
+          <%= question.description %>
+        </div>
+      <% end %>
+      <% unless answers.empty? %>
+        <ul>
+          <% answers.each do | answer | %>
+          <li><%= answer.name %></li>
+          <% end %>
+        </ul>
+        <% end %>
+      </td>
+      <td><small><%= question.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
+      <td>
+        <%= link_to 'Edit', '/questions/'+question.key, :class => 'btn btn-mini' %>
+        <%= link_to 'Del', '/questions/'+question.key, method: :delete, :class => 'btn btn-mini btn-danger',
+          data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>

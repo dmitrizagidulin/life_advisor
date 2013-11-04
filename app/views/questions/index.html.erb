@@ -1,23 +1,16 @@
-<h1>Listing questions</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @questions.each do |question| %>
-  <tr>
-    <td><%= question.name %></td>
-    <td><%= link_to 'Show', question %></td>
-    <td><%= link_to 'Edit', edit_question_path(question) %></td>
-    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<h3>Standalone Questions</h3>
+<%= form_for(Question.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
+  <%= f.text_field :name, :class => "question", :tabindex => 1 %>
+  <%= f.hidden_field :parent_type, value: nil %>
+  <%= f.hidden_field :parent_key, value: nil %>
+  <%= f.submit 'Add Question', :class=> "question btn" %>
 <% end %>
-</table>
+
+<%= render(partial: 'questions/list', locals: {questions: @non_project_questions, parent_type: nil, parent_key: nil}) %>
+
+<h3>Project Questions</h3>
+<%= render(partial: 'questions/list', locals: {questions: @project_questions, parent_type: nil, parent_key: nil}) %>
 
 <br />
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'New Question', new_question_path, class: 'btn' %>

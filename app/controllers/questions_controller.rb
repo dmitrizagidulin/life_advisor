@@ -3,6 +3,9 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.all
+    @project_questions = @questions.select {|q| q if q.parent_type == 'project' }
+    @non_project_questions = @questions.select {|q| q unless q.parent_type == 'project' }
+    puts @non_project_questions
 
     respond_to do |format|
       format.html # index.html.erb
