@@ -63,6 +63,7 @@ class ActionItemsController < ApplicationController
   def show
     @action_item = ActionItem.find(params[:id])
     @parent = @action_item.parent
+    @links = @action_item.links
 
     respond_to do |format|
       format.html # show.html.erb

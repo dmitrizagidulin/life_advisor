@@ -38,3 +38,6 @@
   <dt>Elapsed Time:</dt>
   <dd><%= @action_item.time_elapsed %> hrs</dd>
 </dl>
+
+<br />
+<%= render(partial: 'web_links/list', locals: {parent_type: :action_item, parent_key: @action_item.key, links: @links}) %>

@@ -71,6 +71,10 @@ class ActionItem
     end
   end
   
+  def links
+    WebLink.for_parent(:action_item, self.key)
+  end
+  
   def mywn_category_order
     ActionItem.mywn_categories.find_index self.mywn_category
   end
