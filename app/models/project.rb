@@ -30,9 +30,6 @@ class Project
   end
   
   def action_items
-    if self.new?
-      return []
-    end
     ActionItem.for_parent(:project, self.key)
   end
   
@@ -67,9 +64,6 @@ class Project
   end
   
   def goals_served
-    if self.new?
-      return []
-    end
     Goal.find(self.goal_ids)
   end
   
