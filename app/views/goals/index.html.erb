@@ -1,16 +1,17 @@
 <h2>Life Goals</h2>
 
+<%= link_to 'New Goal', new_goal_path, :class => 'btn' %>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Goal</th>
+      <th>Active Goals</th>
       <th></th>
       <th></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @goals.each do |goal| %>
+    <% @active_goals.each do |goal| %>
       <tr>
         <td><%= link_to goal.name, edit_goal_path(goal) %></td>
         <td><%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
@@ -20,4 +21,40 @@
   </tbody>
 </table>
 
-<%= link_to 'New Goal', new_goal_path, :class => 'btn' %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Inactive Goals</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inactive_goals.each do |goal| %>
+      <tr>
+        <td><%= link_to goal.name, edit_goal_path(goal) %></td>
+        <td><%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Accomplished Goals</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accomplished_goals.each do |goal| %>
+      <tr>
+        <td><%= link_to goal.name, edit_goal_path(goal) %></td>
+        <td><%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

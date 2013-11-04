@@ -49,9 +49,20 @@ class Project
     project_goal.save
   end
   
-  def goal_ids
+  def project_goals
     search_string = "project_key:#{self.key}"
     goal_docs = ProjectGoal.search_results_for(search_string)
+  end
+  
+  # Hash by ProjectGoal key
+  def project_goals_hash
+    project_goals = self.project_goals
+    project_goals = project_goals.map { |doc| ProjectGoal.from_search_result(doc) }
+    project_goals_hash = Hash[project_goals.map {|pg| [pg.goal_key, pg]}]
+  end
+  
+  def goal_ids
+    goal_docs = self.project_goals
     goal_ids = goal_docs.collect {|g| g['goal_key'] }
   end
   
@@ -60,6 +71,20 @@ class Project
       return []
     end
     Goal.find(self.goal_ids)
+  end
+  
+  def serve_goal_toggle(goal_key)
+    goals_hash = self.project_goals_hash
+    goal_ids = goals_hash.keys
+    if goal_ids.include? goal_key
+      # Stop serving goal - Delete the project-goal association
+      project_goal_key = goals_hash[goal_key].key
+      project_goal = ProjectGoal.find(project_goal_key)
+      project_goal.destroy
+    else
+      project_goal = ProjectGoal.new(goal_key: goal_key, project_key: self.key)
+      project_goal.save
+    end
   end
   
   def links

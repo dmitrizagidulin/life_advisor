@@ -19,6 +19,20 @@
 </div>
 
 <div class="control-group">
+  <%= f.label :active, class: "control-label" %>
+  <div class="controls">
+    <%= f.check_box :active, :class=> "goal" %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :accomplished, class: "control-label" %>
+  <div class="controls">
+    <%= f.check_box :accomplished, :class=> "goal" %>
+  </div>
+</div>
+
+<div class="control-group">
     <%= f.label :description, class: "control-label" %>
   <div class="controls">
     <%= f.text_area :description, :class=> "action_item input-xxlarge" %><br />

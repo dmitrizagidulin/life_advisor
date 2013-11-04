@@ -4,7 +4,3 @@ $(document).ready(function() {
 		$('#questions_hidden').show();
 	})
 });
-
-cp ../rb-life_advisor/app/assets/javascripts/action_items.js app/assets/javascripts/
-cp ../rb-life_advisor/app/assets/javascripts/questions.js app/assets/javascripts/
-cp ../rb-life_advisor/app/assets/stylesheets/application.css app/assets/stylesheets/

@@ -57,9 +57,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def serve_goal_toggle
+    goal_key = params[:goal_key]
+    project_key = params[:project_key]
+    project = Project.find(project_key)
+    project.serve_goal_toggle(goal_key)
+    render :nothing => true
+  end
+  
   def set_goals
     @project = Project.find(params[:id])
     @goal_ids = @project.goal_ids
+    @active_goals = Goal.active_goals
     
     respond_to do |format|
       format.html # set_goals.html.erb

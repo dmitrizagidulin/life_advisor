@@ -1,1 +1,23 @@
 <h4><%= @project.name %> - Goals</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Active Goals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @active_goals.each do |goal| %>
+      <% goal_selected = @goal_ids.include? goal.key %>
+      <tr>
+        <td><%= check_box_tag goal.key, '1', goal_selected, :data => {'project' => @project.key}, :class => 'project_goal_checkbox' %></td>
+        <td><%= link_to goal.name, edit_goal_path(goal) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <div style="margin-top: 1em;">
+   <%= link_to 'Done', @project, class: 'btn-mini btn' %>
+  </div>
