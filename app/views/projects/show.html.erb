@@ -44,6 +44,7 @@
   </thead>
   <tbody>
   <% @questions.each do | question | %>
+    <% answers = question.answers %>
     <tr>
       <td><%= link_to question.name, '/questions/'+question.key %>
       <% if question.description %>
@@ -52,6 +53,13 @@
           <%= question.description %>
         </div>
       <% end %>
+      <% unless answers.empty? %>
+        <ul>
+          <% answers.each do | answer | %>
+          <li><%= answer.name %></li>
+          <% end %>
+        </ul>
+        <% end %>
       </td>
       <td><small><%= question.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
       <td>

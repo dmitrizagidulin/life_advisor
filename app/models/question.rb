@@ -10,4 +10,8 @@ class Question
   property :answered_at, Time
   property :description, String
   timestamps!
+  
+  def answers
+    Answer.for_parent(:question, self.key)
+  end
 end

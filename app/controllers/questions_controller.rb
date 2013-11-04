@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @parent = @question.parent
+    @answers = @question.answers
 
     respond_to do |format|
       format.html # show.html.erb

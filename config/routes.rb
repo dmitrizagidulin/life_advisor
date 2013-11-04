@@ -20,6 +20,7 @@ LifeAdvisor::Application.routes.draw do
   end
   resources :action_items
   resources :questions
+  resources :answers
   
   controller :projects do
     get 'projects/completed'

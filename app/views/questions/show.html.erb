@@ -28,3 +28,5 @@
   </dd>
 </dl>
 
+<br />
+<%= render(partial: 'answers/list', locals: {parent_type: :question, parent_key: @question.key, answers: @answers}) %>
