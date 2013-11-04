@@ -1,5 +1,30 @@
+<% content_for :title, "LF: #{@question.name}" %>
+
 <p id="notice"><%= notice %></p>
 
+<h4><%= @question.name %></h4>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to '< List', questions_path, :class => 'btn btn-mini '  %> &nbsp;
+<%= link_to 'Edit', edit_question_path(@question), :class => 'btn btn-mini '  %>
+
+<dl class="dl-horizontal">
+<% if !@question.description.nil? and !@question.description.empty? %>
+  <dt>Description:</dt>
+  <dd><%= raw(@question.description) %></dd>
+  <br />
+<% end %>
+  <dt>Answered:</dt>
+  <dd>
+    <%= @question.answered_at.localtime.strftime("%b %d, %Y, %l:%M %P") if @question.answered_at %>
+  </dd>
+  <br />
+  <dt>Created:</dt>
+  <dd><%= @question.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
+  <dt>Parent:</dt>
+  <dd>
+    <% unless @parent.nil? %>
+    <%= link_to @parent.name, url_for(@parent) %>
+    <% end %>
+  </dd>
+</dl>
+
