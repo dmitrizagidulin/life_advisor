@@ -62,6 +62,7 @@ class ActionItemsController < ApplicationController
   # GET /action_items/1.json
   def show
     @action_item = ActionItem.find(params[:id])
+    @parent = @action_item.parent
 
     respond_to do |format|
       format.html # show.html.erb
