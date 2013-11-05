@@ -77,7 +77,7 @@ class WebLinksController < ApplicationController
     end
     
     respond_to do |format|
-      if @web_link.update_attributes(params[:web_link])
+      if @web_link.update_attributes(params[:web_link].permit(:name, :url, :parent_type, :parent_key))
         format.html { redirect_to redirect_url, notice: 'Web link was successfully updated.' }
         format.json { head :no_content }
       else

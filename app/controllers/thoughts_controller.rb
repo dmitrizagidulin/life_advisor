@@ -71,7 +71,7 @@ class ThoughtsController < ApplicationController
     end
 
     respond_to do |format|
-      if @thought.update_attributes(params[:thought])
+      if @thought.update_attributes(params[:thought].permit(:name, :parent_type, :parent_key))
         format.html { redirect_to redirect_url, notice: 'Thought was successfully updated.' }
         format.json { head :no_content }
       else
