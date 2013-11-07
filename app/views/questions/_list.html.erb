@@ -10,6 +10,7 @@
   <tbody>
   <% questions.each do | question | %>
     <% answers = question ? question.answers : [] %>
+    <% links = question ? question.links : [] %>
     <tr>
       <td><%= link_to question.name, '/questions/'+question.key %>
       <% if question.description %>
@@ -18,13 +19,20 @@
           <%= question.description %>
         </div>
       <% end %>
+      <% unless links.empty? %>
+        <ul>
+          <% links.each do | link | %>
+          <li><i class="icon-share-alt"></i> <%= link_to link.name_display, link.url %></li>
+          <% end %>
+        </ul>
+      <% end %>
       <% unless answers.empty? %>
         <ul>
           <% answers.each do | answer | %>
           <li><%= answer.name %></li>
           <% end %>
         </ul>
-        <% end %>
+      <% end %>
       </td>
       <td><small><%= question.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
       <td>
