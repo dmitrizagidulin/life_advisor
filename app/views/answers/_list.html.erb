@@ -16,7 +16,13 @@
 <tbody>
 <% answers.each do | answer | %>
   <tr>
-    <td><%= answer.name %></td>
+    <td><%= answer.name %>
+    <% if answer.description %>
+      <div class="muted">
+      <%= answer.description %>
+      </div>
+    <% end %>
+    </td>
     <td><small><%= answer.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
     <td>
       <%= link_to 'Edit', edit_answer_path(answer), :class => 'btn btn-mini' %>
