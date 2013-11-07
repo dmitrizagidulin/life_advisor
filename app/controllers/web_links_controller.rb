@@ -47,6 +47,9 @@ class WebLinksController < ApplicationController
     elsif @web_link.parent_type == 'action_item'
       action_item = ActionItem.find(@web_link.parent_key)
       redirect_url = action_item_path(action_item) + '#links_table'
+    elsif @web_link.parent_type == 'question'
+            question = Question.find(@web_link.parent_key)
+            redirect_url = question_path(question) + '#links_table'
     else
       redirect_url = web_links_url
     end
@@ -72,6 +75,9 @@ class WebLinksController < ApplicationController
     elsif @web_link.parent_type == 'action_item'
         action_item = ActionItem.find(@web_link.parent_key)
         redirect_url = action_item_path(action_item) + '#links_table'
+    elsif @web_link.parent_type == 'question'
+          question = Question.find(@web_link.parent_key)
+          redirect_url = question_path(question) + '#links_table'
     else
       redirect_url = web_links_url
     end

@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @parent = @question.parent
     @answers = @question.answers
+    @links = @question.links
 
     respond_to do |format|
       format.html # show.html.erb

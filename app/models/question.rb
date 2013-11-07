@@ -14,4 +14,8 @@ class Question
   def answers
     Answer.for_parent(:question, self.key)
   end
+  
+  def links
+    WebLink.for_parent(:question, self.key)
+  end
 end
