@@ -11,7 +11,24 @@
     </div>
   <% end %>
 
-  <div class="actions">
+<div class="control-group">
+    <%= f.label :name, class: "control-label" %>
+    <div class="controls">
+    <%= f.text_field :name, :class=> "answer" %><br />
+    </div>
+</div>
+
+<div class="control-group">
+    <%= f.label :description, class: "control-label" %>
+  <div class="controls">
+    <%= f.text_area :description, :class=> "answer", :rows => 5 %><br />
+  </div>
+</div>
+
+<div class="control-group">
+  <div class="actions controls">
     <%= f.submit %>
   </div>
+</div>
+
 <% end %>
