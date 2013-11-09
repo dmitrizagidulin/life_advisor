@@ -4,7 +4,7 @@
   <% next_action = project.next_action %>
   <% time_elapsed = project.time_elapsed(action_items) %>
   <tr>
-    <td class="span1">
+    <td class="span1 nowrap">
     <% if item_count > 0 %>
       [ <%= project.action_items_completed.count %> / <%= item_count %> ]
       <% if link_count > 0 %>
