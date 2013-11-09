@@ -5,6 +5,14 @@
 <h4><%= @project.name %></h4>
 
 <dl class="dl-horizontal">
+  <dt>URL:</dt>
+  <dd>
+    <% if @project.url %>
+    <a href="<%= @project.url %>"><%= @project.url %></a>
+    <% else %>
+    -
+    <% end %>
+  </dd>
 <% if !@project.description.nil? and !@project.description.empty? %>
   <dt>Description:</dt>
   <dd><%= raw(@project.description) %></dd>

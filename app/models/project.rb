@@ -6,6 +6,7 @@ class Project
   
   property :name, String, :presence => true
   property :description, String
+  property :url, String
   property :status, String, :default => :idea  # One of [:idea, :active, :someday, :canceled, :completed]
   property :completed_at, Time
   property :canceled_at, Time
