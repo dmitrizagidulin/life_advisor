@@ -1,4 +1,4 @@
-class Day
+class DayLog
   include Ripple::Document
   
   property :date, Date, presence: true
@@ -9,6 +9,7 @@ class Day
   end
   
   def self.today
-    day = Day.new date: Time.now.localtime.to_date
+    day = DayLog.new date: Time.now.localtime.to_date
   end
 end
+
