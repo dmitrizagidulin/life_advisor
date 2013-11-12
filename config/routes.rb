@@ -20,6 +20,10 @@ LifeAdvisor::Application.routes.draw do
   end
   resources :action_items
   resources :questions
+  controller :questions do
+    post 'questions/:id/bump' => :bump
+  end
+  
   resources :answers
   
   controller :projects do

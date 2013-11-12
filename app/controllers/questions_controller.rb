@@ -65,6 +65,21 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def bump
+    @question = Question.find(params[:id])
+    if @question.parent_type == 'project'
+      project = Project.find(@question.parent_key)
+      redirect_url = project_path(project) + '#questions_table'
+    else
+      redirect_url = questions_url
+    end
+    
+    @question.bump!
+    respond_to do |format|
+      format.html { redirect_to redirect_url, notice: "Bumped '#{@question.name}'"}
+    end
+  end
+  
   # PUT /questions/1
   # PUT /questions/1.json
   def update

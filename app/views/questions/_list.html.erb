@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th>Questions</th>
+      <th>Bumped</th>
       <th>Added</th>
       <th></th>
     </tr>
@@ -12,7 +13,9 @@
     <% answers = question ? question.answers : [] %>
     <% links = question ? question.links : [] %>
     <tr>
-      <td><%= link_to question.name, '/questions/'+question.key %>
+      <td>
+      <%= link_to 'Edit', '/questions/'+question.key, :class => 'btn btn-mini' %>
+      <%= link_to question.name, '/questions/'+question.key %>
       <% if question.description %>
         <br />
         <div class="muted">
@@ -34,11 +37,12 @@
         </ul>
       <% end %>
       </td>
-      <td><small><%= question.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
-      <td>
-        <%= link_to 'Edit', '/questions/'+question.key, :class => 'btn btn-mini' %>
+      <td><%= question.bump_count if question.bump_count > 0%></td>
+      <td class="nowrap"><small><%= question.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
+      <td class="nowrap">
+        <%= link_to 'Bump!', "/questions/#{question.key}/bump", method: :post, class: 'btn btn-mini' %>
         <%= link_to 'Del', '/questions/'+question.key, method: :delete, :class => 'btn btn-mini btn-danger',
-          data: { confirm: 'Are you sure?' } %>
+          data: { confirm: 'Delete - Are you sure?' } %>
       </td>
     </tr>
   <% end %>

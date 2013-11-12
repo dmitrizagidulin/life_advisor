@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
     @elapsed_time_total = @elapsed_time_completed + @elapsed_time_todo
     
     @links = @project.links
-    @questions = @project.questions
+    @questions = @project.questions.sort
     @goals_served = @project.goals_served
     
     respond_to do |format|
