@@ -2,6 +2,7 @@ require 'RippleSearch'
 
 class Project
   include Ripple::Document
+  include Comparable
   extend RippleSearch
   
   property :name, String, :presence => true
@@ -29,6 +30,16 @@ class Project
     search_string = "status:#{status} AND area:#{area}"
     results = self.search_results_for(search_string)
     results.collect { |doc| Project.from_search_result(doc) }
+  end
+  
+  def <=>(anOther)
+    # First, sort in reverse bump_count order
+    unless self.bump_count == anOther.bump_count 
+      return anOther.bump_count <=> self.bump_count
+    end
+    
+    # Lastly, sort alpha by name, ascending
+    self.name <=> anOther.name
   end
   
   def action_items

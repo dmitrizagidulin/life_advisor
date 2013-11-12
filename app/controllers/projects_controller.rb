@@ -3,9 +3,9 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
 #    @projects = Project.all
-    @idea_projects = Project.all_for_status(:idea)
-    @active_projects = Project.all_for_status(:active)
-    @someday_projects = Project.all_for_status(:someday)
+    @idea_projects = Project.all_for_status(:idea).sort
+    @active_projects = Project.all_for_status(:active).sort
+    @someday_projects = Project.all_for_status(:someday).sort
 
     respond_to do |format|
       format.html # index.html.erb
