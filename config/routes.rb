@@ -17,6 +17,7 @@ LifeAdvisor::Application.routes.draw do
     post 'action_items/toggle_done/:id' => :toggle_done
     post 'action_items/:id/category/:category' => :category_update
     post 'action_items/category_update_all' => :category_update_all
+    post 'action_items/:id/bump' => :bump
   end
   resources :action_items
   resources :questions

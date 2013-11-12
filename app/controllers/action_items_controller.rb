@@ -25,6 +25,21 @@ class ActionItemsController < ApplicationController
     end
   end
   
+  def bump
+    @action_item = ActionItem.find(params[:id])
+    if @action_item.belongs_to? :project
+      project = Project.find(@action_item.parent_key)
+      redirect_url = project_path(project)
+    else
+      redirect_url = action_items_url
+    end
+    
+    @action_item.bump!
+    respond_to do |format|
+      format.html { redirect_to redirect_url, notice: "Bumped '#{@action_item.name}'"}
+    end
+  end
+  
   def category_update
     @action_item = ActionItem.find(params[:id])
     @action_item.mywn_category = params[:category]

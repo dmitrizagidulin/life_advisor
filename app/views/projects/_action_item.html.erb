@@ -20,7 +20,7 @@
         </ul>
       <% end %>
     </td>
-    <td>
+    <td class="nowrap">
     <% if action_item.done %>
       <span><%= action_item.completed_at.localtime.strftime("%b %d, %Y, %l:%M %P") if action_item.completed_at %></span>
     <% else %>
@@ -28,13 +28,17 @@
     <% end %>
     </td>
     <td>
+      <%= action_item.bump_count if action_item.bump_count > 0 %>
+    </td>
+    <td>
       <% if action_item.time_elapsed > 0 %>
         <%= action_item.time_elapsed %> h
       <% end %>
     </td>
-    <td><small><%= action_item.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
-    <td>
+    <td class="nowrap"><small><%= action_item.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
+    <td class="nowrap">
+        <%= link_to 'Bump!', "/action_items/#{action_item.key}/bump", method: :post, class: 'btn btn-mini' %>
         <%= link_to 'Del', '/action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',
-            data: { confirm: 'Are you sure?' } %>
+            data: { confirm: 'Delete - Are you sure?' } %>
     </td>
   </tr>

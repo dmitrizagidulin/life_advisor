@@ -1,6 +1,7 @@
   <tr>
     <td><%= check_box_tag action_item.key, '1', action_item.done, :class => 'action_item_checkbox' %></td>
     <td class="span6">
+      <%= link_to 'Edit', edit_action_item_path(action_item), :class => 'btn btn-mini' %>
       <% if action_item.parent_type == 'project' %>
         <span class="area-<%= action_item.area %>">
           [ <%= link_to 'proj', '/projects/'+action_item.parent_key %> ]
@@ -24,10 +25,13 @@
       </div>
       <% end %>
     </td>
+    <td>
+      <%= action_item.bump_count if action_item.bump_count > 0 %>
+    </td>
     <td><small><%= action_item.created_at.localtime.strftime("%b %d, %y")  %></small></td>
     <td>
-      <%= link_to 'Edit', edit_action_item_path(action_item), :class => 'btn btn-mini' %>
+      <%= link_to 'Bump!', "/action_items/#{action_item.key}/bump", method: :post, class: 'btn btn-mini' %>
       <%= link_to 'Destroy', '/action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',
-        data: { confirm: 'Are you sure?' } %>
+        data: { confirm: 'Delete - Are you sure?' } %>
     </td>
   </tr>
