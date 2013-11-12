@@ -29,8 +29,16 @@
         <%= time_elapsed %> h
       <% end %>
     </td>
+    <td>
+      <% if project.bump_count > 0 %>
+        <%= project.bump_count %>
+      <% else %>
+        &nbsp;
+      <% end %>
+    </td>
     <td><small><%= project.created_at.localtime.strftime("%b %d, %y")  %></small></td>
     <td>
+      <%= link_to 'Bump!', "/projects/#{project.key}/bump", method: :post, class: 'btn btn-mini' %>
       <%= link_to 'Destroy', '/projects/'+project.key, method: :delete, :class => 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
     </td>
   </tr>

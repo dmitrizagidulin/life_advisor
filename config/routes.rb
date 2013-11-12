@@ -28,6 +28,7 @@ LifeAdvisor::Application.routes.draw do
     post 'projects/:id/status/:status' => :status_update
     get 'projects/:id/set_goals' => :set_goals
     post 'projects/:project_key/serve_goal_toggle/:goal_key' => :serve_goal_toggle
+    post 'projects/:id/bump' => :bump
   end
   resources :projects
   resources :history

@@ -6,8 +6,14 @@ class ProjectTest < ActiveSupport::TestCase
     refute project.valid?
   end
   
-  test "New project should have no action items associated with it" do
+  test "New project should have a Bump count of 0" do
     project = Project.new
-#    assert_empty project.action_items
+    project.bump_count.must_equal 0
+  end
+  
+  test "Bumping a new project should result in a bump count of 1" do
+    project = Project.new
+    project.bump
+    project.bump_count.must_equal 1
   end
 end

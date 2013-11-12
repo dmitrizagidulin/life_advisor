@@ -7,10 +7,10 @@
 <dl class="dl-horizontal">
   <dt>URL:</dt>
   <dd>
-    <% if @project.url %>
-    <a href="<%= @project.url %>"><%= @project.url %></a>
+    <% if @project.url and not @project.url.empty? %>
+      <a href="<%= @project.url %>"><%= @project.url %></a>
     <% else %>
-    -
+      -
     <% end %>
   </dd>
 <% if !@project.description.nil? and !@project.description.empty? %>
@@ -29,6 +29,9 @@
   <dd><a href="#links_table"><%= @links.count %></a></dd>
   <dt>Created:</dt>
   <dd><%= @project.created_at.localtime.strftime("%b %d, %Y, %l:%M %P") %></dd>
+  <dt>Bumped:</dt>
+  <dd><%= @project.bump_count %> times</dd>
+  
   <br />
   <dt>Elapsed Time:</dt>
   <dd><%= @elapsed_time_total %> hrs</dd>

@@ -108,6 +108,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def bump
+    @project = Project.find(params[:id])
+    @project.bump!
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: "Bumped '#{@project.name}'"}
+    end
+  end
+  
   def status_update
     @project = Project.find(params[:id])
     @project.change_status! params[:status]
@@ -159,6 +167,6 @@ class ProjectsController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params[:project].permit(:name, :description, :status, :area, :parent_type, :parent_key, :url)
+    params[:project].permit(:name, :description, :status, :area, :parent_type, :parent_key, :url, :bump_count)
   end
 end
