@@ -14,13 +14,28 @@ class ActionItem
   property :description, String
   property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
   property :time_elapsed, Float, :default => 0  # Elapsed time, in hours. E.g.: 1.5
+  property :bump_count, Integer, default: 0  # Number of times I've thought about the task
   
   timestamps!
   
   before_update :enforce_completed_at
   
-  # TODO: Unit test
   def <=>(anOther)
+    # Sort on Bump Count first, descending
+    bump_cmp = anOther.bump_count <=> self.bump_count
+    return bump_cmp unless bump_cmp == 0
+    
+    # Next, sort on Focus Area (in the order of self.areas() array)
+    unless self.area.nil? or anOther.area.nil?
+      area_cmp = self.area_order <=> anOther.area_order
+      return area_cmp unless area_cmp == 0
+    end
+    
+    # Lastly, sort on Created At time, desc
+    anOther.created_at <=> self.created_at 
+  end
+  
+  def oldCompare(anOther)
     # First, sort on Done status
     return -1 if self.done and not anOther.done
     return 1 if not self.done and anOther.done
@@ -36,7 +51,7 @@ class ActionItem
       return category_cmp unless category_cmp == 0
     end
 
-    # Next, sort on Focus Area
+    # Next, sort on Focus Area (in the order of self.areas() array)
     unless self.area.nil? or anOther.area.nil?
       area_cmp = self.area_order <=> anOther.area_order
       return area_cmp unless area_cmp == 0
@@ -48,6 +63,15 @@ class ActionItem
   
   def area_order
     ActionItem.areas.find_index self.area.to_s
+  end
+  
+  def bump
+    self.bump_count += 1
+  end
+  
+  def bump!
+    self.bump
+    self.save
   end
   
   def completed_same_day?
@@ -120,7 +144,7 @@ class ActionItem
   end
   
   def self.areas
-    ['soul', 'work', 'admin', 'assistant']
+    ['work', 'soul', 'admin', 'assistant']
   end
   
   def self.hash_by_date(items)
