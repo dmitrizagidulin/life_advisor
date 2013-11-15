@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= category_name %></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% goals.each do |goal| %>
+      <tr>
+        <td>
+          <%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
+          <%= link_to goal.name, goal %>
+        </td>
+        <td>
+          <%= link_to 'Del', goal, method: :delete, data: { confirm: "Delete - '#{goal.name}?" }, 
+                :class => 'btn btn-mini btn-danger' %></td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

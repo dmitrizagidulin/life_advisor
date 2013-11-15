@@ -2,59 +2,8 @@
 
 <%= link_to 'New Goal', new_goal_path, :class => 'btn' %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Active Goals</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @active_goals.each do |goal| %>
-      <tr>
-        <td><%= link_to goal.name, edit_goal_path(goal) %></td>
-        <td><%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'goals/category_list', locals: {goals: @active_goals, category_name: 'Active Goals' } %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Inactive Goals</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @inactive_goals.each do |goal| %>
-      <tr>
-        <td><%= link_to goal.name, edit_goal_path(goal) %></td>
-        <td><%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'goals/category_list', locals: {goals: @inactive_goals, category_name: 'Inactive Goals' } %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Accomplished Goals</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @accomplished_goals.each do |goal| %>
-      <tr>
-        <td><%= link_to goal.name, edit_goal_path(goal) %></td>
-        <td><%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'goals/category_list', locals: {goals: @accomplished_goals, category_name: 'Accomplished Goals' } %>
