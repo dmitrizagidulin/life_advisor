@@ -27,6 +27,10 @@ class Goal
     Project.find(self.project_ids)
   end
   
+  def sub_goals
+    Goal.for_parent(:goal, self.key)
+  end
+  
   def self.active_goals(include_accomplished=false)
     search_string = 'active:true'
     results = Goal.search_results_for(search_string)

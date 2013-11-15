@@ -21,9 +21,20 @@ module Parentable
       self.parent_type == parent_type.to_s and self.parent_key.present?
     end
     
+    def parent_class
+      if self.parent_type
+        if self.parent_type.to_sym == :project
+          klass = Project
+        elsif self.parent_type.to_sym == :goal
+          klass = Goal
+        end
+      end
+      klass
+    end
+    
     def parent
-      if self.parent_type and self.parent_type.to_sym == :project
-        parent = Project.find(self.parent_key)
+      if self.parent_type
+        parent = self.parent_class.find(self.parent_key)
       end
       parent
     end

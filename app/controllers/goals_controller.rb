@@ -17,6 +17,8 @@ class GoalsController < ApplicationController
     @projects = @goal.projects  # All projects serving this goal
     projects_by_status = Project.hash_by_status(@projects)
     @active_projects = projects_by_status['active']
+    @sub_goals = @goal.sub_goals
+    @parent = @goal.parent
   end
 
   # GET /goals/new
@@ -32,10 +34,17 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
-
+    
+    if @goal.belongs_to? :goal
+      @parent = Goal.find(@goal.parent_key)
+      redirect_url = @parent
+    else
+      redirect_url = request.referer || goals_url # redirect to referring page
+    end
+    
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to goals_url, notice: 'Goal was successfully created.' }
+        format.html { redirect_to redirect_url, notice: 'Goal was successfully created.' }
         format.json { render action: 'show', status: :created, location: @goal }
       else
         format.html { render action: 'new' }
@@ -47,9 +56,16 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1
   # PATCH/PUT /goals/1.json
   def update
+    if @goal.belongs_to? :goal
+      @parent = Goal.find(@goal.parent_key)
+      redirect_url = @parent
+    else
+      redirect_url = request.referer || goals_url # redirect to referring page
+    end
+
     respond_to do |format|
       if @goal.update(goal_params)
-        format.html { redirect_to goals_url, notice: 'Goal was successfully updated.' }
+        format.html { redirect_to redirect_url, notice: 'Goal was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -61,9 +77,16 @@ class GoalsController < ApplicationController
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
+    if @goal.belongs_to? :goal
+      @parent = Goal.find(@goal.parent_key)
+      redirect_url = @parent
+    else
+      redirect_url = request.referer || goals_url # redirect to referring page
+    end
+    
     @goal.destroy
     respond_to do |format|
-      format.html { redirect_to goals_url }
+      format.html { redirect_to redirect_url }
       format.json { head :no_content }
     end
   end
@@ -76,6 +99,6 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params[:goal].permit(:name, :description, :active, :accomplished)
+      params[:goal].permit(:name, :description, :active, :accomplished, :parent_type, :parent_key)
     end
 end

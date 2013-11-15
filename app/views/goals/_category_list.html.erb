@@ -10,11 +10,11 @@
     <% goals.each do |goal| %>
       <tr>
         <td>
-          <%= link_to 'Edit', edit_goal_path(goal), :class => 'btn btn-mini' %>
-          <%= link_to goal.name, goal %>
+          <%= link_to 'Edit', "/goals/#{goal.key}/edit", :class => 'btn btn-mini' %>
+          <%= link_to goal.name, "/goals/#{goal.key}" %>
         </td>
         <td>
-          <%= link_to 'Del', goal, method: :delete, data: { confirm: "Delete - '#{goal.name}?" }, 
+          <%= link_to 'Del', "/goals/#{goal.key}", method: :delete, data: { confirm: "Delete - '#{goal.name}?" }, 
                 :class => 'btn btn-mini btn-danger' %></td>
         </td>
       </tr>

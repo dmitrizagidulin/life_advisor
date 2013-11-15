@@ -10,7 +10,7 @@
 <tbody>
   <% goals_served.each do | goal | %>
     <tr>
-      <td><%= link_to goal.name, goal %></td>
+      <td><%= link_to goal.name, "/goals/#{goal.key}" %></td>
     </tr>
   <% end %>
 </tbody>

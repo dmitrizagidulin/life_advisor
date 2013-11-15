@@ -8,6 +8,15 @@
 <h4><%= @goal.name %></h4>
 
 <dl class="dl-horizontal">
+  <dt>Parent Goal:</dt>
+  <dd>
+    <% unless @parent.nil? %>
+    <%= link_to @parent.name, url_for(@parent) %>
+    <% else %>
+    none
+    <% end %>
+  </dd>
+
 <% if !@goal.description.nil? and !@goal.description.empty? %>
   <dt>Description:</dt>
   <dd><%= raw(@goal.description) %></dd>
@@ -18,6 +27,17 @@
   <dd><%= @goal.accomplished ? 'Yes' : 'No' %></dd>
 </dl>
 
+<%= form_for(Goal.new, :html => { :class => "form-inline form-nomargin"}) do |f| %>
+  <%= f.text_field :name, :class => "goal", :tabindex => 1, :autofocus => true %>
+  <%= f.hidden_field :parent_type, value: :goal %>
+  <%= f.hidden_field :parent_key, value: @goal.key %>
+  <%= f.submit 'Add Sub-Goal', :class=> "goal btn" %>
+<% end %>
+
+<%= render partial: 'goals/category_list', locals: {goals: @sub_goals, category_name: 'Sub Goals' } %>
+
+
+<br />
 <h5>Projects For Goal</h5>
 <% if @projects and not @projects.empty? %>
 
