@@ -1,4 +1,15 @@
+<% content_for :title, "#{@person.name}" %>
+
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
+<%= link_to '< List', people_path, :class => 'btn btn-mini' %>&nbsp;
+<%= link_to 'Edit', edit_person_path(@person), :class => 'btn btn-mini' %>
+
+<h4><%= @person.name %></h4>
+
+<dl class="dl-horizontal">
+<% if !@person.description.nil? and !@person.description.empty? %>
+  <dt>Description:</dt>
+  <dd><%= raw(@person.description) %></dd>
+<% end %>
+</dl>

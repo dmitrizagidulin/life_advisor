@@ -69,6 +69,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params[:person]
+      params[:person].permit(:name, :description, :parent_key, :parent_type)
     end
 end
