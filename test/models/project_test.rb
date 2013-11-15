@@ -47,4 +47,15 @@ class ProjectTest < ActiveSupport::TestCase
     project_list.sort!
     project_list[0].name.must_equal 'Test Project A'
   end
+  
+  test "Project hash by status method" do
+    project_list = []
+    project_list << (Project.new name: 'Active proj one', status: :active)
+    project_list << (Project.new name: 'Active proj two', status: :active)
+    project_list << (Project.new name: 'Completed proj', status: :completed)
+    
+    projects_by_status = Project.hash_by_status(project_list)
+    projects_by_status['active'].count.must_equal 2
+    projects_by_status['completed'][0].name.must_equal 'Completed proj'
+  end
 end

@@ -1,8 +1,11 @@
 require 'RippleSearch'
+require 'Parentable'
+require 'Util'
 
 class Project
   include Ripple::Document
   include Comparable
+  include Parentable
   extend RippleSearch
   
   property :name, String, :presence => true
@@ -25,12 +28,17 @@ class Project
     results = self.search_results_for(search_string)
     results.collect { |doc| Project.from_search_result(doc) }
   end
-
+    
   def self.focus_on_area(area, status=:active)
     search_string = "status:#{status} AND area:#{area}"
     results = self.search_results_for(search_string)
     results.collect { |doc| Project.from_search_result(doc) }
   end
+  
+  def self.hash_by_status(projects)
+    Util.hash_list_by(projects,:status)
+  end
+
   
   def <=>(anOther)
     # First, sort in reverse bump_count order

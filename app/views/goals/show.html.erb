@@ -1,4 +1,28 @@
+<% content_for :title, "Goal: #{@goal.name}" %>
+
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_goal_path(@goal) %> |
-<%= link_to 'Back', goals_path %>
+<%= link_to '< List', goals_path, :class => 'btn btn-mini' %>&nbsp;
+<%= link_to 'Edit', edit_goal_path(@goal), :class => 'btn btn-mini' %>
+
+<h4><%= @goal.name %></h4>
+
+<dl class="dl-horizontal">
+<% if !@goal.description.nil? and !@goal.description.empty? %>
+  <dt>Description:</dt>
+  <dd><%= raw(@goal.description) %></dd>
+<% end %>
+  <dt>Active:</dt>
+  <dd><%= @goal.active ? 'Yes' : 'No' %></dd>
+  <dt>Accomplished:</dt>
+  <dd><%= @goal.accomplished ? 'Yes' : 'No' %></dd>
+</dl>
+
+<h5>Projects For Goal</h5>
+<% if @projects and not @projects.empty? %>
+
+<%= render partial: 'projects/projects_list', locals: { projects: @active_projects, project_status: :active } %>
+
+<% else %>
+  <div class="muted">None</div>
+<% end %>

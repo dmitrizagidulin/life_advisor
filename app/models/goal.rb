@@ -12,6 +12,21 @@ class Goal
   property :accomplished, Boolean, :default => false
   timestamps!
   
+  def project_goals
+    search_string = "goal_key:#{self.key}"
+    project_goal_docs = ProjectGoal.search_results_for(search_string)
+  end
+  
+  # Keys of projects serving this goal
+  def project_ids
+    project_goal_docs = self.project_goals
+    project_ids = project_goal_docs.collect {|pg| pg['project_key'] }
+  end
+  
+  def projects
+    Project.find(self.project_ids)
+  end
+  
   def self.active_goals(include_accomplished=false)
     search_string = 'active:true'
     results = Goal.search_results_for(search_string)

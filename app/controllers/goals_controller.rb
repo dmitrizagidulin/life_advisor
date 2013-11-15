@@ -13,6 +13,10 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
+    set_goal
+    @projects = @goal.projects  # All projects serving this goal
+    projects_by_status = Project.hash_by_status(@projects)
+    @active_projects = projects_by_status['active']
   end
 
   # GET /goals/new
