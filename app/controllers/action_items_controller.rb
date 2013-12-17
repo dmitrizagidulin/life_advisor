@@ -79,7 +79,13 @@ class ActionItemsController < ApplicationController
     @action_item = ActionItem.find(params[:id])
     @parent = @action_item.parent
     @links = @action_item.links
-
+    if @parent
+      @back_link = url_for(@parent)
+    else
+      @back_link = action_items_path
+    end
+    
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @action_item }
