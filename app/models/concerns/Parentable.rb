@@ -5,7 +5,7 @@ module Parentable
   include Ripple::Callbacks
   
   included do
-    property :parent_type, String  # One of [:project, :day]
+    property :parent_type, String  # One of [:project, :day, :question]
     property :parent_key, String  # (Optional) An action item can belong to a Project, or a day
   end
   
@@ -26,13 +26,17 @@ module Parentable
         if self.parent_type.to_sym == :project
           klass = Project
         elsif self.parent_type.to_sym == :goal
-          klass = Goal
+            klass = Goal
+        elsif self.parent_type.to_sym == :question
+          klass = Question
         end
       end
       klass
     end
     
     def parent
+      return nil if self.parent_key.blank?
+      return nil if self.belongs_to?(:day)
       if self.parent_type
         parent = self.parent_class.find(self.parent_key)
       end
