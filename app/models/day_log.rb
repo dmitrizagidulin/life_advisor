@@ -4,6 +4,13 @@ class DayLog
   property :date, Date, presence: true
   timestamps!
   
+  def ==(other)
+    if other.kind_of? Time
+      return other.to_date == self.date
+    end
+    self.date == other.date
+  end
+  
   def key
     date.strftime("%Y-%m-%d")
   end
