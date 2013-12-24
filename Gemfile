@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 1.2'
 
 group :test do
   gem "minitest-spec-rails", "~> 4.7.5"
+  gem "minitest"
+  gem "minitest-spec-context"
 end
 
 group :doc do
