@@ -144,4 +144,8 @@ class Project
   def time_elapsed(action_items)
     action_items.map(&:time_elapsed).sum
   end
+  
+  def set_main_focus!
+    Elefsis.current_focus = self
+  end
 end
