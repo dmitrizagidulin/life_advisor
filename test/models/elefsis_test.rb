@@ -1,7 +1,7 @@
 require 'test_helper'
 
 describe "Elefsis" do
-  context "keeps track of current focus/interests" do
+  context "keeps track of current obsession" do
     it "should default to the current day as the default focus" do
       Elefsis.reset_focus
       Elefsis.current_focus.must_equal Elefsis.today
