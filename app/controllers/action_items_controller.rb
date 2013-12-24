@@ -7,7 +7,7 @@ class ActionItemsController < ApplicationController
     @horizon_items = ActionItem.all_todo(:horizon).sort
     @someday_items = ActionItem.all_todo(:someday, focus_area=nil, include_projects=false).sort
     @tomorrow_items = ActionItem.all_todo(:tomorrow).sort
-    @active_projects = Project.active_projects
+    @active_projects = Project.active_projects.select {|p| p.next_action }
     
     respond_to do |format|
       format.js
