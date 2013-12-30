@@ -4,6 +4,7 @@
       <th><%= category_name %></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,10 @@
           <%= link_to goal.name, "/goals/#{goal.key}" %>
         </td>
         <td>
+          <%= goal.bump_count if goal.bump_count > 0 %>
+        </td>
+        <td>
+          <%= link_to 'Bump!', "/goals/#{goal.key}/bump", method: :post, class: 'btn btn-mini' %>
           <%= link_to 'Del', "/goals/#{goal.key}", method: :delete, data: { confirm: "Delete - '#{goal.name}?" }, 
                 :class => 'btn btn-mini btn-danger' %></td>
         </td>

@@ -7,9 +7,18 @@ class GoalsController < ApplicationController
     @all_goals = Goal.all
     @accomplished_goals = @all_goals.select {|g| g.accomplished }
     @active_goals = @all_goals.select {|g| g.active and not g.accomplished }  # but unaccomplished
+    @active_goals.sort!
     @inactive_goals = @all_goals.reject {|g| g.active or g.accomplished }
   end
 
+  def bump
+    set_goal
+    @goal.bump!
+    respond_to do |format|
+      format.html { redirect_to goals_url, notice: "Bumped '#{@goal.name}'"}
+    end
+  end
+  
   # GET /goals/1
   # GET /goals/1.json
   def show

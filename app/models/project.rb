@@ -39,7 +39,6 @@ class Project
   def self.hash_by_status(projects)
     Util.hash_list_by(projects,:status)
   end
-
   
   def <=>(anOther)
     # First, sort in reverse bump_count order

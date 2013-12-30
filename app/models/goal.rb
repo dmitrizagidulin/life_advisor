@@ -1,16 +1,29 @@
 require 'RippleSearch'
 require 'Parentable'
+require 'Bumpable'
 
 class Goal
   include Ripple::Document
   extend RippleSearch
   include Parentable
+  include Comparable
+  include Bumpable
   
   property :name, String
   property :description, String
   property :active, Boolean, :default => true
   property :accomplished, Boolean, :default => false
   timestamps!
+  
+  def <=>(anOther)
+    # First, sort in reverse bump_count order
+    unless self.bump_count == anOther.bump_count 
+      return anOther.bump_count <=> self.bump_count
+    end
+    
+    # Lastly, sort alpha by name, ascending
+    self.name <=> anOther.name
+  end
   
   def project_goals
     search_string = "goal_key:#{self.key}"

@@ -46,6 +46,9 @@ LifeAdvisor::Application.routes.draw do
     get 'focus/:area' => :focus_area
   end
 
+  controller :goals do
+    post 'goals/:id/bump' => :bump
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
