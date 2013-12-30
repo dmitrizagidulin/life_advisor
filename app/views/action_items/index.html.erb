@@ -6,15 +6,20 @@
 
 <h4 class="text-center">Action Items</h4>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :critical, items: @critical_items, focus_area: :admin, tab_index: 3 } %>
+<%= render partial: 'action_items/category_list', 
+  locals: { mywn_category: :critical, items: @critical_items, focus_area: :admin, tab_index: 3 } %>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :tomorrow, items: @tomorrow_items, focus_area: :admin, tab_index: 4 } %>
+<%= render partial: 'action_items/category_list', 
+  locals: { mywn_category: :tomorrow, items: @tomorrow_items, focus_area: :admin, tab_index: 5 } %>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :opportunity, items: @opportunity_items, focus_area: :admin, tab_index: 5 } %>
+<%= render partial: 'action_items/category_list', 
+  locals: { mywn_category: :opportunity, items: @opportunity_items, focus_area: :admin, tab_index: 7 } %>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :horizon, items: @horizon_items, focus_area: :admin, tab_index: 6 } %>
+<%= render partial: 'action_items/category_list', 
+  locals: { mywn_category: :horizon, items: @horizon_items, focus_area: :admin, tab_index: 9 } %>
 
-<%= render partial: 'action_items/category_list', locals: { mywn_category: :someday, items: @someday_items, focus_area: :admin, tab_index: 7 } %>
+<%= render partial: 'action_items/category_list', 
+  locals: { mywn_category: :someday, items: @someday_items, focus_area: :admin, tab_index: 11 } %>
 
 
 <br />

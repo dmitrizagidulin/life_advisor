@@ -103,6 +103,13 @@ class ActionItem
     ActionItem.mywn_categories.find_index self.mywn_category
   end
   
+  def new_link(url)
+    link = WebLink.new url: url
+    link.parent_type = :action_item
+    link.parent_key = self.key
+    link
+  end
+  
   def toggle_done!
     self.done = !self.done
     if self.done
@@ -189,7 +196,7 @@ class ActionItem
     end
     category_items.count  # Return the number of items moved
   end
-  
+    
 #  def from_search_result(document)
 #    action_item = super.from_search_result(document)
 #    action_item.done = action_item.done == 'true'

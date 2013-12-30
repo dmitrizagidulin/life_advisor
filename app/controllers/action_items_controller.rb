@@ -112,10 +112,15 @@ class ActionItemsController < ApplicationController
   # POST /action_items
   # POST /action_items.json
   def create
-    @action_item = ActionItem.new(params[:action_item].permit(:name, :mywn_category, :area, :parent_type, :parent_key, :time_elapsed))
-
+    item_params = params[:action_item].permit(:name, :mywn_category, :area, :parent_type, :parent_key, :time_elapsed)
+    @action_item = ActionItem.new(item_params)
+    
     respond_to do |format|
       if @action_item.save
+        if params.include? :url
+          link = @action_item.new_link(params[:url])
+          link.save
+        end
         redirect_url = request.referer || action_items_url # redirect to referring page
         redirect_url += "##{@action_item.key}"
 
