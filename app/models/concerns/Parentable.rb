@@ -9,6 +9,10 @@ module Parentable
     property :parent_key, String  # (Optional) An action item can belong to a Project, or a day
   end
   
+  def persist!
+    @new = false
+  end
+  
 #  module InstanceMethods
     def enforce_default_day_parent
       if not self.parent_type or (self.parent_type == 'day' and self.parent_key == 'today')

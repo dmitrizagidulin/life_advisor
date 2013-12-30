@@ -6,11 +6,13 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @web_links.each do |web_link| %>
   <tr>
     <td><%= web_link.name %></td>
+    <td><%= web_link.url %></td>
     <td><%= link_to 'Show', web_link %></td>
     <td><%= link_to 'Edit', edit_web_link_path(web_link) %></td>
     <td><%= link_to 'Destroy', web_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>

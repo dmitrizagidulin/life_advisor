@@ -165,6 +165,12 @@ class ActionItemsController < ApplicationController
   # DELETE /action_items/1.json
   def destroy
     @action_item = ActionItem.find(params[:id])
+    # Destroy any links this action item might have
+    if @action_item.links.present?
+      @action_item.links.each do | link |
+        link.destroy
+      end
+    end
     session[:return_to] = request.referer || action_items_url # redirect to referring page
     @action_item.destroy
 

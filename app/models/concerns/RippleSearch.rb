@@ -11,6 +11,7 @@ module RippleSearch
     key = document['id']
     document.delete('id')
     item = self.new(document)
+    item.persist!
     item.key = key
     item
   end
