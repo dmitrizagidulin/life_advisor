@@ -40,6 +40,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+    @next_action = @project.next_action
     @action_items = @project.action_items_todo.sort
     @completed_items = @project.action_items_completed.sort {|x,y| y <=> x}
     @num_action_items_total = @action_items.count + @completed_items.count

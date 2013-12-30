@@ -51,7 +51,7 @@ class Project
   end
   
   def action_items
-    ActionItem.for_parent(:project, self.key)
+    @action_items ||= ActionItem.for_parent(:project, self.key)
   end
   
   def action_items_completed
@@ -117,7 +117,7 @@ class Project
   
   def next_action
     project_items_todo = self.action_items_todo.sort
-    if project_items_todo
+    if project_items_todo.present?
       next_action = project_items_todo.first
     end
     next_action

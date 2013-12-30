@@ -5,9 +5,16 @@
 <h4><%= @project.name %></h4>
 
 <dl class="dl-horizontal">
+  <dt>Action:</dt>
+  <dd>
+    <% if @next_action.present? %>
+      <a href="#<%= @next_action.key %>"><%= @next_action.name %></a>
+    <% else %>
+     -
+    <% end %>
   <dt>URL:</dt>
   <dd>
-    <% if @project.url and not @project.url.empty? %>
+    <% if @project.url.present? %>
       <a href="<%= @project.url %>"><%= @project.url %></a>
     <% else %>
       -
