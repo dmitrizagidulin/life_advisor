@@ -1,16 +1,17 @@
 require 'RippleSearch'
 require 'Parentable'
+require 'Bumpable'
 
 class Question
   include Ripple::Document
   extend RippleSearch
   include Parentable
+  include Bumpable
     
   property :name, String, :presence => true
   property :answered, Boolean, default: false
   property :answered_at, Time
   property :description, String
-  property :bump_count, Integer, default: 0  # Question's relative priority / number of times I've thought about it
   timestamps!
   
   def <=>(anOther)
@@ -24,15 +25,6 @@ class Question
   
   def answers
     Answer.for_parent(:question, self.key)
-  end
-  
-  def bump
-    self.bump_count += 1
-  end
-  
-  def bump!
-    self.bump
-    self.save
   end
   
   def links

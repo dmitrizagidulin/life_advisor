@@ -1,12 +1,14 @@
 require 'RippleSearch'
 require 'Parentable'
 require 'Util'
+require 'Bumpable'
 
 class Project
   include Ripple::Document
   include Comparable
   include Parentable
   extend RippleSearch
+  include Bumpable
   
   property :name, String, :presence => true
   property :description, String
@@ -15,7 +17,6 @@ class Project
   property :completed_at, Time
   property :canceled_at, Time
   property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
-  property :bump_count, Integer, default: 0
   
   timestamps!
   
@@ -65,15 +66,6 @@ class Project
   def add_goal(goal_key)
     project_goal = ProjectGoal.new project_key: self.key, goal_key: goal_key
     project_goal.save
-  end
-  
-  def bump
-    self.bump_count += 1
-  end
-  
-  def bump!
-    self.bump
-    self.save
   end
   
   def project_goals

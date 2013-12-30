@@ -1,11 +1,13 @@
 require 'RippleSearch'
 require 'Parentable'
+require 'Bumpable'
 
 class ActionItem
   include Ripple::Document
   include Comparable
   extend RippleSearch
   include Parentable
+  include Bumpable
 
   property :name, String, :presence => true
   property :done, Boolean, :default => false
@@ -63,15 +65,6 @@ class ActionItem
   
   def area_order
     ActionItem.areas.find_index self.area.to_s
-  end
-  
-  def bump
-    self.bump_count += 1
-  end
-  
-  def bump!
-    self.bump
-    self.save
   end
   
   def completed_same_day?
