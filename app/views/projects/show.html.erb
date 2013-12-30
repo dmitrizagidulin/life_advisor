@@ -63,6 +63,8 @@
 
 <%= form_for(ActionItem.new, :html => { :class => "form-inline form-nomargin"}) do |f| %>
   <%= f.text_field :name, :class => "action_item", :tabindex => 2, :autofocus => true %>
+  url:
+  <%= text_field_tag :url, nil, :tabindex => 3 %>
   <%= f.hidden_field :mywn_category, value: :someday %>
   <%= f.hidden_field :parent_type, value: :project %>
   <%= f.hidden_field :parent_key, value: @project.key %>
@@ -112,4 +114,4 @@
 </tbody>
 </table>
 <br />
-<%= render(partial: 'web_links/list', locals: {parent_type: :project, parent_key: @project.key, links: @links}) %>
+<%= render(partial: 'web_links/list', locals: {parent_type: :project, parent_key: @project.key, links: @links, starting_index: 3}) %>

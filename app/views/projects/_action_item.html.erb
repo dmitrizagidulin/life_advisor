@@ -12,7 +12,7 @@
       </div>
       <% end %>
       
-      <% if not links.empty? %>
+      <% if links.present? %>
         <ul>
         <% links.each do | link | %>
           <li><%= link_to link.name_display, link.url %></li>

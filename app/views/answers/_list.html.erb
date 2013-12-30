@@ -1,5 +1,5 @@
 <%= form_for(Answer.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
-    name <%= f.text_field :name, :class => "link", :tabindex => 2 %>
+    name <%= f.text_field :name, :class => "link", :tabindex => starting_index %>
     <%= f.hidden_field :parent_type, value: parent_type %>
     <%= f.hidden_field :parent_key, value: parent_key %>
     <%= f.submit 'Add Answer', :class=> "link btn" %>

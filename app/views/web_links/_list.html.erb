@@ -1,6 +1,6 @@
 <%= form_for(WebLink.new, :html => { :class => "form-inline inline form-nomargin"}) do |f| %>
-    url <%= f.text_field :url, :class => "link", :tabindex => 2 %>
-    name <%= f.text_field :name, :class => "link", :tabindex => 3 %>
+    url <%= f.text_field :url, :class => "link", :tabindex => starting_index %>
+    name <%= f.text_field :name, :class => "link", :tabindex => starting_index+1 %>
     <%= f.hidden_field :parent_type, value: parent_type %>
     <%= f.hidden_field :parent_key, value: parent_key %>
     <%= f.submit 'Add Link', :class=> "link btn" %>

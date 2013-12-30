@@ -29,6 +29,6 @@
 </dl>
 
 <br />
-<%= render(partial: 'web_links/list', locals: {parent_type: :question, parent_key: @question.key, links: @links}) %>
+<%= render(partial: 'web_links/list', locals: {parent_type: :question, parent_key: @question.key, links: @links, starting_index: 2}) %>
 <br />
-<%= render(partial: 'answers/list', locals: {parent_type: :question, parent_key: @question.key, answers: @answers}) %>
+<%= render(partial: 'answers/list', locals: {parent_type: :question, parent_key: @question.key, answers: @answers, starting_index: 4}) %>
