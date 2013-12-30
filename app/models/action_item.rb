@@ -96,7 +96,7 @@ class ActionItem
   end
   
   def links
-    WebLink.for_parent(:action_item, self.key)
+    @links ||= WebLink.for_parent(:action_item, self.key)
   end
   
   def mywn_category_order

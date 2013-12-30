@@ -10,6 +10,13 @@
       <span id="task-<%= action_item.key %>" class="area-<%= action_item.area %>">
         <%= link_to action_item.name, '/action_items/'+action_item.key %>
       </span>
+      <% if action_item.links.present? %>
+        <ul>
+        <% action_item.links.each do | link | %>
+          <li><%= link_to link.name, link.url %></li>
+        <% end %>
+        </ul>
+      <% end %>
       <% if action_item.description %>
       <br />
       <div class="muted">
