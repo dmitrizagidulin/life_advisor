@@ -39,9 +39,9 @@
 
 <br />
 <h5>Projects For Goal</h5>
-<% if @projects and not @projects.empty? %>
+<% if @projects.present? %>
 
-<%= render partial: 'projects/projects_list', locals: { projects: @active_projects, project_status: :active } %>
+<%= render partial: 'projects/projects_list', locals: { projects: @projects, project_status: :active } %>
 
 <% else %>
   <div class="muted">None</div>
