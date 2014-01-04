@@ -1,6 +1,10 @@
 require 'test_helper'
 
 describe "Elefsis" do
+  context "has a document instance to handle persistence" do
+    
+  end
+  
   context "keeps track of current obsession" do
     it "should default to the current day as the default focus" do
       Elefsis.reset_focus

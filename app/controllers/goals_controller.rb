@@ -44,9 +44,8 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     
-    if @goal.belongs_to? :goal
-      @parent = Goal.find(@goal.parent_key)
-      redirect_url = @parent
+    if @goal.has_parent?
+      redirect_url = @goal.parent_url
     else
       redirect_url = request.referer || goals_url # redirect to referring page
     end
@@ -65,9 +64,8 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1
   # PATCH/PUT /goals/1.json
   def update
-    if @goal.belongs_to? :goal
-      @parent = Goal.find(@goal.parent_key)
-      redirect_url = @parent
+    if @goal.has_parent?
+      redirect_url = @goal.parent_url
     else
       redirect_url = request.referer || goals_url # redirect to referring page
     end
@@ -86,9 +84,8 @@ class GoalsController < ApplicationController
   # DELETE /goals/1
   # DELETE /goals/1.json
   def destroy
-    if @goal.belongs_to? :goal
-      @parent = Goal.find(@goal.parent_key)
-      redirect_url = @parent
+    if @goal.has_parent?
+      redirect_url = @goal.parent_url
     else
       redirect_url = request.referer || goals_url # redirect to referring page
     end

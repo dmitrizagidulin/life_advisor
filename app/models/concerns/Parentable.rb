@@ -6,7 +6,7 @@ module Parentable
   
   included do
     property :parent_type, String  # One of [:project, :day, :question]
-    property :parent_key, String  # (Optional) An action item can belong to a Project, or a day
+    property :parent_key, String  # (Optional) 
   end
   
   def persist!
@@ -21,26 +21,17 @@ module Parentable
       end
     end
     
-    def belongs_to?(parent_type)
-      self.parent_type == parent_type.to_s and self.parent_key.present?
+    def has_parent?
+      self.parent_type.present? && self.parent_key.present?
     end
     
     def parent_class
-      if self.parent_type
-        if self.parent_type.to_sym == :project
-          klass = Project
-        elsif self.parent_type.to_sym == :goal
-            klass = Goal
-        elsif self.parent_type.to_sym == :question
-          klass = Question
-        end
-      end
-      klass
+      self.parent_type.to_s.classify.constantize
     end
     
     def parent
       return nil if self.parent_key.blank?
-      return nil if self.belongs_to?(:day)
+      return nil if self.parent_type.to_s == 'day'
       if self.parent_type
         parent = self.parent_class.find(self.parent_key)
       end
@@ -48,9 +39,8 @@ module Parentable
     end
     
     def parent_url
-      if self.parent_type.to_sym == :project
-        return "/projects/#{self.parent_key}"
-      end
+      parent_instance = self.parent_class.new
+      "/#{parent_instance.class.bucket_name}/#{self.parent_key}"
     end
 #  end  #  module InstanceMethods
   
