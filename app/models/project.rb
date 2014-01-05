@@ -61,6 +61,12 @@ class Project
     end
   end
   
+  def destroy_links!
+    self.links.each do | link |
+      link.destroy!
+    end
+  end
+  
   def goal_ids
     goal_docs = self.project_goals
     goal_ids = goal_docs.collect {|g| g['goal_key'] }
