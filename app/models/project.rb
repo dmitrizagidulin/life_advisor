@@ -20,26 +20,6 @@ class Project
   
   timestamps!
   
-  def self.active_projects
-    self.all_for_status(:active)
-  end
-  
-  def self.all_for_status(status)
-    search_string = "status:"+status.to_s
-    results = self.search_results_for(search_string)
-    results.collect { |doc| Project.from_search_result(doc) }
-  end
-    
-  def self.focus_on_area(area, status=:active)
-    search_string = "status:#{status} AND area:#{area}"
-    results = self.search_results_for(search_string)
-    results.collect { |doc| Project.from_search_result(doc) }
-  end
-  
-  def self.hash_by_status(projects)
-    Util.hash_list_by(projects,:status)
-  end
-  
   def <=>(anOther)
     # First, sort in reverse bump_count order
     unless self.bump_count == anOther.bump_count 
@@ -67,6 +47,41 @@ class Project
     project_goal.save
   end
   
+  def change_status!(new_status)
+    self.status = new_status
+    if new_status.to_sym == :completed
+      self.completed_at = Time.now
+      self.canceled_at = nil
+    elsif new_status.to_sym == :canceled
+      self.canceled_at = Time.now
+      self.completed_at = nil
+    else
+      self.completed_at = nil
+      self.canceled_at = nil
+    end
+  end
+  
+  def goal_ids
+    goal_docs = self.project_goals
+    goal_ids = goal_docs.collect {|g| g['goal_key'] }
+  end
+  
+  def goals_served
+    Goal.find(self.goal_ids)
+  end
+  
+  def links
+    WebLink.for_parent(:project, self.key)
+  end
+  
+  def next_action
+    project_items_todo = self.action_items_todo.sort
+    if project_items_todo.present?
+      next_action = project_items_todo.first
+    end
+    next_action
+  end
+  
   def project_goals
     search_string = "project_key:#{self.key}"
     goal_docs = ProjectGoal.search_results_for(search_string)
@@ -79,13 +94,8 @@ class Project
     project_goals_hash = Hash[project_goals.map {|pg| [pg.goal_key, pg]}]
   end
   
-  def goal_ids
-    goal_docs = self.project_goals
-    goal_ids = goal_docs.collect {|g| g['goal_key'] }
-  end
-  
-  def goals_served
-    Goal.find(self.goal_ids)
+  def questions
+    Question.for_parent(:project, self.key)
   end
   
   def serve_goal_toggle(goal_key)
@@ -102,41 +112,31 @@ class Project
     end
   end
   
-  def links
-    WebLink.for_parent(:project, self.key)
-  end
-  
-  def next_action
-    project_items_todo = self.action_items_todo.sort
-    if project_items_todo.present?
-      next_action = project_items_todo.first
-    end
-    next_action
-  end
-  
-  def change_status!(new_status)
-    self.status = new_status
-    if new_status.to_sym == :completed
-      self.completed_at = Time.now
-      self.canceled_at = nil
-    elsif new_status.to_sym == :canceled
-      self.canceled_at = Time.now
-      self.completed_at = nil
-    else
-      self.completed_at = nil
-      self.canceled_at = nil
-    end
-  end
-  
-  def questions
-    Question.for_parent(:project, self.key)
-  end
-  
   def time_elapsed(action_items)
     action_items.map(&:time_elapsed).sum
   end
   
   def set_main_focus!
     Elefsis.current_focus = self
+  end
+  
+  def self.active_projects
+    self.all_for_status(:active)
+  end
+  
+  def self.all_for_status(status)
+    search_string = "status:"+status.to_s
+    results = self.search_results_for(search_string)
+    results.collect { |doc| Project.from_search_result(doc) }
+  end
+    
+  def self.focus_on_area(area, status=:active)
+    search_string = "status:#{status} AND area:#{area}"
+    results = self.search_results_for(search_string)
+    results.collect { |doc| Project.from_search_result(doc) }
+  end
+  
+  def self.hash_by_status(projects)
+    Util.hash_list_by(projects,:status)
   end
 end
