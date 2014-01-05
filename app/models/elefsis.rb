@@ -4,16 +4,25 @@ class Elefsis
   include Ripple::Document
   extend RippleSearch
   
+  DEFAULT_FOCUS_KEY = '_current_focus'
+  
   def self.current_focus
-    @current_focus ||= self.today
-  end
-
-  def self.current_focus=(focus)
-    @current_focus = focus
+    focus = CurrentFocus.find(Elefsis::DEFAULT_FOCUS_KEY)
+    if focus.focus_type == 'DayLog' && focus.focus_key.to_sym == :today
+      DayLog.today
+    else
+      focus.load_instance
+    end
   end
   
-  def self.reset_focus
-    self.current_focus = self.today
+  def self.focus_on(item)
+    focus = CurrentFocus.on item
+    focus.save!
+  end
+  
+  def self.reset_focus!
+    focus = CurrentFocus.today
+    focus.save!
   end
   
   def self.today

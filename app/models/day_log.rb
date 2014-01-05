@@ -12,7 +12,7 @@ class DayLog
   end
   
   def key
-    date.strftime("%Y-%m-%d")
+    self.date.strftime("%Y-%m-%d")
   end
   
   def self.today
