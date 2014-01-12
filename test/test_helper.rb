@@ -17,6 +17,16 @@ class ActiveSupport::TestCase
 
 
 #  teardown { Ripple::TestServer.clear }
-
-  # Add more helper methods to be used by all tests here...
 end
+
+def test_project
+  project = Project.new name: 'Project for Unit Testing'
+  project.key = '_test-project'
+  project
+end
+
+# :before_suite
+project = test_project
+project.save!
+# clear all project links
+project.destroy_links!
