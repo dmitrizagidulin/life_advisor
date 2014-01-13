@@ -4,3 +4,10 @@
 require File.expand_path('../config/application', __FILE__)
 
 LifeAdvisor::Application.load_tasks
+
+namespace :db do
+  task :seed => :environment do
+    env_seed_file = File.join(Rails.root, 'db', 'seeds.rb')
+    load(env_seed_file) if File.exist?(env_seed_file)
+  end
+end
