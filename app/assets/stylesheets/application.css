@@ -12,8 +12,8 @@
  *= require_tree .
  */
 h1.page {
-	text-align: center;
-	font-size: 16pt;
+  text-align: center;
+  font-size: 16pt;
 }
 
 .form-nomargin {
@@ -21,36 +21,36 @@ h1.page {
 }
 
 .task_done {
-	text-decoration: line-through;
+  text-decoration: line-through;
 }
 .area-soul {
-	font-weight: bold;
-	color: green;
+  font-weight: bold;
+  color: green;
 }
 .area-soul a {
-	color: green;
+  color: green;
 }
 .area-admin {
-	color: #555;
+  color: #555;
 }
 .area-admin a {
-	color: #555;
+  color: #555;
 }
 .area-assistant {
-	color: #CCC;
+  color: #CCC;
 }
 .area-assistant a {
-	color: #CCC;
+  color: #CCC;
 }
 .green {
-	color: green;
+  color: green;
 }
 .red {
-	color: red;
+  color: red;
 }
 .bold {
-	font-weight: bold;
+  font-weight: bold;
 }
 .nowrap {
-	white-space: nowrap;
+  white-space: nowrap;
 }

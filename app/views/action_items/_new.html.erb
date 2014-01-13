@@ -1,24 +1,41 @@
-<%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
-    <strong><%= mywn_category.capitalize %> (<%= item_count %>)</strong>&nbsp;&nbsp;&nbsp;
-    <%= f.text_field :name, :class => "action_item", :tabindex => tab_index, :autofocus => mywn_category.to_sym == :critical %>
-    url:
-    <%= text_field_tag :url, nil, :tabindex => tab_index+1 %>
-    <%= f.hidden_field :mywn_category, value: mywn_category %>
-    <%= f.hidden_field :area, value: focus_area %>
-    <%= f.submit 'Add', :class=> "action_item btn" %>
+<% if mywn_category.to_sym == :critical && item_count > 5 %>
+<%   count_class = 'red' %>
+<% elsif mywn_category.to_sym == :opportunity && item_count > 20 %>
+<%   count_class = 'red' %>
+<% else %>
+<%   count_class = '' %>
 <% end %>
 
-<% if mywn_category.to_sym == :tomorrow and item_count > 0 %>
-<div class="inline">
-  <%= form_tag('/action_items/category_update_all', :class => "form-inline inline") do %>
-      <%= hidden_field_tag :from_mywn_category, mywn_category %>
-      <%= hidden_field_tag :to_mywn_category, :critical %>
-      <%= submit_tag 'Move All to Today', :class=> "action_item btn" %>
+<div class="row">
+  <div class="span2 <%= count_class %>">
+    <strong><%= mywn_category.capitalize %> (<%= item_count %>)</strong>
+  </div>
+  
+  <div class="span7">
+    <%= form_for(ActionItem.new, :html => { :class => "form-inline inline"}) do |f| %>
+      <%= f.text_field :name, :class => "action_item", :tabindex => tab_index, :autofocus => mywn_category.to_sym == :critical %>
+      url:
+      <%= text_field_tag :url, nil, :tabindex => tab_index+1 %>
+      <%= f.hidden_field :mywn_category, value: mywn_category %>
+      <%= f.hidden_field :area, value: focus_area %>
+      <%= f.submit 'Add Item', :class=> "action_item btn" %>
+    <% end %>
+  </div>
+  
+  <div class="span3">
+  <% if mywn_category.to_sym == :tomorrow and item_count > 0 %>
+    <div>
+      <%= form_tag('/action_items/category_update_all', :class => "form-inline inline nowrap") do %>
+          <%= hidden_field_tag :from_mywn_category, mywn_category %>
+          <%= hidden_field_tag :to_mywn_category, :critical %>
+          <%= submit_tag 'Move to Today', :class=> "action_item btn" %>
+      <% end %>
+      <%= form_tag('/action_items/category_update_all', :class => "form-inline inline") do %>
+        <%= hidden_field_tag :from_mywn_category, :tomorrow %>
+        <%= hidden_field_tag :to_mywn_category, :opportunity %>
+        <%= submit_tag 'Move to Opportunity', :class=> "action_item btn" %>
+      <% end %>
+    </div>
   <% end %>
-    <%= form_tag('/action_items/category_update_all', :class => "form-inline inline") do %>
-      <%= hidden_field_tag :from_mywn_category, :tomorrow %>
-      <%= hidden_field_tag :to_mywn_category, :opportunity %>
-      <%= submit_tag 'Move All to Opportunity', :class=> "action_item btn" %>
-  <% end %>
+  </div>
 </div>
-<% end %>
