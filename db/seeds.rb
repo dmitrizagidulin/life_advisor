@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+ActionItem.bucket.enable_index!
+Answer.bucket.enable_index!
+CurrentFocus.bucket.enable_index!
+Goal.bucket.enable_index!
+Question.bucket.enable_index!
+Thought.bucket.enable_index!
+Project.bucket.enable_index!
+WebLink.bucket.enable_index!
