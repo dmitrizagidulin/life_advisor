@@ -61,6 +61,10 @@ class Project
     end
   end
   
+  def current_focus!
+    Elefsis.focus_on self
+  end
+  
   def destroy_links!
     self.links.each do | link |
       link.destroy!
@@ -78,6 +82,13 @@ class Project
   
   def links
     WebLink.for_parent(:project, self.key)
+  end
+  
+  def new_link(url, name=nil)
+    link = WebLink.new url: url, name: name
+    link.parent_type = :project
+    link.parent_key = self.key
+    link
   end
   
   def next_action
@@ -120,10 +131,6 @@ class Project
   
   def time_elapsed(action_items)
     action_items.map(&:time_elapsed).sum
-  end
-  
-  def set_main_focus!
-    Elefsis.current_focus = self
   end
   
   def self.active_projects

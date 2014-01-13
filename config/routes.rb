@@ -50,6 +50,12 @@ LifeAdvisor::Application.routes.draw do
     post 'goals/:id/bump' => :bump
   end
 
+  resources :current_focus do
+    collection do
+      post 'add_bookmark'
+    end
+  end
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
