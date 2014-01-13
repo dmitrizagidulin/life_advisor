@@ -53,6 +53,7 @@ LifeAdvisor::Application.routes.draw do
   resources :current_focus do
     collection do
       post 'add_bookmark'
+      post 'edit'
     end
   end
   
