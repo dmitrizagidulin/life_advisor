@@ -10,10 +10,7 @@ class CurrentFocus
   
   def load_instance
     klass = self.focus_type.constantize
-    instance = klass.new
-    instance.key = self.focus_key
-    instance.reload
-    instance
+    klass.find(self.focus_key)
   end
   
   def self.on(item)

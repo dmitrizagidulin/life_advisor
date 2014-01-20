@@ -2,8 +2,8 @@ require 'test_helper'
 
 describe 'Elefsis' do
   it "can load and save the current focus" do
-    project = Project.new
-    project.key = 'WukHgNDH0FQxdmjGNGBgZHgaoJm' # LA proj
+    Elefsis.reset_focus!
+    project = test_project
     
     # creates a CurrentFocus instance and saves it to db
     Elefsis.focus_on project

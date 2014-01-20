@@ -22,6 +22,7 @@ end
 def test_project
   project = Project.new name: 'Project for Unit Testing'
   project.key = '_test-project'
+  project.persist!
   project
 end
 
