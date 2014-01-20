@@ -8,7 +8,9 @@ class Elefsis
   
   def self.current_focus
     focus = CurrentFocus.find(Elefsis::DEFAULT_FOCUS_KEY)
-    if focus.focus_type == 'DayLog' && focus.focus_key.to_sym == :today
+    if focus.blank?
+      DayLog.today
+    elsif focus.focus_type == 'DayLog' && focus.focus_key.to_sym == :today
       DayLog.today
     else
       focus.load_instance
@@ -18,6 +20,10 @@ class Elefsis
   def self.focus_on(item)
     focus = CurrentFocus.on item
     focus.save!
+  end
+  
+  def self.non_default_focus_exists?
+    self.current_focus != self.today
   end
   
   def self.reset_focus!
