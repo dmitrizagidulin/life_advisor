@@ -15,3 +15,18 @@
 //= require twitter/bootstrap
 // require turbolinks
 //= require_tree .
+
+function clearFocusDiv() {
+  $('#current_focus_div').hide()
+}
+
+$(document).ready(function() {
+  $('#clear-focus-link').click(function() {
+    $.ajax({
+      url: '/current_focus/reset',
+      type: 'POST',
+      success: function() { clearFocusDiv() },
+      error: function() { alert('Error sending clear request to server.')}
+    })
+  })
+})

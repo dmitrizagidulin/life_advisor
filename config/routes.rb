@@ -54,6 +54,7 @@ LifeAdvisor::Application.routes.draw do
     collection do
       post 'add_bookmark'
       post 'edit'
+      post 'reset'
     end
   end
   

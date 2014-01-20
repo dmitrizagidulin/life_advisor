@@ -2,6 +2,10 @@
 
 <%= link_to '< Projects', projects_path, :class => 'btn btn-mini'  %> &nbsp;
 <%= link_to 'Edit', edit_project_path(@project), :class => 'btn btn-mini'  %>
+
+<%= link_to 'Make Current Focus', edit_current_focus_path(:focus_type => 'Project', :focus_key => @project.key), 
+  :method => :post, :class => 'btn btn-mini btn-info'  %>
+
 <h4><%= @project.name %></h4>
 
 <dl class="dl-horizontal">
