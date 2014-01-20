@@ -40,7 +40,7 @@ class WebLinksController < ApplicationController
   # POST /web_links
   # POST /web_links.json
   def create
-    @web_link = WebLink.new(params[:web_link].permit(:name, :url, :parent_type, :parent_key))
+    @web_link = WebLink.new(web_link_params)
     if @web_link.parent_type == 'project'
       project = Project.find(@web_link.parent_key)
       redirect_url = project_path(project) + '#links_table'
@@ -83,7 +83,7 @@ class WebLinksController < ApplicationController
     end
     
     respond_to do |format|
-      if @web_link.update_attributes(params[:web_link].permit(:name, :url, :parent_type, :parent_key))
+      if @web_link.update_attributes(web_link_params)
         format.html { redirect_to redirect_url, notice: 'Web link was successfully updated.' }
         format.json { head :no_content }
       else
@@ -111,5 +111,10 @@ class WebLinksController < ApplicationController
       format.html { redirect_to redirect_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  def web_link_params
+    params[:web_link].permit(:name, :url, :description, :parent_type, :parent_key)
   end
 end

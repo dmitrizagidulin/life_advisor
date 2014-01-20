@@ -8,6 +8,7 @@ class WebLink
   
   property :name, String
   property :url, String, :presence => true
+  property :description, String
   timestamps!
   
   before_create :enforce_default_day_parent
