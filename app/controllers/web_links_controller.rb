@@ -2,6 +2,11 @@ class WebLinksController < ApplicationController
   layout 'bookmark', :only => [:bookmark]
   
   # GET /web_links/bookmark
+  # Bookmarklet code:
+  # <code>
+  # javascript:window.open('http://localhost:3000/web_links/bookmark?url='+encodeURIComponent(location.href)+'&name='+encodeURIComponent(document.title),
+  # 'newWindowName','width=775,height=450,scrollbars=no,status=no,titlebar=no,toolbar=no');void(0);
+  # </code>
   def bookmark
     @web_link = WebLink.new(params.permit([:name, :url]))
   end
