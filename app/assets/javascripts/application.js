@@ -29,4 +29,16 @@ $(document).ready(function() {
       error: function() { alert('Error sending clear request to server.')}
     })
   })
+  
+  $('#bookmark_form_submit').click(function() {
+    var form = $('#new_web_link')
+//    console.log(form.serialize())
+    $.ajax({
+      url: '/web_links/bookmark',
+      type: 'POST',
+      data: form.serializeArray(),
+      success: function() { window.close() },
+      error: function() { alert('Error sending clear request to server.')}
+    })
+  })
 })

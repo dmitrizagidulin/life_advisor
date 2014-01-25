@@ -1,4 +1,26 @@
 class WebLinksController < ApplicationController
+  layout 'bookmark', :only => [:bookmark]
+  
+  # GET /web_links/bookmark
+  def bookmark
+    @web_link = WebLink.new(params.permit([:name, :url]))
+  end
+  
+  # POST /web_links/bookmark
+  def create_bookmark
+    @current_focus = Elefsis.current_focus
+    @web_link = @current_focus.new_link(params[:web_link].permit(:name, :url, :description))
+    
+    respond_to do |format|
+      if @web_link.save
+        format.html { head :ok }
+        format.js { head :ok }
+      else
+        format.json { render json: @web_link.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   # GET /web_links
   # GET /web_links.json
   def index

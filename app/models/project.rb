@@ -84,8 +84,8 @@ class Project
     WebLink.for_parent(:project, self.key)
   end
   
-  def new_link(url, name=nil)
-    link = WebLink.new url: url, name: name
+  def new_link(link_params)
+    link = WebLink.new(link_params)
     link.parent_type = :project
     link.parent_key = self.key
     link

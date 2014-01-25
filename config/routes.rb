@@ -28,6 +28,11 @@ LifeAdvisor::Application.routes.draw do
   resources :answers
   resources :people
   
+  controller :web_links do
+    get 'web_links/bookmark' => :bookmark
+    post 'web_links/bookmark' => :create_bookmark
+  end
+  
   controller :projects do
     get 'projects/completed'
     get 'projects/canceled'
@@ -42,6 +47,8 @@ LifeAdvisor::Application.routes.draw do
   resources :thoughts
   resources :goals
   
+
+  
   controller :focus do
     get 'focus/:area' => :focus_area
   end
@@ -52,7 +59,6 @@ LifeAdvisor::Application.routes.draw do
 
   resources :current_focus do
     collection do
-      post 'add_bookmark'
       post 'edit'
       post 'reset'
     end
