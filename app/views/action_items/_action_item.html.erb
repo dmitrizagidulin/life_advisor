@@ -13,7 +13,7 @@
       <% if action_item.links.present? %>
         <ul>
         <% action_item.links.each do | link | %>
-          <li><%= link_to link.name, link.url %></li>
+          <li><%= link_to link.name_display, link.url %></li>
         <% end %>
         </ul>
       <% end %>
