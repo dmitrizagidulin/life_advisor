@@ -150,7 +150,8 @@ class ActionItemsController < ApplicationController
     redirect_url += "##{@action_item.key}"
     
     respond_to do |format|
-      if @action_item.update_attributes(params[:action_item].permit(:name, :mywn_category, :done, :completed_at, :time_elapsed, :description, :area, :parent_type, :parent_key))
+      if @action_item.update_attributes(params[:action_item].permit(:name, :mywn_category, :done, :completed_at, :time_elapsed, 
+        :description, :area, :parent_type, :parent_key, :bump_count))
         format.html { redirect_to redirect_url, notice: 'Action item was successfully updated.' }
         format.json { head :no_content }
       else
