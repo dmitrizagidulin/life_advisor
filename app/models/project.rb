@@ -17,8 +17,50 @@ class Project
   property :completed_at, Time
   property :canceled_at, Time
   property :area, String, :default => :admin # Realms/Areas of concern. One of [:soul, :work, :admin, :assistant ]
+  property :related_projects, Set
   
   timestamps!
+  
+  def to_hash
+    JSON.parse(self.to_json)
+  end
+  
+  def to_hash_for_export
+    proj_hash = self.to_hash
+    hash_for_export = {}
+    hash_for_export['key'] = self.key
+    hash_for_export['name'] = self.name
+    proj_hash.keys.each do | attribute |
+      unless hash_for_export.include? attribute.to_s
+        hash_for_export[attribute.to_s] = proj_hash[attribute]
+      end
+    end
+    
+    questions = []
+    self.questions().each do | question |
+      question_hash = { 'key' => question.key, 'name' => question.name || '' }
+      questions.append(question_hash)
+    end
+    hash_for_export['questions'] = questions
+    
+    action_items = { 'todo' => [], 'completed' => [] }
+    self.action_items.each do | item |
+      if item.done
+        action_items['completed'].append({ 'key'=>item.key, 'name'=>item.name})
+      else
+        action_items['todo'].append({ 'key'=>item.key, 'name'=>item.name})
+      end
+    end
+    hash_for_export['action_items'] = action_items
+    
+    links = []
+    self.links().each do | link |
+      link_hash = { 'key' => link.key, 'name' => link.name || '', 'url'=> link.url }
+      links.append(link_hash)
+    end
+    hash_for_export['links'] = links
+    hash_for_export
+  end
   
   def <=>(anOther)
     # First, sort in reverse bump_count order
@@ -47,6 +89,10 @@ class Project
     project_goal.save
   end
   
+  def add_related_project(proj_key)
+    
+  end
+  
   def change_status!(new_status)
     self.status = new_status
     if new_status.to_sym == :completed
@@ -69,6 +115,12 @@ class Project
     self.links.each do | link |
       link.destroy!
     end
+  end
+  
+  # Does this project have related projects?
+  # @return [Boolean] True if this project has related projects linked to it.
+  def has_related?
+    self.related_projects.present?
   end
   
   def goal_ids
@@ -113,6 +165,11 @@ class Project
   
   def questions
     Question.for_parent(:project, self.key)
+  end
+  
+  # Lazy-initialize accessor to :related_projects
+  def related_projects
+    @related_projects ||= []
   end
   
   def serve_goal_toggle(goal_key)
