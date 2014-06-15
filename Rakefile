@@ -11,3 +11,8 @@ namespace :db do
     load(env_seed_file) if File.exist?(env_seed_file)
   end
 end
+
+task :export => :environment do
+  env_seed_file = File.join(Rails.root, 'db', 'export.rb')
+  load(env_seed_file) if File.exist?(env_seed_file)
+end
