@@ -14,3 +14,4 @@ Question.bucket.enable_index!
 Thought.bucket.enable_index!
 Project.bucket.enable_index!
 WebLink.bucket.enable_index!
+ProjectGoal.bucket.enable_index!
