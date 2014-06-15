@@ -21,4 +21,12 @@ class WebLink
     self.name
   end
   
+  # Initialize a new WebLink from an ActionItem instance
+  def self.from_action_item(action_item)
+    link = WebLink.new name: action_item.name
+    link.url = action_item.links.first.url
+    link.parent_type = action_item.parent_type
+    link.parent_key = action_item.parent_key
+    link
+  end
 end

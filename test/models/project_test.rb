@@ -58,4 +58,15 @@ class ProjectTest < ActiveSupport::TestCase
     projects_by_status['active'].count.must_equal 2
     projects_by_status['completed'][0].name.must_equal 'Completed proj'
   end
+  
+#  test "Project can have related projects" do
+#    proj_one = test_project
+#    refute proj_one.has_related?
+#    
+#    proj_two = Project.new name: 'Related Project'
+#    proj_two.key = 'proj2'
+#    
+#    proj_one.add_related_project(proj_two.key)
+#    assert proj_one.has_related?
+#  end
 end

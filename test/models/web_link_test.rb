@@ -14,4 +14,19 @@ describe "a WebLink" do
     link = WebLink.new url: test_url
     link.name_display.must_equal test_url
   end
+  
+  it "can be created form an ActionItem" do
+    test_name = 'Test Item'
+    test_url = 'http://www.test.com'
+    item = ActionItem.new name: test_name
+    item.links = [item.new_link(test_url)]
+    item.parent_type = :project
+    item.parent_key = '1234'
+    
+    link = WebLink.from_action_item item
+    link.name.must_equal test_name
+    link.url.must_equal test_url
+    link.parent_type.to_s.must_equal 'project'
+    link.parent_key.must_equal '1234'
+  end
 end

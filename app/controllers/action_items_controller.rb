@@ -25,6 +25,7 @@ class ActionItemsController < ApplicationController
     end
   end
   
+  # PUT
   def bump
     @action_item = ActionItem.find(params[:id])
     if @action_item.has_parent?
@@ -138,6 +139,24 @@ class ActionItemsController < ApplicationController
     render :nothing => true
   end
   
+  # PUT /action_items/1/to_link
+  def to_link
+    @action_item = ActionItem.find(params[:id])
+    if @action_item.has_parent?
+      redirect_url = @action_item.parent_url
+    else
+      redirect_url = action_items_url
+    end
+    respond_to do |format|
+      web_link = WebLink.from_action_item @action_item
+      if web_link.save
+        @action_item.destroy_related()
+        @action_item.destroy!
+      end
+      format.html { redirect_to redirect_url, notice: 'Converted to link' }
+    end
+  end
+  
   # PUT /action_items/1
   # PUT /action_items/1.json
   def update
@@ -164,14 +183,9 @@ class ActionItemsController < ApplicationController
   # DELETE /action_items/1
   # DELETE /action_items/1.json
   def destroy
-    @action_item = ActionItem.find(params[:id])
-    # Destroy any links this action item might have
-    if @action_item.links.present?
-      @action_item.links.each do | link |
-        link.destroy
-      end
-    end
     session[:return_to] = request.referer || action_items_url # redirect to referring page
+    @action_item = ActionItem.find(params[:id])
+    @action_item.destroy_related()
     @action_item.destroy
 
     respond_to do |format|

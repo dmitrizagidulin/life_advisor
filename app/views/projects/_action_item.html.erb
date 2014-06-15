@@ -37,8 +37,11 @@
     </td>
     <td class="nowrap"><small><%= action_item.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
     <td class="nowrap">
-        <%= link_to 'Bump!', "/action_items/#{action_item.key}/bump", method: :post, class: 'btn btn-mini' %>
+        <%= link_to 'Bump!', "/action_items/#{action_item.key}/bump", method: :put, class: 'btn btn-mini' %>
         <%= link_to 'Del', '/action_items/'+action_item.key, method: :delete, :class => 'btn btn-mini btn-danger',
             data: { confirm: 'Delete - Are you sure?' } %>
+        <br />
+        <%= link_to 'To Link', "/action_items/#{action_item.key}/to_link", method: :put, class: 'btn btn-mini',
+            data: { confirm: 'Convert to Link - Are you sure?' } %>
     </td>
   </tr>

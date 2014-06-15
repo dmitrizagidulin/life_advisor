@@ -18,6 +18,8 @@ LifeAdvisor::Application.routes.draw do
     post 'action_items/:id/category/:category' => :category_update
     post 'action_items/category_update_all' => :category_update_all
     post 'action_items/:id/bump' => :bump
+    put 'action_items/:id/bump' => :bump
+    put 'action_items/:id/to_link' => :to_link
   end
   resources :action_items
   resources :questions

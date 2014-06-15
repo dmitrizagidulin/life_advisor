@@ -82,6 +82,15 @@ class ActionItem
     end
   end
   
+  def destroy_related
+    # Destroy any links this action item might have
+    if self.links.present?
+      self.links.each do | link |
+        link.destroy
+      end
+    end
+  end
+  
   def enforce_completed_at
     if self.done and self.completed_at.nil?
       self.completed_at = Time.zone.now
@@ -90,6 +99,10 @@ class ActionItem
   
   def links
     @links ||= WebLink.for_parent(:action_item, self.key)
+  end
+  
+  def links=(links)
+    @links = links
   end
   
   def mywn_category_order
