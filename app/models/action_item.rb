@@ -116,6 +116,18 @@ class ActionItem
     link
   end
   
+  # Save related resources (links, etc).
+  # To be called only after this item was saved
+  def save_related
+    if self.links.present?
+      self.links.each do | link |
+        link.parent_type = :action_item
+        link.parent_key = self.key
+        link.save!
+      end
+    end
+  end
+  
   def toggle_done!
     self.done = !self.done
     if self.done
@@ -160,6 +172,15 @@ class ActionItem
     ['work', 'soul', 'admin', 'assistant']
   end
   
+  def self.from_web_link(web_link)
+    item = ActionItem.new name: web_link.name
+    item.parent_type = web_link.parent_type
+    item.parent_key = web_link.parent_key
+    new_link = WebLink.new name: '', url: web_link.url
+    item.links = [new_link]
+    item
+  end
+  
   def self.hash_by_date(items)
     created_items = {}
     completed_items = {}
@@ -202,7 +223,6 @@ class ActionItem
     end
     category_items.count  # Return the number of items moved
   end
-    
 #  def from_search_result(document)
 #    action_item = super.from_search_result(document)
 #    action_item.done = action_item.done == 'true'

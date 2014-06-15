@@ -33,6 +33,7 @@ LifeAdvisor::Application.routes.draw do
   controller :web_links do
     get 'web_links/bookmark' => :bookmark
     post 'web_links/bookmark' => :create_bookmark
+    put 'web_links/:id/to_action_item' => :to_action_item
   end
   
   controller :projects do

@@ -6,5 +6,8 @@
       <%= link_to 'Edit', edit_web_link_path(link), :class => 'btn btn-mini' %>
       <%= link_to 'Destroy', '/web_links/'+link.key, method: :delete, :class => 'btn btn-mini btn-danger',
         data: { confirm: 'Are you sure?' } %>
+      <br />
+      <%= link_to 'To ActionItem', '/web_links/'+link.key+'/to_action_item', method: :put, :class => 'btn btn-mini',
+        data: { confirm: 'Convert to ActionItem - Are you sure?' } %>
     </td>
   </tr>

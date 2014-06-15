@@ -15,7 +15,7 @@ describe "a WebLink" do
     link.name_display.must_equal test_url
   end
   
-  it "can be created form an ActionItem" do
+  it "can be created from an ActionItem" do
     test_name = 'Test Item'
     test_url = 'http://www.test.com'
     item = ActionItem.new name: test_name
@@ -28,5 +28,20 @@ describe "a WebLink" do
     link.url.must_equal test_url
     link.parent_type.to_s.must_equal 'project'
     link.parent_key.must_equal '1234'
+  end
+  
+  it "can be converted to an ActionItem" do
+    test_name = 'Test Item'
+    test_url = 'http://www.test.com'
+    link = WebLink.new name: test_name, url: test_url
+    link.parent_type = :project
+    link.parent_key = '1234'
+    
+    item = ActionItem.from_web_link link
+    item.name.must_equal test_name
+    item.links.first.name.must_be_empty
+    item.links.first.url.must_equal test_url
+    item.parent_type.to_s.must_equal 'project'
+    item.parent_key.must_equal '1234'
   end
 end

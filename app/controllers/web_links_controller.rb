@@ -92,6 +92,21 @@ class WebLinksController < ApplicationController
     end
   end
 
+  # PUT /web_links/1/to_action_item
+  def to_action_item
+    @web_link = WebLink.find(params[:id])
+    redirect_url = @web_link.parent_url
+    
+    respond_to do |format|
+      action_item = ActionItem.from_web_link @web_link
+      if action_item.save
+        action_item.save_related()
+        @web_link.destroy!
+      end
+      format.html { redirect_to redirect_url, notice: 'Converted to ActionItem' }
+    end
+  end
+  
   # PUT /web_links/1
   # PUT /web_links/1.json
   def update
