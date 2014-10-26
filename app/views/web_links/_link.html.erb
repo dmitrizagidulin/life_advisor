@@ -1,6 +1,9 @@
   <tr>
     <td><%= link.name  %></td>
-    <td><%= link_to link.url, link.url %></td>
+    <td>
+      <%= link_to link.url, link.url %><br />
+      <small><%= link.description %></small>
+    </td>
     <td><small><%= link.created_at.localtime.strftime("%b %d, %Y")  %></small></td>
     <td>
       <%= link_to 'Edit', edit_web_link_path(link), :class => 'btn btn-mini' %>
