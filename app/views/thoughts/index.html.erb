@@ -2,21 +2,13 @@
 
 <%= render partial: 'thoughts/new', locals: { tab_index: 1 } %>
 
-<table class="table table-hover">
+<table class="table table-hover thoughts">
   <tbody>
 <% @thoughts.each do |thought| %>
   <%= render(partial: 'thoughts/thought', object: thought) %>
 <% end %>
   </tbody>
 </table>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <br />
 

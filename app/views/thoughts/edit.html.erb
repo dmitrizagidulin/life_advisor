@@ -1,4 +1,6 @@
 <h1>Editing thought</h1>
+<%= link_to 'Delete', '/thoughts/'+@thought.key, method: :delete, :class => 'btn btn-mini btn-danger',
+      data: { confirm: 'Are you sure?' } %>
 
 <%= render 'form' %>
 

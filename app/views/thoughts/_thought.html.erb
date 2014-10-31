@@ -1,11 +1,11 @@
   <tr>
-    <td class="span6">
+    <td>
+      <%= link_to 'Edit', edit_thought_path(thought), :class => 'btn btn-mini' %></td>
+    <td class="nowrap"><small><%= thought.created_at.localtime.strftime("%b %d, %y")  %></small></td>
+    <td>
       <% if thought.parent_type == 'project' %>
         <span class="area-<%= thought.area %>">[ <%= link_to 'proj', '/projects/'+thought.parent_key %> ]</span>
       <% end %>
-      <span id="thought-<%= thought.key %>"><%= link_to thought.name, edit_thought_path(thought) %></span>
+      <div id="thought-<%= thought.key %>" style="width: 80%;"><%= thought.name %></div>
     </td>
-    <td><small><%= thought.created_at.localtime.strftime("%b %d, %y")  %></small></td>
-    <td><%= link_to 'Destroy', '/thoughts/'+thought.key, method: :delete, :class => 'btn btn-mini btn-danger',
-      data: { confirm: 'Are you sure?' } %></td>
   </tr>

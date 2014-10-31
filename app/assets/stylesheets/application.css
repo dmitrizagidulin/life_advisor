@@ -54,3 +54,6 @@ h1.page {
 .nowrap {
   white-space: nowrap;
 }
+table.thoughts td {
+  padding: 2em 0.5em;
+}
