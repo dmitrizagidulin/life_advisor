@@ -83,6 +83,8 @@ GEM
       sprockets-rails (~> 2.0.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
+    rails_autolink (1.1.6)
+      rails (> 3.1)
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
@@ -153,6 +155,7 @@ DEPENDENCIES
   minitest-spec-context
   minitest-spec-rails (~> 4.7.5)
   rails (= 4.0.2)
+  rails_autolink
   ripple!
   sass-rails (~> 4.0)
   sdoc

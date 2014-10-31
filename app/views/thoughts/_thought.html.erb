@@ -6,6 +6,6 @@
       <% if thought.parent_type == 'project' %>
         <span class="area-<%= thought.area %>">[ <%= link_to 'proj', '/projects/'+thought.parent_key %> ]</span>
       <% end %>
-      <div id="thought-<%= thought.key %>" style="width: 80%;"><%= thought.name %></div>
+      <div id="thought-<%= thought.key %>" style="width: 80%;"><%= auto_link(thought.name) %></div>
     </td>
   </tr>
